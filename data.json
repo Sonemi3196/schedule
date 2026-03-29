@@ -1,0 +1,30 @@
+{
+  "projects": [
+    {
+      "id": "mnbiqafhp4ik",
+      "tasks": [],
+      "status": "active",
+      "name": "aaa",
+      "startDate": "2026-03-30",
+      "deadline": "2026-04-06",
+      "dailyMins": "60",
+      "includeWeekends": false,
+      "description": "",
+      "color": "#38bdf8"
+    }
+  ],
+  "todayTasks": [],
+  "settings": {
+    "maxMins": 240,
+    "buffer": 20,
+    "workStart": "09:00",
+    "workEnd": "18:00",
+    "workdays": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  }
+}
