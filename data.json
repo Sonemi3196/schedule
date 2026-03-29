@@ -1,5 +1,18 @@
 {
-  "projects": [],
+  "projects": [
+    {
+      "id": "mncazjxbk4n3",
+      "tasks": [],
+      "status": "active",
+      "name": "読書",
+      "startDate": "2026-03-30",
+      "deadline": "2026-04-08",
+      "dailyMins": "30",
+      "includeWeekends": true,
+      "description": "",
+      "color": "#38bdf8"
+    }
+  ],
   "todayTasks": [],
   "settings": {
     "maxMins": 240,
