@@ -17,7 +17,7 @@
           "scheduledDate": null,
           "scheduledStartTime": null,
           "scheduledEndTime": null,
-          "actualMins": 3
+          "actualMins": 30
         },
         {
           "id": "mneq81sqcaig",
@@ -40,10 +40,12 @@
           "scheduledDate": "2026-03-31",
           "scheduledStartTime": "23:00",
           "scheduledEndTime": "23:30",
-          "status": "todo",
-          "actualMins": 0,
-          "achievementPct": null,
-          "createdAt": "2026-03-31"
+          "status": "done",
+          "actualMins": 30,
+          "achievementPct": 100,
+          "createdAt": "2026-03-31",
+          "actualMinsLog": 30,
+          "lastNote": ""
         },
         {
           "id": "mneq81sqosjj",
