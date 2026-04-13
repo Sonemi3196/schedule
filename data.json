@@ -17,7 +17,7 @@
           "scheduledDate": null,
           "scheduledStartTime": null,
           "scheduledEndTime": null,
-          "actualMins": 120
+          "actualMins": 180
         },
         {
           "id": "mnws7b4oul02",
@@ -79,9 +79,9 @@
           "scheduledDate": "2026-04-05",
           "scheduledStartTime": "08:30",
           "scheduledEndTime": "09:00",
-          "status": "todo",
-          "actualMins": 0,
-          "achievementPct": null,
+          "status": "done",
+          "actualMins": 30,
+          "achievementPct": 100,
           "createdAt": "2026-04-13"
         },
         {
@@ -92,9 +92,9 @@
           "scheduledDate": "2026-04-06",
           "scheduledStartTime": "08:30",
           "scheduledEndTime": "09:00",
-          "status": "todo",
-          "actualMins": 0,
-          "achievementPct": null,
+          "status": "done",
+          "actualMins": 30,
+          "achievementPct": 100,
           "createdAt": "2026-04-13"
         },
         {
