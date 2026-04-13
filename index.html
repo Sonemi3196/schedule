@@ -168,7 +168,7 @@ button{cursor:pointer;font-family:var(--jp)}input,select,textarea{font-family:va
 
 <div class="modal-ov hidden" id="m-task"><div class="modal modal-lg"><div class="mhead"><span class="mtitle" id="m-task-title">タスク追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-task')">✕</button></div><div class="mbody"><input type="hidden" id="tf-id"><input type="hidden" id="tf-proj-id"><div class="fg"><label class="fl">タスク名 *</label><input class="fi" id="tf-name"></div><div class="frow"><div class="fg"><label class="fl">ステータス</label><select class="fs" id="tf-status"><option value="todo">未着手</option><option value="doing">進行中</option><option value="review">確認待ち</option><option value="done">完了</option><option value="hold">保留</option></select></div><div class="fg"><label class="fl">想定所要時間（分）</label><input class="fi" type="text" inputmode="numeric" id="tf-est" placeholder="例: 120"></div></div><div class="frow"><div class="fg"><label class="fl">タスク開始日</label><input class="fi" type="date" id="tf-start"></div><div class="fg"><label class="fl">優先開始時刻</label><input class="fi" type="time" id="tf-pref-time"></div></div><div class="fg"><label class="fl">スケジュール方法</label><select class="fs" id="tf-auto" onchange="onAutoChange()"><option value="auto">自動（開始日〜納期に自動分割配置）</option><option value="manual">手動（日付・時刻を自分で指定）</option><option value="off">なし（スケジュールしない）</option></select></div><div class="frow hidden" id="tf-manual-row"><div class="fg"><label class="fl">指定日</label><input class="fi" type="date" id="tf-mdate"></div><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="tf-mtime"></div></div><div class="fg"><label class="fl">メモ / 完了条件</label><textarea class="ft" id="tf-notes" style="min-height:46px"></textarea></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-task')">キャンセル</button><button class="btn btn-primary" onclick="saveTask()">保存してスケジュール</button></div></div></div>
 
-<div class="modal-ov hidden" id="m-result"><div class="modal"><div class="mhead"><span class="mtitle">実績記録</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-result')">✕</button></div><div class="mbody"><div id="rf-info" style="margin-bottom:12px"></div><input type="hidden" id="rf-proj-id"><input type="hidden" id="rf-task-id"><div class="frow"><div class="fg"><label class="fl">達成率（%）</label><input class="fi" type="text" inputmode="numeric" id="rf-pct" placeholder="例: 150" oninput="onPctInput()"><div class="fhint" id="rf-pct-hint"></div></div><div class="fg"><label class="fl">実働時間（分）</label><input class="fi" type="text" inputmode="numeric" id="rf-actual" placeholder="例: 25"></div></div><div class="fg"><label class="fl">ステータス</label><select class="fs" id="rf-status"><option value="doing">進行中</option><option value="done">完了</option><option value="review">確認待ち</option><option value="hold">保留</option></select></div><div class="fg"><label class="fl">メモ</label><textarea class="ft" id="rf-note" style="min-height:50px" placeholder="気づきなど"></textarea></div><div id="rf-preview"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-result')">キャンセル</button><button class="btn btn-primary" onclick="saveResult()">保存</button></div></div></div>
+<div class="modal-ov hidden" id="m-result"><div class="modal"><div class="mhead"><span class="mtitle">📝 実績を記録</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-result')">✕</button></div><div class="mbody"><div style="font-size:11px;color:var(--t3);margin-bottom:8px;padding:5px 8px;background:var(--s3);border-radius:5px">✓ チェック=完了切替のみ　📝 実績=達成率・メモを記録（後から確認できます）</div><div id="rf-info" style="margin-bottom:10px"></div><input type="hidden" id="rf-proj-id"><input type="hidden" id="rf-task-id"><div class="frow"><div class="fg"><label class="fl">達成率（%）</label><input class="fi" type="text" inputmode="numeric" id="rf-pct" placeholder="例: 150" oninput="onPctInput()"><div class="fhint" id="rf-pct-hint"></div></div><div class="fg"><label class="fl">実働時間（分）</label><input class="fi" type="text" inputmode="numeric" id="rf-actual" placeholder="例: 25"></div></div><div class="fg"><label class="fl">ステータス</label><select class="fs" id="rf-status"><option value="doing">進行中</option><option value="done">完了</option><option value="review">確認待ち</option><option value="hold">保留</option></select></div><div class="fg"><label class="fl">メモ（後から今日ページで確認できます）</label><textarea class="ft" id="rf-note" style="min-height:50px" placeholder="気づきなど"></textarea></div><div id="rf-preview"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-result')">キャンセル</button><button class="btn btn-primary" onclick="saveResult()">保存</button></div></div></div>
 
 <div class="modal-ov hidden" id="m-conflict"><div class="modal modal-lg"><div class="mhead"><span class="mtitle">⚠ 時刻の競合</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-conflict')">✕</button></div><div class="mbody"><div style="font-size:12.5px;color:var(--t2);margin-bottom:12px">時間帯が重複しています。開始時刻を変更するか「このまま保存」を選択してください。</div><div id="conflict-body"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="saveWithConflicts()">このまま保存</button><button class="btn btn-primary" onclick="applyConflictFix()">時刻を変更して保存</button></div></div></div>
 
@@ -330,7 +330,42 @@ function renderDayPanel(ds,data){const items=(data?.items||[]).sort((a,b)=>(t2m(
 function renderTimeline(ds,items){const SH=8,EH=22,PPM=1.6,H=(EH-SH)*60*PPM;let labels='';for(let h=SH;h<=EH;h++){const top=(h-SH)*60*PPM;labels+=`<div class="tl-hour-line" style="top:${top}px"><span class="tl-hour-label">${h}:00</span></div>`;}const blocks=items.map(({t,proj})=>{const s=t2m(t.scheduledStartTime)||SH*60;const e=t2m(t.scheduledEndTime)||(s+(t.estimatedMins||30));return {t,proj,s,e,lane:0};});const lanes=[];blocks.forEach(b=>{let placed=false;for(let i=0;i<lanes.length;i++){if(lanes[i][lanes[i].length-1].e<=b.s){lanes[i].push(b);b.lane=i;placed=true;break;}}if(!placed){b.lane=lanes.length;lanes.push([b]);}});const LC=lanes.length||1;const {ids:conIds}=getConflictIds();let tblocks=blocks.map(b=>{const top=(b.s-SH*60)*PPM;const bh=Math.max(24,(b.e-b.s)*PPM);const w=90/LC;const left=b.lane*w;const isCon=conIds.has(b.t.id);return `<div class="tl-block ${isCon?'conflict-b':''}" style="top:${top}px;height:${bh}px;left:${left}%;width:${w}%;background:${b.proj.color||COLORS[0]}20;border-left-color:${b.proj.color||COLORS[0]}"><div class="tl-block-time">${m2t(b.s)}〜${m2t(b.e)}</div><div class="tl-block-name">${b.t.name}</div><div style="display:flex;gap:3px;margin-top:3px">${b.t.status!=='done'?`<button style="background:rgba(251,146,60,.8);color:#fff;border:none;border-radius:4px;padding:1px 6px;font-size:10px;cursor:pointer" onclick="openResultModal('${b.proj.id}','${b.t.id}')">実績</button>`:''}<button style="background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:4px;padding:1px 6px;font-size:10px;cursor:pointer" onclick="openTimeEdit('${b.proj.id}','${b.t.id}')">✎</button></div></div>`;}).join('');let nowLine='';const now=new Date();if(now.toISOString().slice(0,10)===ds){const nm=now.getHours()*60+now.getMinutes();if(nm>=SH*60&&nm<=EH*60)nowLine=`<div class="tl-now" style="top:${(nm-SH*60)*PPM}px"></div>`;}return `<div style="position:relative;height:${H}px;margin-left:48px;border-left:1px solid var(--b1);overflow:visible">${labels}${tblocks}${nowLine}</div>`;}
 
 // ══ TODAY ══
-function renderToday(){const today=td();const projItems=[];D.projects.forEach(proj=>(proj.tasks||[]).forEach(t=>{if(t.scheduledDate===today)projItems.push({t,proj});}));projItems.sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));const personal=(D.todayTasks||[]).filter(t=>t.date===today);document.getElementById('v-today').innerHTML=`<div class="ph"><div class="ph-title">今日</div><div class="ph-actions"><button class="btn btn-primary btn-sm" onclick="openTodayModal()">＋ 追加</button></div></div>${projItems.length?`<div style="font-size:12px;font-family:var(--mono);color:var(--t3);margin-bottom:7px">プロジェクトタスク</div><div class="sched-grid" style="margin-bottom:14px">${projItems.map(({t,proj})=>staskHTML(t,proj,today,getConflictIds().ids)).join('')}</div>`:''}${personal.length?`<div style="font-size:12px;font-family:var(--mono);color:var(--t3);margin-bottom:7px">個人タスク</div><div class="tlist">${personal.map(t=>`<div class="titem ${t.status==='done'?'done-item':''}"><button class="tcheck ${t.status==='done'?'chk':''}" onclick="toggleTodayTask('${t.id}')">✓</button><div class="tbody"><div class="tname">${t.name}</div>${t.estimatedMins?`<div class="tmeta"><span class="tmeta-i">⏱ ${t.estimatedMins}分</span></div>`:''}</div><div class="tactions"><button class="btn btn-danger btn-xs btn-icon" onclick="delTodayTask('${t.id}')">🗑</button></div></div>`).join('')}</div>`:''}${!projItems.length&&!personal.length?'<div class="empty"><div class="empty-icon">☀</div><p>今日の予定はありません</p></div>':''}`;}
+function renderToday(){
+  const today=td();const projItems=[];
+  D.projects.forEach(proj=>(proj.tasks||[]).forEach(t=>{if(t.scheduledDate===today)projItems.push({t,proj});}));
+  projItems.sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));
+  const personal=(D.todayTasks||[]).filter(t=>t.date===today);
+  document.getElementById('v-today').innerHTML=`
+    <div class="ph"><div class="ph-title">今日</div>
+      <div class="ph-actions"><button class="btn btn-primary btn-sm" onclick="openTodayModal()">＋ 追加</button></div>
+    </div>
+    ${projItems.length?`<div style="font-size:12px;font-family:var(--mono);color:var(--t3);margin-bottom:7px">プロジェクトタスク</div>
+    <div class="sched-grid" style="margin-bottom:14px">${projItems.map(({t,proj})=>staskHTML(t,proj,today,getConflictIds().ids)).join('')}</div>`:''}
+    ${personal.length?`<div style="font-size:12px;font-family:var(--mono);color:var(--t3);margin-bottom:7px">個人タスク</div>
+    <div style="font-size:11px;color:var(--t3);margin-bottom:6px;padding:6px 8px;background:var(--s3);border-radius:6px">
+      ✓ チェック = 完了/未完了の切り替え　　📝 実績 = 達成率・メモを記録（後から確認できます）
+    </div>
+    <div class="tlist">${personal.map(t=>`
+      <div class="titem ${t.status==='done'?'done-item':''}">
+        <button class="tcheck ${t.status==='done'?'chk':''}" onclick="toggleTodayTask('${t.id}')" title="完了/未完了を切り替え">✓</button>
+        <div class="tbody">
+          <div class="tname">${t.name}</div>
+          <div class="tmeta">
+            ${t.startTime?`<span class="tmeta-i">🕐 ${t.startTime}${t.endTime?'〜'+t.endTime:''}</span>`:''}
+            ${t.estimatedMins?`<span class="tmeta-i">⏱ ${t.estimatedMins}分</span>`:''}
+            ${t.achievementPct!=null?`<span class="tmeta-i" style="color:var(--g)">達成 ${t.achievementPct}%</span>`:''}
+            ${t.actualMinsLog?`<span class="tmeta-i" style="color:var(--g)">実働 ${t.actualMinsLog}分</span>`:''}
+          </div>
+          ${t.lastNote?`<div style="font-size:11px;color:var(--t2);margin-top:3px;padding:4px 6px;background:var(--s3);border-radius:4px">📝 ${t.lastNote}</div>`:''}
+        </div>
+        <div class="tactions">
+          <button class="btn btn-warn btn-xs" onclick="openResultModal('personal','${t.id}')" title="達成率・メモを記録">📝 実績</button>
+          <button class="btn btn-ghost btn-xs btn-icon" onclick="openTimeEdit('personal','${t.id}')" title="時刻を変更">✎</button>
+          <button class="btn btn-danger btn-xs btn-icon" onclick="delTodayTask('${t.id}')">🗑</button>
+        </div>
+      </div>`).join('')}</div>`:''}
+    ${!projItems.length&&!personal.length?'<div class="empty"><div class="empty-icon">☀</div><p>今日の予定はありません</p></div>':''}`;
+}
 
 // ══ PROJECT DETAIL ══
 function renderProjDetail(){const p=getProj(curProj);if(!p)return;const pct=calcProg(p);const parents=(p.tasks||[]).filter(t=>!t.parentId);const totalEst=parents.reduce((a,t)=>a+(t.estimatedMins||0),0);const totalAct=parents.reduce((a,t)=>a+(t.actualMins||0),0);const rem=Math.max(0,totalEst-totalAct);const mxd=getDailyMax(p);document.getElementById('proj-acts').innerHTML=`<button class="btn btn-ghost btn-sm" onclick="openProjModal('${p.id}')">✎ 編集</button><button class="btn btn-primary btn-sm" onclick="openTaskModal()">＋ タスク追加</button>`;document.getElementById('proj-header').innerHTML=`<div class="card" style="margin-bottom:14px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="width:10px;height:10px;border-radius:50%;background:${p.color||COLORS[0]};display:inline-block"></span><span style="font-size:16px;font-weight:700">${p.name}</span>${p.deadline?`<span style="font-size:12px;color:var(--t3);font-family:var(--mono)">納期: ${p.deadline}</span>`:''}</div>${p.description?`<div style="font-size:12px;color:var(--t3);margin-bottom:8px">${p.description}</div>`:''}<div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="color:var(--t2)">進捗 ${parents.filter(t=>t.status==='done').length}/${parents.length}件完了</span><span style="font-family:var(--mono)">${pct}%</span></div><div class="pbar pbar-lg" style="margin-bottom:7px"><div class="pbar-fill" style="width:${pct}%;background:${pcColor(pct)}"></div></div><div style="display:flex;gap:12px;font-size:11px;color:var(--t3);font-family:var(--mono)"><span>残り ${rem}分</span><span>1日${mxd}分換算で約${mxd>0?Math.ceil(rem/mxd):'?'}日</span></div></div>`;switchPTab(curPTab);}
@@ -390,12 +425,107 @@ function showAllConflicts(){const c=checkAllConflicts();if(c.length)showConflict
 // ══ TIME EDIT ══
 function updateTeEndHint(){const start=document.getElementById('te-start')?.value||'09:00';const mins=parseInt(document.getElementById('te-mins')?.value)||0;const hint=document.getElementById('te-end-hint');if(hint&&mins>0)hint.textContent='終了: '+addMinsT(start,mins);else if(hint)hint.textContent='';}
 function openTimeEdit(projId,taskId){const isP=projId==='personal';const proj=isP?null:getProj(projId);const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);if(!t)return;document.getElementById('te-proj-id').value=projId;document.getElementById('te-task-id').value=taskId;document.getElementById('te-info').textContent=t.name;document.getElementById('te-date').value=t.scheduledDate||td();document.getElementById('te-start').value=t.scheduledStartTime||'09:00';document.getElementById('te-mins').value=t.estimatedMins||'';updateTeEndHint();openM('m-time-edit');}
-function saveTimeEdit(){const projId=document.getElementById('te-proj-id').value;const taskId=document.getElementById('te-task-id').value;const isP=projId==='personal';const proj=isP?null:getProj(projId);const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);if(!t)return;t.scheduledDate=document.getElementById('te-date').value;t.scheduledStartTime=document.getElementById('te-start').value;const nm=parseInt(document.getElementById('te-mins')?.value)||0;if(nm>0)t.estimatedMins=nm;t.scheduledEndTime=addMinsT(t.scheduledStartTime,t.estimatedMins||30);if(!isP)t.pinned=true;save();closeM('m-time-edit');renderCurrent();const c=checkAllConflicts();if(c.length)showConflictModal(c);}
+function saveTimeEdit(){
+  const projId=document.getElementById('te-proj-id').value;
+  const taskId=document.getElementById('te-task-id').value;
+  const isP=projId==='personal';
+  const proj=isP?null:getProj(projId);
+  const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);
+  if(!t)return;
+  const newDate=document.getElementById('te-date').value;
+  const newStart=document.getElementById('te-start').value;
+  const nm=parseInt(document.getElementById('te-mins')?.value)||0;
+  if(nm>0)t.estimatedMins=nm;
+  const newEnd=addMinsT(newStart,t.estimatedMins||30);
+  if(isP){
+    // 個人タスクはdate/startTime/endTimeフィールドを使う
+    t.date=newDate;
+    t.startTime=newStart;
+    t.endTime=newEnd;
+  } else {
+    t.scheduledDate=newDate;
+    t.scheduledStartTime=newStart;
+    t.scheduledEndTime=newEnd;
+    t.pinned=true;
+  }
+  save();closeM('m-time-edit');renderCurrent();
+  const c=checkAllConflicts();if(c.length)showConflictModal(c);
+}
 
 // ══ RESULT ══
-function openResultModal(projId,taskId){resultCtx={projId,taskId};const isP=projId==='personal';const proj=isP?null:getProj(projId);const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);if(!t)return;const par=t.parentId?(proj.tasks||[]).find(x=>x.id===t.parentId):null;document.getElementById('rf-proj-id').value=projId;document.getElementById('rf-task-id').value=taskId;document.getElementById('rf-info').innerHTML=`<div class="card"><div style="font-size:13px;font-weight:500">${t.name}</div>${par?`<div style="font-size:11px;color:var(--t3)">親タスク: ${par.name}</div>`:''}<div style="display:flex;gap:10px;font-size:11px;color:var(--t3);font-family:var(--mono);margin-top:3px"><span>${t.scheduledDate||''} ${t.scheduledStartTime||''}${t.scheduledEndTime?'〜'+t.scheduledEndTime:''}</span><span>想定: ${t.estimatedMins||'?'}分</span>${t.achievementPct!=null?`<span>前回: ${t.achievementPct}%</span>`:''}</div></div>`;document.getElementById('rf-pct').value=t.achievementPct||'';document.getElementById('rf-actual').value=t.actualMinsLog||'';document.getElementById('rf-status').value=t.status||'doing';document.getElementById('rf-note').value=t.lastNote||'';document.getElementById('rf-pct-hint').textContent='';document.getElementById('rf-preview').innerHTML='';openM('m-result');}
+function openResultModal(projId,taskId){
+  resultCtx={projId,taskId};
+  const isP=projId==='personal';
+  const proj=isP?null:getProj(projId);
+  const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);
+  if(!t)return;
+  const par=(!isP&&t.parentId)?(proj.tasks||[]).find(x=>x.id===t.parentId):null;
+  // 個人タスクはdate/startTime、プロジェクトタスクはscheduledDate/scheduledStartTime
+  const dispDate=isP?(t.date||''):(t.scheduledDate||'');
+  const dispStart=isP?(t.startTime||''):(t.scheduledStartTime||'');
+  const dispEnd=isP?(t.endTime||''):(t.scheduledEndTime||'');
+  document.getElementById('rf-proj-id').value=projId;
+  document.getElementById('rf-task-id').value=taskId;
+  document.getElementById('rf-info').innerHTML=`
+    <div class="card">
+      <div style="font-size:13px;font-weight:500">${t.name}</div>
+      ${par?`<div style="font-size:11px;color:var(--t3)">親タスク: ${par.name}</div>`:''}
+      <div style="display:flex;gap:10px;font-size:11px;color:var(--t3);font-family:var(--mono);margin-top:3px">
+        <span>${dispDate} ${dispStart}${dispEnd?'〜'+dispEnd:''}</span>
+        <span>想定: ${t.estimatedMins||'?'}分</span>
+        ${t.achievementPct!=null?`<span style="color:var(--g)">前回: ${t.achievementPct}%</span>`:''}
+      </div>
+      ${t.lastNote?`<div style="margin-top:6px;padding:5px 8px;background:var(--s3);border-radius:5px;font-size:11px;color:var(--t2)">📝 前回メモ: ${t.lastNote}</div>`:''}
+      ${t.actualMinsLog?`<div style="font-size:11px;color:var(--t3);margin-top:3px">前回実働: ${t.actualMinsLog}分</div>`:''}
+    </div>`;
+  document.getElementById('rf-pct').value=t.achievementPct||'';
+  document.getElementById('rf-actual').value=t.actualMinsLog||'';
+  document.getElementById('rf-status').value=t.status||'doing';
+  document.getElementById('rf-note').value=t.lastNote||'';
+  document.getElementById('rf-pct-hint').textContent='';
+  document.getElementById('rf-preview').innerHTML='';
+  openM('m-result');
+}
 function onPctInput(){const pct=parseInt(document.getElementById('rf-pct').value)||0;const tid=document.getElementById('rf-task-id').value;const proj=getProj(document.getElementById('rf-proj-id').value);const t=(proj?.tasks||[]).find(x=>x.id===tid);if(!t)return;const actual=Math.round((t.estimatedMins||0)*pct/100);const rem=Math.max(0,(t.estimatedMins||0)-actual);document.getElementById('rf-pct-hint').textContent='消化 '+actual+'分 / 残り '+rem+'分 ('+pct+'%)';}
-function saveResult(){const pct=parseInt(document.getElementById('rf-pct').value);const status=document.getElementById('rf-status').value;const note=document.getElementById('rf-note').value;const projId=document.getElementById('rf-proj-id').value;const taskId=document.getElementById('rf-task-id').value;const isP=projId==='personal';const proj=isP?null:getProj(projId);const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);if(!t){closeM('m-result');return;}const actualLog=parseInt(document.getElementById('rf-actual')?.value)||null;t.achievementPct=isNaN(pct)?null:Math.max(0,pct);t.actualMins=isNaN(pct)?null:Math.round((t.estimatedMins||0)*pct/100);if(actualLog!==null)t.actualMinsLog=actualLog;t.status=status;t.lastNote=note;if(status==='done'){if(isNaN(pct)||pct<=0)t.achievementPct=100;t.actualMins=Math.round((t.estimatedMins||0)*(t.achievementPct||100)/100);if(t.parentId){const sibs=(proj.tasks||[]).filter(x=>x.parentId===t.parentId);const par=(proj.tasks||[]).find(x=>x.id===t.parentId);if(par){par.actualMins=sibs.reduce((a,s)=>a+(s.actualMins||0),0);if(sibs.every(s=>s.status==='done'||s.id===t.id))par.status='done';}}if(!t.parentId)(proj.tasks||[]).filter(x=>x.parentId===t.id).forEach(s=>{s.status='done';s.achievementPct=100;s.actualMins=s.estimatedMins;});save();closeM('m-result');renderCurrent();}else{if(t.parentId){const par=(proj.tasks||[]).find(x=>x.id===t.parentId);if(par){const ds=(proj.tasks||[]).filter(x=>x.parentId===t.parentId&&x.status==='done'&&x.id!==t.id);par.actualMins=ds.reduce((a,s)=>a+(s.actualMins||s.estimatedMins||0),0)+(t.actualMins||0);}}if(!isP)buildSchedule(proj,td());const rem=Math.max(0,(t.estimatedMins||0)-(t.actualMins||0));document.getElementById('rf-preview').innerHTML=`<div style="margin-top:10px;padding:10px;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.2);border-radius:7px;font-size:12px;color:var(--a)">⟳ 残り ${rem}分 で再スケジュールしました</div>`;save();renderCurrent();}}
+function saveResult(){
+  const pct=parseInt(document.getElementById('rf-pct').value);
+  const status=document.getElementById('rf-status').value;
+  const note=document.getElementById('rf-note').value;
+  const projId=document.getElementById('rf-proj-id').value;
+  const taskId=document.getElementById('rf-task-id').value;
+  const isP=projId==='personal';
+  const proj=isP?null:getProj(projId);
+  const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);
+  if(!t){closeM('m-result');return;}
+  const actualLog=parseInt(document.getElementById('rf-actual')?.value)||null;
+  // 実績を保存（個人タスク・プロジェクトタスク共通）
+  t.achievementPct=isNaN(pct)?null:Math.max(0,pct);
+  t.actualMins=isNaN(pct)?null:Math.round((t.estimatedMins||0)*pct/100);
+  if(actualLog!==null)t.actualMinsLog=actualLog;
+  t.status=status;
+  t.lastNote=note; // メモを必ず保存
+  if(status==='done'){
+    if(isNaN(pct)||pct<=0)t.achievementPct=100;
+    t.actualMins=Math.round((t.estimatedMins||0)*(t.achievementPct||100)/100);
+    // プロジェクトタスクのみ親タスク更新
+    if(!isP&&t.parentId){
+      const sibs=(proj.tasks||[]).filter(x=>x.parentId===t.parentId);
+      const par=(proj.tasks||[]).find(x=>x.id===t.parentId);
+      if(par){par.actualMins=sibs.reduce((a,s)=>a+(s.actualMins||0),0);if(sibs.every(s=>s.status==='done'||s.id===t.id))par.status='done';}
+    }
+    if(!isP&&!t.parentId)(proj.tasks||[]).filter(x=>x.parentId===t.id).forEach(s=>{s.status='done';s.achievementPct=100;s.actualMins=s.estimatedMins;});
+    save();closeM('m-result');renderCurrent();
+  } else {
+    if(!isP&&t.parentId){
+      const par=(proj.tasks||[]).find(x=>x.id===t.parentId);
+      if(par){const ds=(proj.tasks||[]).filter(x=>x.parentId===t.parentId&&x.status==='done'&&x.id!==t.id);par.actualMins=ds.reduce((a,s)=>a+(s.actualMins||s.estimatedMins||0),0)+(t.actualMins||0);}
+    }
+    if(!isP)buildSchedule(proj,td());
+    const rem=Math.max(0,(t.estimatedMins||0)-(t.actualMins||0));
+    document.getElementById('rf-preview').innerHTML=`<div style="margin-top:10px;padding:10px;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.2);border-radius:7px;font-size:12px;color:var(--a)">✓ 実績を保存しました${!isP?' (残り '+rem+'分で再スケジュール)':''}</div>`;
+    save();renderCurrent();
+  }
+}
 
 // ══ TOGGLE DONE ══
 function toggleDone(projId,taskId){if(projId==='personal'){const t=(D.todayTasks||[]).find(x=>x.id===taskId);if(!t)return;t.status=t.status==='done'?'todo':'done';save();renderCurrent();return;}const proj=getProj(projId);if(!proj)return;const t=proj.tasks.find(x=>x.id===taskId);if(!t)return;if(t.status==='done'){t.status='todo';t.achievementPct=null;t.actualMins=null;if(t.parentId){const par=proj.tasks.find(x=>x.id===t.parentId);if(par&&par.status==='done')par.status='doing';}}else{t.status='done';t.achievementPct=100;t.actualMins=t.estimatedMins;if(t.parentId){const sibs=proj.tasks.filter(x=>x.parentId===t.parentId);const par=proj.tasks.find(x=>x.id===t.parentId);if(par){par.actualMins=sibs.reduce((a,s)=>a+(s.actualMins||0),0);if(sibs.every(s=>s.status==='done'||s.id===t.id))par.status='done';}}if(!t.parentId)proj.tasks.filter(x=>x.parentId===t.id).forEach(s=>{s.status='done';s.achievementPct=100;s.actualMins=s.estimatedMins;});}save();renderCurrent();}
