@@ -2962,6 +2962,17 @@
       "plan": "",
       "status": "todo",
       "repeatGroupId": null
+    },
+    {
+      "id": "mnwp6392eq44",
+      "date": "2026-04-13",
+      "name": "昼食",
+      "estimatedMins": 60,
+      "startTime": "12:30",
+      "endTime": "13:30",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
