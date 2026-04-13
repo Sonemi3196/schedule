@@ -154,7 +154,7 @@
       "startTime": "10:00",
       "endTime": "11:00",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": "mngy8nqty4mr",
       "repeat": "daily"
     },
@@ -2938,8 +2938,12 @@
       "startTime": "11:30",
       "endTime": "13:00",
       "plan": "",
-      "status": "todo",
-      "repeatGroupId": null
+      "status": "done",
+      "repeatGroupId": null,
+      "achievementPct": 100,
+      "actualMins": 90,
+      "actualMinsLog": 90,
+      "lastNote": "色落ちとかしたりして時間かかった。色落ちは酸性て取れた。"
     },
     {
       "id": "mnwi2bq00i68",
@@ -2971,8 +2975,12 @@
       "startTime": "12:30",
       "endTime": "13:30",
       "plan": "",
-      "status": "todo",
-      "repeatGroupId": null
+      "status": "done",
+      "repeatGroupId": null,
+      "achievementPct": 100,
+      "actualMins": 60,
+      "actualMinsLog": 60,
+      "lastNote": "けーたんと色々お話できた"
     }
   ],
   "settings": {
