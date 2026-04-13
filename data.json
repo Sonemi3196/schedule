@@ -142,7 +142,7 @@
       "startTime": "10:00",
       "endTime": "11:00",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": "mngy8nqty4mr",
       "repeat": "daily"
     },
@@ -2959,6 +2959,17 @@
       "estimatedMins": 60,
       "startTime": "16:00",
       "endTime": "17:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
+    },
+    {
+      "id": "mnwp46ghlxvc",
+      "date": "2026-04-13",
+      "name": "昼食",
+      "estimatedMins": 60,
+      "startTime": "00:30",
+      "endTime": "01:30",
       "plan": "",
       "status": "todo",
       "repeatGroupId": null
