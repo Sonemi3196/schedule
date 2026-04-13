@@ -307,7 +307,9 @@
       "achievementPct": 100,
       "actualMins": 60,
       "actualMinsLog": 60,
-      "lastNote": ""
+      "lastNote": "",
+      "actualStartTime": "11:12",
+      "actualEndTime": "12:24"
     },
     {
       "id": "mngy8nqt4yu8",
