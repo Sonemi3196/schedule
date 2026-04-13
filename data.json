@@ -34,7 +34,7 @@
       "startTime": "10:00",
       "endTime": "11:00",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": "mngy8nqty4mr",
       "repeat": "daily"
     },
@@ -58,7 +58,7 @@
       "startTime": "10:00",
       "endTime": "11:00",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": "mngy8nqty4mr",
       "repeat": "daily"
     },
