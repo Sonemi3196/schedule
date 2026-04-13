@@ -3091,6 +3091,17 @@
       "plan": "",
       "status": "todo",
       "repeatGroupId": null
+    },
+    {
+      "id": "mnwi2bq00i68",
+      "date": "2026-04-13",
+      "name": "料理",
+      "estimatedMins": 60,
+      "startTime": "18:30",
+      "endTime": "19:30",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
