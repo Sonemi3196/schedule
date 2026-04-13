@@ -3137,6 +3137,17 @@
       "actualMinsLog": 60,
       "lastNote": "けーたんと色々お話できた",
       "actualStartTime": "12:30"
+    },
+    {
+      "id": "mnwvhu6hcwvj",
+      "date": "2026-04-13",
+      "name": "お参り",
+      "estimatedMins": null,
+      "startTime": "13:00",
+      "endTime": "17:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
