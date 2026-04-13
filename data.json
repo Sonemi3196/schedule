@@ -8,7 +8,7 @@
           "createdAt": "2026-04-13",
           "parentId": null,
           "name": "読書",
-          "status": "todo",
+          "status": "done",
           "estimatedMins": 300,
           "taskStartDate": "2026-04-01",
           "prefTime": "08:30",
@@ -17,7 +17,7 @@
           "scheduledDate": null,
           "scheduledStartTime": null,
           "scheduledEndTime": null,
-          "actualMins": 270
+          "actualMins": 300
         },
         {
           "id": "mnws7b4oul02",
@@ -144,9 +144,9 @@
           "scheduledDate": "2026-04-10",
           "scheduledStartTime": "08:30",
           "scheduledEndTime": "09:00",
-          "status": "todo",
-          "actualMins": 0,
-          "achievementPct": null,
+          "status": "done",
+          "actualMins": 30,
+          "achievementPct": 100,
           "createdAt": "2026-04-13"
         }
       ],
