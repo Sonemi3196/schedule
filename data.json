@@ -156,7 +156,11 @@
       "plan": "",
       "status": "todo",
       "repeatGroupId": "mngy8nqty4mr",
-      "repeat": "daily"
+      "repeat": "daily",
+      "achievementPct": 100,
+      "actualMins": 60,
+      "actualMinsLog": 60,
+      "lastNote": ""
     },
     {
       "id": "mngy8nqt4yu8",
