@@ -3151,5 +3151,16 @@
       4,
       5
     ]
-  }
+  },
+  "actualRecords": [
+    {
+      "id": "mnwvf0it1u5m",
+      "date": "2026-04-13",
+      "name": "アンケートやyoutube視聴",
+      "startTime": "13:30",
+      "endTime": "15:30",
+      "note": "",
+      "type": "actual"
+    }
+  ]
 }
