@@ -2972,7 +2972,10 @@
       "endTime": "13:30",
       "plan": "",
       "status": "todo",
-      "repeatGroupId": null
+      "repeatGroupId": null,
+      "scheduledDate": "2026-04-13",
+      "scheduledStartTime": "13:30",
+      "scheduledEndTime": "14:30"
     }
   ],
   "settings": {
