@@ -3080,6 +3080,17 @@
       "status": "todo",
       "repeatGroupId": "mngy8nqty4mr",
       "repeat": "daily"
+    },
+    {
+      "id": "mnwi032htigv",
+      "date": "2026-04-13",
+      "name": "洗濯（下着）",
+      "estimatedMins": 90,
+      "startTime": "11:30",
+      "endTime": "13:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
