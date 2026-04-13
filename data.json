@@ -3102,6 +3102,17 @@
       "plan": "",
       "status": "todo",
       "repeatGroupId": null
+    },
+    {
+      "id": "mnwi4oofuenr",
+      "date": "2026-04-13",
+      "name": "ヴェーダ数秘",
+      "estimatedMins": 60,
+      "startTime": "16:00",
+      "endTime": "17:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
