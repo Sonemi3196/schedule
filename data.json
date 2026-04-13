@@ -3119,8 +3119,13 @@
       "startTime": "16:00",
       "endTime": "17:00",
       "plan": "",
-      "status": "todo",
-      "repeatGroupId": null
+      "status": "doing",
+      "repeatGroupId": null,
+      "achievementPct": 80,
+      "actualMins": 48,
+      "actualStartTime": "16:30",
+      "actualEndTime": "17:32",
+      "lastNote": "ダシャーまで終わった"
     },
     {
       "id": "mnwp8itfe1o9",
