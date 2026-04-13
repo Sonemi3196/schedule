@@ -3096,7 +3096,9 @@
       "achievementPct": 100,
       "actualMins": 90,
       "actualMinsLog": 90,
-      "lastNote": "色落ちとかしたりして時間かかった。色落ちは酸性て取れた。"
+      "lastNote": "色落ちとかしたりして時間かかった。色落ちは酸性て取れた。",
+      "actualStartTime": "11:12",
+      "actualEndTime": "12:27"
     },
     {
       "id": "mnwi2bq00i68",
