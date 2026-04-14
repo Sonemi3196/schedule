@@ -3161,8 +3161,13 @@
       "startTime": "11:00",
       "endTime": "16:00",
       "plan": "",
-      "status": "todo",
-      "repeatGroupId": null
+      "status": "done",
+      "repeatGroupId": null,
+      "achievementPct": 100,
+      "actualMins": 300,
+      "actualStartTime": "11:00",
+      "actualEndTime": "16:00",
+      "lastNote": ""
     }
   ],
   "settings": {
