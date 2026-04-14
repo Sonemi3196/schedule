@@ -3223,6 +3223,15 @@
       "endTime": "12:30",
       "note": "スパイス美味しかった",
       "type": "actual"
+    },
+    {
+      "id": "mny5pod53vp3",
+      "date": "2026-04-14",
+      "name": "浅間神社",
+      "startTime": "13:00",
+      "endTime": "13:30",
+      "note": "大吉だった",
+      "type": "actual"
     }
   ]
 }
