@@ -3157,9 +3157,9 @@
       "id": "mnwvhu6hcwvj",
       "date": "2026-04-14",
       "name": "お参り",
-      "estimatedMins": null,
-      "startTime": "13:00",
-      "endTime": "13:30",
+      "estimatedMins": 300,
+      "startTime": "11:00",
+      "endTime": "16:00",
       "plan": "",
       "status": "todo",
       "repeatGroupId": null
