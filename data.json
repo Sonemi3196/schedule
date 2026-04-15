@@ -3193,13 +3193,13 @@
       "startTime": "15:00",
       "endTime": "16:00",
       "plan": "",
-      "status": "",
+      "status": "doing",
       "repeatGroupId": null,
       "achievementPct": null,
       "actualMins": null,
       "actualStartTime": "15:00",
       "actualEndTime": "16:00",
-      "lastNote": "・入谷のクーポン(来た人限定)\n・今後の展開"
+      "lastNote": ""
     }
   ],
   "settings": {
