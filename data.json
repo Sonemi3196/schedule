@@ -3205,6 +3205,17 @@
       "actualStartTime": "15:00",
       "actualEndTime": "16:00",
       "lastNote": "・入谷のクーポン(来た人限定)\n・今後の展開"
+    },
+    {
+      "id": "mnzl96w9v4hk",
+      "date": "2026-04-15",
+      "name": "スライド作り",
+      "estimatedMins": 60,
+      "startTime": "17:00",
+      "endTime": "18:00",
+      "plan": "生体電流の説明",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
