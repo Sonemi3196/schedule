@@ -336,9 +336,14 @@
       "startTime": "10:00",
       "endTime": "11:00",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": "mngy8nqty4mr",
-      "repeat": "daily"
+      "repeat": "daily",
+      "achievementPct": 100,
+      "actualMins": 60,
+      "actualStartTime": "10:00",
+      "actualEndTime": "11:00",
+      "lastNote": ""
     },
     {
       "id": "mngy8nqt5skf",
