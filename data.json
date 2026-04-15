@@ -3168,6 +3168,17 @@
       "actualStartTime": "11:00",
       "actualEndTime": "16:00",
       "lastNote": "友達と回るのは楽しい"
+    },
+    {
+      "id": "mnzfsizql1oh",
+      "date": "2026-04-15",
+      "name": "ヴェーダ数秘",
+      "estimatedMins": 60,
+      "startTime": "11:30",
+      "endTime": "12:30",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
