@@ -3184,6 +3184,17 @@
       "plan": "",
       "status": "todo",
       "repeatGroupId": null
+    },
+    {
+      "id": "mnzglf72frhf",
+      "date": "2026-04-15",
+      "name": "ラインアット",
+      "estimatedMins": null,
+      "startTime": "15:00",
+      "endTime": "16:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
