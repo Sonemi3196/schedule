@@ -3380,6 +3380,15 @@
       "endTime": "16:00",
       "note": "左利きのエレン、アド街",
       "type": "actual"
+    },
+    {
+      "id": "mo06vpqla6tq",
+      "date": "2026-04-15",
+      "name": "料理",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "note": "",
+      "type": "actual"
     }
   ]
 }
