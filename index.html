@@ -7,6 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0a0c10;--s1:#111318;--s2:#181c24;--s3:#1f2433;--s4:#262d40;--b1:#2a3148;--b2:#364060;--text:#e2e8f8;--t2:#8892b0;--t3:#4a5578;--t4:#2e3650;--a:#38bdf8;--ag:#0ea5e9;--g:#4ade80;--y:#fbbf24;--o:#fb923c;--r:#f87171;--p:#a78bfa;--mono:'DM Mono',monospace;--jp:'Zen Kaku Gothic New',sans-serif}
+[data-theme="light"]{--bg:#f0f4f8;--s1:#ffffff;--s2:#f8fafc;--s3:#eef2f7;--s4:#e2e8f0;--b1:#cbd5e1;--b2:#94a3b8;--text:#1e293b;--t2:#475569;--t3:#94a3b8;--t4:#cbd5e1;--a:#0284c7;--ag:#0369a1;--g:#16a34a;--y:#d97706;--o:#ea580c;--r:#dc2626;--p:#7c3aed}
+[data-theme="warm"]{--bg:#1a1612;--s1:#211d18;--s2:#2a2420;--s3:#332d27;--s4:#3d362f;--b1:#4a4038;--b2:#5c5048;--text:#f0e8de;--t2:#b8a898;--t3:#7a6a5c;--t4:#4a3e34;--a:#f59e0b;--ag:#d97706;--g:#4ade80;--y:#fbbf24;--o:#fb923c;--r:#f87171;--p:#c084fc}
+[data-theme="blue"]{--bg:#0d1117;--s1:#161b22;--s2:#1c2128;--s3:#21262d;--s4:#2d333b;--b1:#30363d;--b2:#484f58;--text:#e6edf3;--t2:#8b949e;--t3:#484f58;--t4:#21262d;--a:#58a6ff;--ag:#388bfd;--g:#3fb950;--y:#d29922;--o:#db6d28;--r:#f85149;--p:#bc8cff}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--jp);font-size:14px;min-height:100vh}
 ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
@@ -96,11 +99,8 @@ button{cursor:pointer;font-family:var(--jp)}input,select,textarea{font-family:va
 .tl-block-time{font-size:9.5px;opacity:.8;font-family:var(--mono)}.tl-block-name{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tl-now{position:absolute;left:0;right:0;height:2px;background:var(--r);pointer-events:none;z-index:2}
 .tl-now::before{content:'';position:absolute;left:-5px;top:-4px;width:10px;height:10px;background:var(--r);border-radius:50%}
-/* 予定ブロック（薄い色・左側） */
 .tl-plan{opacity:0.75;border-style:dashed}
-/* 実績ブロック（濃い色・右側） */
 .tl-actual{border-left-width:4px!important;box-shadow:0 1px 6px rgba(0,0,0,.3)}
-/* タイムライン凡例 */
 .tl-legend{display:flex;gap:12px;margin-bottom:8px;font-size:11px;font-family:var(--mono);color:var(--t2);padding:5px 8px;background:var(--s3);border-radius:6px;flex-wrap:wrap}
 .tl-legend-item{display:flex;align-items:center;gap:5px}
 .tl-legend-dot{width:12px;height:12px;border-radius:3px}
@@ -172,23 +172,20 @@ button{cursor:pointer;font-family:var(--jp)}input,select,textarea{font-family:va
 </main>
 </div>
 <!-- MODALS -->
-<div class="modal-ov hidden" id="m-proj"><div class="modal"><div class="mhead"><span class="mtitle" id="m-proj-title">プロジェクト追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-proj')">✕</button></div><div class="mbody"><input type="hidden" id="pf-id"><div class="fg"><label class="fl">プロジェクト名 *</label><input class="fi" id="pf-name"></div><div class="frow"><div class="fg"><label class="fl">開始日</label><input class="fi" type="date" id="pf-start"></div><div class="fg"><label class="fl">納期</label><input class="fi" type="date" id="pf-deadline"></div></div><div class="frow"><div class="fg"><label class="fl">1日の上限（分）</label><input class="fi" type="text" inputmode="numeric" id="pf-daily" placeholder="例: 120"></div><div class="fg"><label class="fl">土日を含む</label><select class="fs" id="pf-wkend"><option value="0">含まない</option><option value="1">含む</option></select></div></div><div class="fg"><label class="fl">説明</label><textarea class="ft" id="pf-desc" style="min-height:46px"></textarea></div><div class="fg"><label class="fl">カラー</label><div class="cpicker" id="pf-colors"></div></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-proj')">キャンセル</button><button class="btn btn-primary" onclick="saveProj()">保存</button></div></div></div>
+<div class="modal-ov hidden" id="m-proj"><div class="modal"><div class="mhead"><span class="mtitle" id="m-proj-title">プロジェクト追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-proj')">✕</button></div><div class="mbody"><input type="hidden" id="pf-id"><div class="fg"><label class="fl">プロジェクト名 *</label><input class="fi" id="pf-name"></div><div class="frow"><div class="fg"><label class="fl">開始日</label><input class="fi" type="date" id="pf-start"></div><div class="fg"><label class="fl">納期</label><input class="fi" type="date" id="pf-deadline"></div></div><div class="frow"><div class="fg"><label class="fl">1日の上限（分）</label><input class="fi" type="text" inputmode="numeric" id="pf-daily" placeholder="例: 120"></div><div class="fg"><label class="fl">土日を含む</label><select class="fs" id="pf-wkend"><option value="0">含まない</option><option value="1">含む</option></select></div></div><div class="fg"><label class="fl">説明</label><textarea class="ft" id="pf-desc" style="min-height:46px"></textarea></div><div class="fg"><label class="fl">カラー</label><div class="cpicker" id="pf-colors"></div></div><div class="fg"><label class="fl">ステータス</label><select class="fs" id="pf-status"><option value="active">進行中</option><option value="done">完了</option><option value="hold">保留</option></select></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-proj')">キャンセル</button><button class="btn btn-primary" onclick="saveProj()">保存</button></div></div></div>
 
 <div class="modal-ov hidden" id="m-task"><div class="modal modal-lg"><div class="mhead"><span class="mtitle" id="m-task-title">タスク追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-task')">✕</button></div><div class="mbody"><input type="hidden" id="tf-id"><input type="hidden" id="tf-proj-id"><div class="fg"><label class="fl">タスク名 *</label><input class="fi" id="tf-name"></div><div class="frow"><div class="fg"><label class="fl">ステータス</label><select class="fs" id="tf-status"><option value="todo">未着手</option><option value="doing">進行中</option><option value="review">確認待ち</option><option value="done">完了</option><option value="hold">保留</option></select></div><div class="fg"><label class="fl">想定所要時間（分）</label><input class="fi" type="text" inputmode="numeric" id="tf-est" placeholder="例: 120"></div></div><div class="frow"><div class="fg"><label class="fl">タスク開始日</label><input class="fi" type="date" id="tf-start"></div><div class="fg"><label class="fl">優先開始時刻</label><input class="fi" type="time" id="tf-pref-time"></div></div><div class="fg"><label class="fl">スケジュール方法</label><select class="fs" id="tf-auto" onchange="onAutoChange()"><option value="auto">自動（開始日〜納期に自動分割配置）</option><option value="manual">手動（日付・時刻を自分で指定）</option><option value="off">なし（スケジュールしない）</option></select></div><div class="frow hidden" id="tf-manual-row"><div class="fg"><label class="fl">指定日</label><input class="fi" type="date" id="tf-mdate"></div><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="tf-mtime"></div></div><div class="fg"><label class="fl">メモ / 完了条件</label><textarea class="ft" id="tf-notes" style="min-height:46px"></textarea></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-task')">キャンセル</button><button class="btn btn-primary" onclick="saveTask()">保存してスケジュール</button></div></div></div>
 
-<div class="modal-ov hidden" id="m-result"><div class="modal"><div class="mhead"><span class="mtitle">📝 実績を記録</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-result')">✕</button></div><div class="mbody"><div style="font-size:11px;color:var(--t3);margin-bottom:8px;padding:5px 8px;background:var(--s3);border-radius:5px">✓ チェック=完了切替のみ　📝 実績=達成率・メモを記録（後から確認できます）</div><div id="rf-info" style="margin-bottom:10px"></div><input type="hidden" id="rf-proj-id"><input type="hidden" id="rf-task-id">
-      <div class="frow"><div class="fg"><label class="fl">実績 開始時刻</label><input class="fi" type="time" id="rf-actual-start"></div><div class="fg"><label class="fl">実績 終了時刻</label><input class="fi" type="time" id="rf-actual-end"></div></div>
-      <div class="frow"><div class="fg"><label class="fl">達成率（%）</label><input class="fi" type="text" inputmode="numeric" id="rf-pct" placeholder="例: 150" oninput="onPctInput()"><div class="fhint" id="rf-pct-hint"></div></div><div class="fg"><label class="fl">実働時間（分）</label><input class="fi" type="text" inputmode="numeric" id="rf-actual" placeholder="例: 25"></div></div><div class="fg"><label class="fl">ステータス</label><select class="fs" id="rf-status"><option value="doing">進行中</option><option value="done">完了</option><option value="review">確認待ち</option><option value="hold">保留</option></select></div><div class="fg"><label class="fl">メモ（後から今日ページで確認できます）</label><textarea class="ft" id="rf-note" style="min-height:50px" placeholder="気づきなど"></textarea></div><div id="rf-preview"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-result')">キャンセル</button><button class="btn btn-primary" onclick="saveResult()">保存</button></div></div></div>
+<div class="modal-ov hidden" id="m-result"><div class="modal"><div class="mhead"><span class="mtitle">📝 実績を記録</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-result')">✕</button></div><div class="mbody"><div style="font-size:11px;color:var(--t3);margin-bottom:8px;padding:5px 8px;background:var(--s3);border-radius:5px">✓ チェック=完了切替のみ　📝 実績=達成率・メモを記録（後から確認できます）</div><div id="rf-info" style="margin-bottom:10px"></div><input type="hidden" id="rf-proj-id"><input type="hidden" id="rf-task-id"><div class="frow"><div class="fg"><label class="fl">実績 開始時刻</label><input class="fi" type="time" id="rf-actual-start"></div><div class="fg"><label class="fl">実績 終了時刻</label><input class="fi" type="time" id="rf-actual-end"></div></div><div class="frow"><div class="fg"><label class="fl">達成率（%）</label><input class="fi" type="text" inputmode="numeric" id="rf-pct" placeholder="例: 150" oninput="onPctInput()"><div class="fhint" id="rf-pct-hint"></div></div><div class="fg"><label class="fl">実働時間（分）</label><input class="fi" type="text" inputmode="numeric" id="rf-actual" placeholder="例: 25"></div></div><div class="fg"><label class="fl">ステータス</label><select class="fs" id="rf-status"><option value="doing">進行中</option><option value="done">完了</option><option value="review">確認待ち</option><option value="hold">保留</option></select></div><div class="fg"><label class="fl">メモ（後から今日ページで確認できます）</label><textarea class="ft" id="rf-note" style="min-height:50px" placeholder="気づきなど"></textarea></div><div id="rf-preview"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-result')">キャンセル</button><button class="btn btn-primary" onclick="saveResult()">保存</button></div></div></div>
 
 <div class="modal-ov hidden" id="m-conflict"><div class="modal modal-lg"><div class="mhead"><span class="mtitle">⚠ 時刻の競合</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-conflict')">✕</button></div><div class="mbody"><div style="font-size:12.5px;color:var(--t2);margin-bottom:12px">時間帯が重複しています。開始時刻を変更するか「このまま保存」を選択してください。</div><div id="conflict-body"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="saveWithConflicts()">このまま保存</button><button class="btn btn-primary" onclick="applyConflictFix()">時刻を変更して保存</button></div></div></div>
 
-<div class="modal-ov hidden" id="m-time-edit"><div class="modal"><div class="mhead"><span class="mtitle">時刻を変更</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-time-edit')">✕</button></div><div class="mbody"><div id="te-info" style="margin-bottom:12px;font-size:13px;font-weight:500"></div><input type="hidden" id="te-proj-id"><input type="hidden" id="te-task-id"><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="te-date"></div><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="te-start" oninput="updateTeEndHint()"></div></div><div class="fg"><label class="fl">作業時間（分）※空欄=そのまま</label><input class="fi" type="text" inputmode="numeric" id="te-mins" placeholder="例: 60" oninput="updateTeEndHint()"></div><div class="fhint" id="te-end-hint"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-time-edit')">キャンセル</button><button class="btn btn-primary" onclick="saveTimeEdit()">変更</button></div></div></div>
+<div class="modal-ov hidden" id="m-time-edit"><div class="modal"><div class="mhead"><span class="mtitle">時刻を変更</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-time-edit')">✕</button></div><div class="mbody"><div id="te-info" style="margin-bottom:12px;font-size:13px;font-weight:500"></div><input type="hidden" id="te-proj-id"><input type="hidden" id="te-task-id"><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="te-date"></div><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="te-start" oninput="updateTeEndHint()"></div></div><div class="frow"><div class="fg"><label class="fl">終了時刻（直接指定）</label><input class="fi" type="time" id="te-end" oninput="updateTeEndFromEnd()"></div><div class="fg"><label class="fl">作業時間（分）で指定</label><input class="fi" type="text" inputmode="numeric" id="te-mins" placeholder="例: 60" oninput="updateTeEndHint()"></div></div><div class="fhint" id="te-end-hint" style="color:var(--a)"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-time-edit')">キャンセル</button><button class="btn btn-primary" onclick="saveTimeEdit()">変更</button></div></div></div>
 
 <div class="modal-ov hidden" id="m-today"><div class="modal"><div class="mhead"><span class="mtitle">個人タスク追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-today')">✕</button></div><div class="mbody"><div class="fg"><label class="fl">タスク名 *</label><input class="fi" id="ttf-name"></div><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="ttf-date"></div><div class="fg"><label class="fl">想定時間（分）</label><input class="fi" type="text" inputmode="numeric" id="ttf-est"></div></div><div class="frow"><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="ttf-start"></div><div class="fg"><label class="fl">終了時刻（空欄=自動）</label><input class="fi" type="time" id="ttf-end"></div></div><div class="fg"><label class="fl">関連プロジェクト</label><select class="fs" id="ttf-proj"></select></div><div class="fg"><label class="fl">繰り返し</label><select class="fs" id="ttf-repeat" onchange="onRepeatChange()"><option value="none">なし（1回のみ）</option><option value="daily">毎日</option><option value="weekdays">平日のみ（月〜金）</option><option value="weekly">毎週（曜日指定）</option><option value="monthly">毎月（日付指定）</option></select></div><div id="ttf-repeat-days" class="fg hidden"><label class="fl">繰り返す曜日</label><div style="display:flex;gap:8px;flex-wrap:wrap"><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="0" class="ttf-wd" style="accent-color:var(--a)">日</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="1" class="ttf-wd" style="accent-color:var(--a)" checked>月</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="2" class="ttf-wd" style="accent-color:var(--a)" checked>火</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="3" class="ttf-wd" style="accent-color:var(--a)" checked>水</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="4" class="ttf-wd" style="accent-color:var(--a)" checked>木</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="5" class="ttf-wd" style="accent-color:var(--a)" checked>金</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="6" class="ttf-wd" style="accent-color:var(--a)">土</label></div></div><div id="ttf-repeat-end" class="fg hidden"><label class="fl">繰り返し終了日</label><input class="fi" type="date" id="ttf-end-date"></div><div class="fg"><label class="fl">メモ</label><textarea class="ft" id="ttf-plan" style="min-height:46px"></textarea></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-today')">キャンセル</button><button class="btn btn-primary" id="ttf-save-btn" onclick="saveTodayTask()">追加</button></div></div></div>
 
 <div class="modal-ov hidden" id="m-resched"><div class="modal modal-lg"><div class="mhead"><span class="mtitle">⟳ リスケジュール確認</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-resched')">✕</button></div><div class="mbody"><div id="rs-info" style="font-size:12px;color:var(--t2);margin-bottom:8px"></div><div id="rs-warn" style="display:none;color:var(--o);font-size:12px;margin-bottom:8px;padding:8px 12px;background:rgba(251,146,60,.08);border-radius:7px;border:1px solid rgba(251,146,60,.2)"></div><div id="rs-preview" style="max-height:320px;overflow-y:auto"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-resched')">キャンセル</button><button class="btn btn-primary" onclick="applyResched()">適用する</button></div></div></div>
 
-<!-- 予定外の実績追加モーダル -->
 <div class="modal-ov hidden" id="m-actual-add">
   <div class="modal">
     <div class="mhead"><span class="mtitle">🟠 実績を追加（予定外）</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-actual-add')">✕</button></div>
@@ -325,6 +322,10 @@ function renderSidebar(){document.getElementById('sb-projs').innerHTML=D.project
 function renderDash(){
   const today=td();const todayItems=[];
   D.projects.forEach(proj=>(proj.tasks||[]).forEach(t=>{if(t.scheduledDate===today)todayItems.push({t,proj});}));
+  const _sp={id:'personal',name:'個人',color:'#a78bfa',tasks:[]};
+  (D.todayTasks||[]).filter(t=>t.date===today).forEach(t=>{
+    todayItems.push({t:{...t,scheduledDate:today,scheduledStartTime:t.startTime,scheduledEndTime:t.endTime,parentId:null},proj:_sp,isPersonal:true});
+  });
   todayItems.sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));
   const {ids:conIds,count:conCount,raw:conflicts}=getConflictIds();
   const el=document.getElementById('v-dash');
@@ -333,7 +334,15 @@ function renderDash(){
     <div class="stats-strip"><div class="stat-card"><div class="stat-val">${D.projects.filter(p=>p.status!=='done').length}</div><div class="stat-label">進行中プロジェクト</div></div><div class="stat-card"><div class="stat-val">${todayItems.length}</div><div class="stat-label">今日のタスク</div></div><div class="stat-card"><div class="stat-val">${totalMins}</div><div class="stat-label">今日の予定（分）</div></div><div class="stat-card" style="${conflicts.length?'border-color:var(--o)':''}"><div class="stat-val" style="${conflicts.length?'color:var(--o)':''}">${conCount}</div><div class="stat-label">時刻競合</div></div></div>
     ${conCount?`<div class="conflict-banner">⚠ ${conCount}件の時刻競合があります。<button class="btn btn-warn btn-xs" style="margin-left:8px" onclick="showAllConflicts()">確認・修正</button></div>`:''}
     <div style="margin-bottom:14px"><div style="font-size:13px;font-weight:600;margin-bottom:8px">📋 今日の予定</div>${todayItems.length?`<div class="sched-grid">${todayItems.map(({t,proj})=>staskHTML(t,proj,today,conIds)).join('')}</div>`:'<div class="empty" style="padding:20px"><p>今日の予定はありません</p></div>'}</div>
-    <div><div style="font-size:13px;font-weight:600;margin-bottom:8px">プロジェクト</div><div class="proj-grid">${D.projects.map(p=>{const pct=calcProg(p);const dl=dLeft(p.deadline);const dlc=dl===null?'var(--t3)':dl<0?'var(--r)':dl<=7?'var(--o)':'var(--g)';return `<div class="pcard" onclick="gotoView('project','${p.id}')"><div class="pcard-accent" style="background:${p.color||COLORS[0]}"></div><div style="font-size:14px;font-weight:600;margin-bottom:4px">${p.name}</div><div style="font-size:11px;color:var(--t3);display:flex;gap:10px;margin-bottom:9px">${p.deadline?`<span style="color:${dlc}">📅 ${p.deadline}</span>`:''}<span>${pct}%</span></div><div class="pbar"><div class="pbar-fill" style="width:${pct}%;background:${pcColor(pct)}"></div></div></div>`;}).join('')}<div class="pcard" style="border-style:dashed;display:flex;align-items:center;justify-content:center;color:var(--t3);min-height:80px" onclick="openProjModal()">＋ 新規プロジェクト</div></div></div>`;
+    <div><div style="font-size:13px;font-weight:600;margin-bottom:8px">プロジェクト</div><div class="proj-grid">${D.projects.filter(p=>p.status!=='done'&&p.status!=='hold').map(p=>{const pct=calcProg(p);const dl=dLeft(p.deadline);const dlc=dl===null?'var(--t3)':dl<0?'var(--r)':dl<=7?'var(--o)':'var(--g)';return `<div class="pcard" onclick="gotoView('project','${p.id}')"><div class="pcard-accent" style="background:${p.color||COLORS[0]}"></div><div style="font-size:14px;font-weight:600;margin-bottom:4px">${p.name}</div><div style="font-size:11px;color:var(--t3);display:flex;gap:10px;margin-bottom:9px">${p.deadline?`<span style="color:${dlc}">📅 ${p.deadline}</span>`:''}<span>${pct}%</span></div><div class="pbar"><div class="pbar-fill" style="width:${pct}%;background:${pcColor(pct)}"></div></div></div>`;}).join('')}<div class="pcard" style="border-style:dashed;display:flex;align-items:center;justify-content:center;color:var(--t3);min-height:80px" onclick="openProjModal()">＋ 新規プロジェクト</div></div>
+    ${D.projects.filter(p=>p.status==='done'||p.status==='hold').length?`
+    <div style="margin-top:12px">
+      <button onclick="this.nextElementSibling.classList.toggle('hidden')" style="background:none;border:none;color:var(--t3);font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;padding:4px 0">
+        ▶ 完了・保留プロジェクト（${D.projects.filter(p=>p.status==='done'||p.status==='hold').length}件）
+      </button>
+      <div class="proj-grid hidden" style="margin-top:8px">${D.projects.filter(p=>p.status==='done'||p.status==='hold').map(p=>{const pct=calcProg(p);const isDone=p.status==='done';return `<div class="pcard" style="opacity:0.6" onclick="gotoView('project','${p.id}')"><div class="pcard-accent" style="background:${p.color||COLORS[0]}"></div><div style="font-size:14px;font-weight:600;margin-bottom:4px">${p.name} <span style="font-size:10px;color:${isDone?'var(--g)':'var(--y)'}">${isDone?'✓完了':'保留'}</span></div><div class="pbar"><div class="pbar-fill" style="width:${pct}%;background:${pcColor(pct)}"></div></div></div>`;}).join('')}</div>
+    </div>`:''}
+    </div>`;
 }
 
 // ══ SCHEDULE ══
@@ -347,7 +356,7 @@ function renderSchedule(){
   el.innerHTML=`<div class="ph"><div class="ph-title">スケジュール</div><div class="ph-actions">${conCount?`<button class="btn btn-warn btn-sm" onclick="showAllConflicts()">⚠ 競合 ${conCount}件</button>`:''}<button class="btn btn-ghost btn-sm" onclick="reschedAll()">⟳ 全体リスケジュール</button></div></div>
     ${dates.length?`<div class="sched-grid">${dates.map(date=>{const items=byDate[date].sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));const tot=items.reduce((a,x)=>a+(x.t.estimatedMins||0),0);const isToday=date===today;const hasLate=items.some(x=>x.t.status!=='done'&&x.t.status!=='hold'&&date<today);const hasCon=conflictDates.has(date);return `<div class="sched-day ${isToday?'today-row':''} ${isToday?'open':''}" id="sd-${date}"><div class="sday-head" onclick="toggleSD('sd-${date}')"><span class="sday-date ${isToday?'today-label':''}">${fmtDL(date)}</span><div class="sday-bar"><div class="pbar"><div class="pbar-fill" style="width:${Math.min(100,Math.round(tot/(getDailyMax(null)||192)*100))}%;background:${hasLate?'var(--r)':hasCon?'var(--o)':'var(--a)'}"></div></div></div><span class="sday-info" style="${hasLate?'color:var(--r)':hasCon?'color:var(--o)':''}">${tot}分</span><span class="sday-toggle">▶</span></div><div class="sday-tasks">${items.map(({t,proj})=>staskHTML(t,proj,date,conIds)).join('')}</div></div>`;}).join('')}</div>`:'<div class="empty"><div class="empty-icon">📋</div><p>スケジュールされたタスクがありません</p></div>'}`;
 }
-function staskHTML(t,proj,date,conIds){const today=td();const isSub=!!t.parentId;const par=isSub?(proj.tasks||[]).find(x=>x.id===t.parentId):null;const isLate=t.status!=='done'&&t.status!=='hold'&&date<today;const isCon=conIds?conIds.has(t.id):false;return `<div class="stask ${t.status==='done'?'done-t':''} ${isLate?'late-t':''} ${isCon?'conflict-t':''}"><button class="stask-check ${t.status==='done'?'chk':''}" onclick="toggleDone('${proj.id}','${t.id}')">✓</button><span class="stask-time">${t.scheduledStartTime||''}${t.scheduledEndTime?'〜'+t.scheduledEndTime:''}</span><span class="stask-name">${isSub?'<span style="font-size:10px;color:var(--t3)">↳ </span>':''}${t.name}</span><span class="stask-mins">${t.estimatedMins||'?'}分</span><span style="font-size:10px;color:${proj.color||COLORS[0]};margin-left:4px">${proj.name}</span><div class="stask-acts">${t.status!=='done'?`<button class="btn btn-warn btn-xs" onclick="openResultModal('${proj.id}','${t.id}')">実績</button>`:''}<button class="btn btn-ghost btn-xs" onclick="openTimeEdit('${proj.id}','${t.id}')">✎</button></div></div>`;}
+function staskHTML(t,proj,date,conIds){const today=td();const isSub=!!t.parentId;const isLate=t.status!=='done'&&t.status!=='hold'&&date<today;const isCon=conIds?conIds.has(t.id):false;return `<div class="stask ${t.status==='done'?'done-t':''} ${isLate?'late-t':''} ${isCon?'conflict-t':''}"><button class="stask-check ${t.status==='done'?'chk':''}" onclick="toggleDone('${proj.id}','${t.id}')">✓</button><span class="stask-time">${t.scheduledStartTime||''}${t.scheduledEndTime?'〜'+t.scheduledEndTime:''}</span><span class="stask-name">${isSub?'<span style="font-size:10px;color:var(--t3)">↳ </span>':''}${t.name}</span><span class="stask-mins">${t.estimatedMins||'?'}分</span><span style="font-size:10px;color:${proj.color||COLORS[0]};margin-left:4px">${proj.name}</span><div class="stask-acts">${t.status!=='done'?`<button class="btn btn-warn btn-xs" onclick="openResultModal('${proj.id}','${t.id}')">実績</button>`:''}<button class="btn btn-ghost btn-xs" onclick="openTimeEdit('${proj.id}','${t.id}')">✎</button></div></div>`;}
 function toggleSD(id){document.getElementById(id)?.classList.toggle('open');}
 
 // ══ CALENDAR ══
@@ -372,50 +381,34 @@ function renderDayPanel(ds,data){
       </div>
     </div>`;
 }
-function renderTimeline(ds, items){
-  const SH=8, EH=22, PPM=1.6, H=(EH-SH)*60*PPM;
-
-  // 時間ラベルと横線
+function renderTimeline(ds,items){
+  const SH=8,EH=22,PPM=1.6,H=(EH-SH)*60*PPM;
   let labels='';
   for(let h=SH;h<=EH;h++){
     const top=(h-SH)*60*PPM;
     labels+=`<div class="tl-hour-line" style="top:${top}px"><span class="tl-hour-label">${h}:00</span></div>`;
   }
-
-  // 予定ブロック（左45%）と実績ブロック（右45%）に分ける
-  // 予定 = scheduledStartTime/scheduledEndTime または startTime/endTime
-  // 実績 = actualStartTime/actualEndTime が設定されている場合
-  const planBlocks=[], actualBlocks=[];
-
+  const planBlocks=[],actualBlocks=[];
   items.forEach(({t,proj,isPersonal})=>{
-    const isP = isPersonal || proj.id==='personal';
-    // 予定時刻
-    const ps = isP ? t2m(t.startTime) : t2m(t.scheduledStartTime);
-    const pe = isP ? t2m(t.endTime)   : t2m(t.scheduledEndTime);
-    const pStart = ps || SH*60;
-    const pEnd   = pe || (pStart + (t.estimatedMins||30));
-    planBlocks.push({t, proj, s:pStart, e:pEnd, isP, col:'plan'});
-
-    // 実績時刻（記録されていれば）
+    const isP=isPersonal||proj.id==='personal';
+    const ps=isP?t2m(t.startTime):t2m(t.scheduledStartTime);
+    const pe=isP?t2m(t.endTime):t2m(t.scheduledEndTime);
+    const pStart=ps||SH*60;
+    const pEnd=pe||(pStart+(t.estimatedMins||30));
+    planBlocks.push({t,proj,s:pStart,e:pEnd,isP,col:'plan'});
     if(t.actualStartTime){
-      const as = t2m(t.actualStartTime);
-      const ae = t.actualEndTime ? t2m(t.actualEndTime) : (as + (t.actualMinsLog||t.estimatedMins||30));
-      actualBlocks.push({t, proj, s:as, e:ae, isP, col:'actual'});
+      const as=t2m(t.actualStartTime);
+      const ae=t.actualEndTime?t2m(t.actualEndTime):(as+(t.actualMinsLog||t.estimatedMins||30));
+      actualBlocks.push({t,proj,s:as,e:ae,isP,col:'actual'});
     }
   });
-
-  // 予定外実績（D.actualRecords から当日分）
-  const extraActuals = (D.actualRecords||[]).filter(r=>r.date===ds);
+  const extraActuals=(D.actualRecords||[]).filter(r=>r.date===ds);
   extraActuals.forEach(r=>{
-    const as=t2m(r.startTime), ae=t2m(r.endTime)||(as+30);
-    actualBlocks.push({t:{id:r.id,name:r.name,lastNote:r.note,status:'done'}, proj:{id:'extra',name:'実績',color:'#fb923c'}, s:as, e:ae, isP:true, col:'actual', isExtra:true});
+    const as=t2m(r.startTime),ae=t2m(r.endTime)||(as+30);
+    actualBlocks.push({t:{id:r.id,name:r.name,lastNote:r.note,status:'done'},proj:{id:'extra',name:'実績',color:'#fb923c'},s:as,e:ae,isP:true,col:'actual',isExtra:true});
   });
-
   const {ids:conIds}=getConflictIds();
-
-  // ブロック描画関数
-  function drawBlocks(blocks, leftPct, widthPct, isPlan){
-    // 同列内のレーン割り当て
+  function drawBlocks(blocks,leftPct,widthPct,isPlan){
     const lanes=[];
     blocks.forEach(b=>{
       let placed=false;
@@ -434,54 +427,23 @@ function renderTimeline(ds, items){
       const isCon=!isPlan&&conIds.has(b.t.id);
       const isDone=b.t.status==='done';
       if(isPlan){
-        // 予定ブロック：薄い背景・破線ボーダー
-        return `<div class="tl-block tl-plan ${isCon?'conflict-b':''}"
-          style="top:${top}px;height:${bh}px;left:${left}%;width:${w-0.5}%;background:${color}18;border-left:3px solid ${color};border:1px dashed ${color}55;border-left:3px solid ${color};opacity:${isDone?0.4:0.85}"
-          onclick="openResultModal('${b.proj.id}','${b.t.id}')">
-          <div class="tl-block-time" style="color:${color};font-size:9px">${m2t(b.s)}〜${m2t(b.e)}</div>
-          <div class="tl-block-name" style="color:var(--t2)">${b.t.name}</div>
-        </div>`;
-      } else {
-        // 実績ブロック：濃い背景・太いボーダー
+        return `<div class="tl-block tl-plan ${isCon?'conflict-b':''}" style="top:${top}px;height:${bh}px;left:${left}%;width:${w-0.5}%;background:${color}18;border:1px dashed ${color}55;border-left:3px solid ${color};opacity:${isDone?0.4:0.85}" onclick="openResultModal('${b.proj.id}','${b.t.id}')"><div class="tl-block-time" style="color:${color};font-size:9px">${m2t(b.s)}〜${m2t(b.e)}</div><div class="tl-block-name" style="color:var(--t2)">${b.t.name}</div></div>`;
+      }else{
         const bg=b.isExtra?'rgba(251,146,60,0.25)':`${color}35`;
         const borderColor=b.isExtra?'#fb923c':color;
-        return `<div class="tl-block tl-actual"
-          style="top:${top}px;height:${bh}px;left:${left}%;width:${w-0.5}%;background:${bg};border-left:4px solid ${borderColor}"
-          onclick="${b.isExtra?`openActualEdit('${b.t.id}','${ds}')`:`openResultModal('${b.proj.id}','${b.t.id}')` }">
-          <div class="tl-block-time" style="color:${borderColor};font-size:9px">${m2t(b.s)}〜${m2t(b.e)} ✓実績</div>
-          <div class="tl-block-name">${b.t.name}</div>
-          ${b.t.lastNote?`<div style="font-size:9px;color:var(--t3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${b.t.lastNote}</div>`:''}
-        </div>`;
+        return `<div class="tl-block tl-actual" style="top:${top}px;height:${bh}px;left:${left}%;width:${w-0.5}%;background:${bg};border-left:4px solid ${borderColor}" onclick="${b.isExtra?`openActualEdit('${b.t.id}','${ds}')`:`openResultModal('${b.proj.id}','${b.t.id}')`}"><div class="tl-block-time" style="color:${borderColor};font-size:9px">${m2t(b.s)}〜${m2t(b.e)} ✓実績</div><div class="tl-block-name">${b.t.name}</div>${b.t.lastNote?`<div style="font-size:9px;color:var(--t3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${b.t.lastNote}</div>`:''}</div>`;
       }
     }).join('');
   }
-
-  const planHTML   = drawBlocks(planBlocks,   1, 46, true);
-  const actualHTML = drawBlocks(actualBlocks, 50, 46, false);
-
-  // 現在時刻ライン
+  const planHTML=drawBlocks(planBlocks,1,46,true);
+  const actualHTML=drawBlocks(actualBlocks,50,46,false);
   let nowLine='';
   const now=new Date();
   const todayStr=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
-  if(todayStr===ds){
-    const nm=now.getHours()*60+now.getMinutes();
-    if(nm>=SH*60&&nm<=EH*60) nowLine=`<div class="tl-now" style="top:${(nm-SH*60)*PPM}px"></div>`;
-  }
-
-  // 中央の区切り線
+  if(todayStr===ds){const nm=now.getHours()*60+now.getMinutes();if(nm>=SH*60&&nm<=EH*60)nowLine=`<div class="tl-now" style="top:${(nm-SH*60)*PPM}px"></div>`;}
   const divider=`<div style="position:absolute;left:49%;top:0;bottom:0;width:1px;background:var(--b2);"></div>`;
-
-  // 凡例
-  const legend=`<div class="tl-legend">
-    <div class="tl-legend-item"><div class="tl-legend-dot" style="background:rgba(56,189,248,0.2);border:1px dashed #38bdf8"></div>予定</div>
-    <div class="tl-legend-item"><div class="tl-legend-dot" style="background:rgba(74,222,128,0.35);border-left:4px solid #4ade80"></div>実績（タスク）</div>
-    <div class="tl-legend-item"><div class="tl-legend-dot" style="background:rgba(251,146,60,0.25);border-left:4px solid #fb923c"></div>実績（予定外）</div>
-    <span style="margin-left:auto;color:var(--t3)">左=予定　右=実績</span>
-  </div>`;
-
-  return `${legend}<div style="position:relative;height:${H}px;margin-left:48px;border-left:1px solid var(--b1);overflow:visible">
-    ${labels}${divider}${planHTML}${actualHTML}${nowLine}
-  </div>`;
+  const legend=`<div class="tl-legend"><div class="tl-legend-item"><div class="tl-legend-dot" style="background:rgba(56,189,248,0.2);border:1px dashed #38bdf8"></div>予定</div><div class="tl-legend-item"><div class="tl-legend-dot" style="background:rgba(74,222,128,0.35);border-left:4px solid #4ade80"></div>実績（タスク）</div><div class="tl-legend-item"><div class="tl-legend-dot" style="background:rgba(251,146,60,0.25);border-left:4px solid #fb923c"></div>実績（予定外）</div><span style="margin-left:auto;color:var(--t3)">左=予定　右=実績</span></div>`;
+  return `${legend}<div style="position:relative;height:${H}px;margin-left:48px;border-left:1px solid var(--b1);overflow:visible">${labels}${divider}${planHTML}${actualHTML}${nowLine}</div>`;
 }
 
 // ══ TODAY ══
@@ -529,7 +491,20 @@ function renderProjSched(){const p=getProj(curProj);const el=document.getElement
 function renderProjLog(){const p=getProj(curProj);const el=document.getElementById('pt-log');const done=(p.tasks||[]).filter(t=>t.status==='done'&&t.achievementPct!=null).sort((a,b)=>b.scheduledDate>a.scheduledDate?1:-1);if(!done.length){el.innerHTML='<div class="empty"><div class="empty-icon">📊</div><p>完了タスクなし</p></div>';return;}const byDate={};done.forEach(t=>{if(!byDate[t.scheduledDate])byDate[t.scheduledDate]=[];byDate[t.scheduledDate].push(t);});el.innerHTML='<div class="sched-grid">'+Object.keys(byDate).sort().reverse().map(date=>`<div class="card" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px"><span style="font-family:var(--mono)">${fmtDL(date)}</span><span style="color:var(--g)">${byDate[date].reduce((a,t)=>a+(t.actualMins||0),0)}分完了</span></div>${byDate[date].map(t=>`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--b1);display:flex;justify-content:space-between"><span>${t.name}</span><span style="color:var(--t3);font-family:var(--mono)">${t.achievementPct||0}%${t.actualMinsLog!=null?' 実働'+t.actualMinsLog+'分':''}</span></div>`).join('')}</div>`).join('')+'</div>';}
 
 // ══ SETTINGS ══
-function renderSettings(){const s=D.settings;const token=ghToken();document.getElementById('v-settings').innerHTML=`<div class="ph"><div class="ph-title">設定</div></div>
+function renderSettings(){
+  const s=D.settings;const token=ghToken();const curTheme=localStorage.getItem('tf_theme')||'dark';
+  document.getElementById('v-settings').innerHTML=`<div class="ph"><div class="ph-title">設定</div></div>
+  <div class="settings-block">
+    <div class="settings-block-title">🎨 テーマ・デザイン</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:4px">
+      ${[
+        {id:'dark',  label:'ダーク（デフォルト）', bg:'#0a0c10', text:'#e2e8f8', accent:'#38bdf8'},
+        {id:'light', label:'ライト',               bg:'#f0f4f8', text:'#1e293b', accent:'#0284c7'},
+        {id:'warm',  label:'ウォームダーク',        bg:'#1a1612', text:'#f0e8de', accent:'#f59e0b'},
+        {id:'blue',  label:'ブルーダーク',          bg:'#0d1117', text:'#e6edf3', accent:'#58a6ff'},
+      ].map(t=>`<button onclick="applyTheme('${t.id}')" style="padding:10px 12px;border-radius:8px;border:2px solid ${curTheme===t.id?t.accent:'transparent'};background:${t.bg};color:${t.text};cursor:pointer;text-align:left;transition:all .2s"><div style="font-size:12px;font-weight:600;color:${t.accent};margin-bottom:2px">${t.label}</div><div style="display:flex;gap:4px;margin-top:4px"><span style="width:14px;height:14px;border-radius:3px;background:${t.accent};display:inline-block"></span><span style="width:14px;height:14px;border-radius:3px;background:${t.text};opacity:.6;display:inline-block"></span><span style="width:14px;height:14px;border-radius:3px;background:${t.bg};border:1px solid ${t.text}44;display:inline-block"></span></div></button>`).join('')}
+    </div>
+  </div>
   <div class="settings-block" style="border-color:${token?'rgba(74,222,128,.3)':'rgba(251,146,60,.4)'}">
     <div class="settings-block-title" style="color:${token?'var(--g)':'var(--o)'}">${token?'✓ GitHub 自動保存（設定済み）':'⚠ GitHub 自動保存（未設定）'}</div>
     ${!token?`<div style="font-size:12px;color:var(--o);margin-bottom:10px;padding:8px 10px;background:rgba(251,146,60,.08);border-radius:6px;border:1px solid rgba(251,146,60,.2)">トークンを入力すると、データが自動的に GitHub リポジトリ（${GH_OWNER}/${GH_REPO}）に保存されます。</div>`:''}
@@ -546,7 +521,8 @@ function renderSettings(){const s=D.settings;const token=ghToken();document.getE
   </div>
   <div class="settings-block"><div class="settings-block-title">データ管理</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-warn btn-sm" onclick="forceReschedAll()">⟳ 全プロジェクト強制リスケジュール</button><button class="btn btn-sec btn-sm" onclick="exportData()">⬇ JSONバックアップ</button><button class="btn btn-sec btn-sm" onclick="importData()">⬆ JSONインポート</button><button class="btn btn-danger btn-sm" onclick="resetAll()">⚠ 全リセット</button></div>
-  </div>`;}
+  </div>`;
+}
 
 function saveGhToken(){const input=document.getElementById('cfg-token').value.trim();if(!input||input.startsWith('●'))return;ghSetToken(input);renderSettings();setSS('saving','読み込み中…');ghLoad().then(ok=>{if(ok){renderAll();gotoView('dash');}});}
 function clearGhToken(){if(!confirm('トークンを削除します。'))return;ghSetToken('');renderSettings();setSS('notoken','トークン未設定');}
@@ -562,8 +538,8 @@ function initCP(id,cur){pickedColor=cur||COLORS[0];document.getElementById(id).i
 function pickC(c,id){pickedColor=c;document.querySelectorAll(`#${id} .cp-dot`).forEach(d=>d.classList.toggle('selected',d.style.background===c||d.style.backgroundColor===c));}
 
 // ══ PROJECT CRUD ══
-function openProjModal(editId){const p=editId?getProj(editId):null;document.getElementById('m-proj-title').textContent=p?'プロジェクト編集':'プロジェクト追加';document.getElementById('pf-id').value=p?.id||'';document.getElementById('pf-name').value=p?.name||'';document.getElementById('pf-start').value=p?.startDate||'';document.getElementById('pf-deadline').value=p?.deadline||'';document.getElementById('pf-daily').value=p?.dailyMins||'';document.getElementById('pf-wkend').value=p?.includeWeekends?'1':'0';document.getElementById('pf-desc').value=p?.description||'';initCP('pf-colors',p?.color);openM('m-proj');}
-function saveProj(){const name=document.getElementById('pf-name').value.trim();if(!name){alert('プロジェクト名を入力してください');return;}const editId=document.getElementById('pf-id').value;const data={name,startDate:document.getElementById('pf-start').value,deadline:document.getElementById('pf-deadline').value,dailyMins:document.getElementById('pf-daily').value||null,includeWeekends:document.getElementById('pf-wkend').value==='1',description:document.getElementById('pf-desc').value,color:pickedColor};if(editId){const p=getProj(editId);if(p)Object.assign(p,data);}else D.projects.push({id:uid(),tasks:[],status:'active',...data});save();closeM('m-proj');renderCurrent();}
+function openProjModal(editId){const p=editId?getProj(editId):null;document.getElementById('m-proj-title').textContent=p?'プロジェクト編集':'プロジェクト追加';document.getElementById('pf-id').value=p?.id||'';document.getElementById('pf-name').value=p?.name||'';document.getElementById('pf-start').value=p?.startDate||'';document.getElementById('pf-deadline').value=p?.deadline||'';document.getElementById('pf-daily').value=p?.dailyMins||'';document.getElementById('pf-wkend').value=p?.includeWeekends?'1':'0';document.getElementById('pf-desc').value=p?.description||'';document.getElementById('pf-status').value=p?.status||'active';initCP('pf-colors',p?.color);openM('m-proj');}
+function saveProj(){const name=document.getElementById('pf-name').value.trim();if(!name){alert('プロジェクト名を入力してください');return;}const editId=document.getElementById('pf-id').value;const data={name,startDate:document.getElementById('pf-start').value,deadline:document.getElementById('pf-deadline').value,dailyMins:document.getElementById('pf-daily').value||null,includeWeekends:document.getElementById('pf-wkend').value==='1',description:document.getElementById('pf-desc').value,color:pickedColor,status:document.getElementById('pf-status').value||'active'};if(editId){const p=getProj(editId);if(p)Object.assign(p,data);}else D.projects.push({id:uid(),tasks:[],...data});save();closeM('m-proj');renderCurrent();}
 
 // ══ TASK CRUD ══
 function onAutoChange(){const m=document.getElementById('tf-auto').value;document.getElementById('tf-manual-row').classList.toggle('hidden',m!=='manual');}
@@ -578,8 +554,32 @@ function saveWithConflicts(){pendingConflict=null;save();closeM('m-conflict');re
 function showAllConflicts(){const c=checkAllConflicts();if(c.length)showConflictModal(c);}
 
 // ══ TIME EDIT ══
-function updateTeEndHint(){const start=document.getElementById('te-start')?.value||'09:00';const mins=parseInt(document.getElementById('te-mins')?.value)||0;const hint=document.getElementById('te-end-hint');if(hint&&mins>0)hint.textContent='終了: '+addMinsT(start,mins);else if(hint)hint.textContent='';}
-function openTimeEdit(projId,taskId){const isP=projId==='personal';const proj=isP?null:getProj(projId);const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);if(!t)return;document.getElementById('te-proj-id').value=projId;document.getElementById('te-task-id').value=taskId;document.getElementById('te-info').textContent=t.name;document.getElementById('te-date').value=t.scheduledDate||td();document.getElementById('te-start').value=t.scheduledStartTime||'09:00';document.getElementById('te-mins').value=t.estimatedMins||'';updateTeEndHint();openM('m-time-edit');}
+function updateTeEndHint(){
+  const start=document.getElementById('te-start')?.value||'';
+  const mins=parseInt(document.getElementById('te-mins')?.value)||0;
+  const hint=document.getElementById('te-end-hint');
+  if(hint&&start&&mins>0){
+    const endTime=addMinsT(start,mins);
+    hint.textContent='→ 終了: '+endTime;
+    const endEl=document.getElementById('te-end');
+    if(endEl)endEl.value=endTime;
+  }else if(hint)hint.textContent='';
+}
+function updateTeEndFromEnd(){
+  const start=document.getElementById('te-start')?.value||'';
+  const end=document.getElementById('te-end')?.value||'';
+  const hint=document.getElementById('te-end-hint');
+  if(start&&end){
+    const sm=t2m(start),em=t2m(end);
+    if(em>sm){
+      const mins=em-sm;
+      const minsEl=document.getElementById('te-mins');
+      if(minsEl)minsEl.value=mins;
+      if(hint)hint.textContent='→ 作業時間: '+mins+'分';
+    }
+  }
+}
+function openTimeEdit(projId,taskId){const isP=projId==='personal';const proj=isP?null:getProj(projId);const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);if(!t)return;document.getElementById('te-proj-id').value=projId;document.getElementById('te-task-id').value=taskId;document.getElementById('te-info').textContent=t.name;document.getElementById('te-date').value=(isP?t.date:t.scheduledDate)||td();document.getElementById('te-start').value=(isP?t.startTime:t.scheduledStartTime)||'';document.getElementById('te-end').value=(isP?t.endTime:t.scheduledEndTime)||'';document.getElementById('te-mins').value=t.estimatedMins||'';updateTeEndHint();openM('m-time-edit');}
 function saveTimeEdit(){
   const projId=document.getElementById('te-proj-id').value;
   const taskId=document.getElementById('te-task-id').value;
@@ -589,20 +589,15 @@ function saveTimeEdit(){
   if(!t)return;
   const newDate=document.getElementById('te-date').value;
   const newStart=document.getElementById('te-start').value;
+  const newEndDirect=document.getElementById('te-end')?.value||'';
   const nm=parseInt(document.getElementById('te-mins')?.value)||0;
+  let newEnd='';
+  if(newEndDirect)newEnd=newEndDirect;
+  else if(nm>0&&newStart)newEnd=addMinsT(newStart,nm);
   if(nm>0)t.estimatedMins=nm;
-  const newEnd=addMinsT(newStart,t.estimatedMins||30);
-  if(isP){
-    // 個人タスクはdate/startTime/endTimeフィールドを使う
-    t.date=newDate;
-    t.startTime=newStart;
-    t.endTime=newEnd;
-  } else {
-    t.scheduledDate=newDate;
-    t.scheduledStartTime=newStart;
-    t.scheduledEndTime=newEnd;
-    t.pinned=true;
-  }
+  else if(newStart&&newEnd)t.estimatedMins=Math.max(1,t2m(newEnd)-t2m(newStart));
+  if(isP){t.date=newDate;t.startTime=newStart;t.endTime=newEnd;}
+  else{t.scheduledDate=newDate;t.scheduledStartTime=newStart;t.scheduledEndTime=newEnd;t.pinned=true;}
   save();closeM('m-time-edit');renderCurrent();
   const c=checkAllConflicts();if(c.length)showConflictModal(c);
 }
@@ -615,24 +610,12 @@ function openResultModal(projId,taskId){
   const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);
   if(!t)return;
   const par=(!isP&&t.parentId)?(proj.tasks||[]).find(x=>x.id===t.parentId):null;
-  // 個人タスクはdate/startTime、プロジェクトタスクはscheduledDate/scheduledStartTime
   const dispDate=isP?(t.date||''):(t.scheduledDate||'');
   const dispStart=isP?(t.startTime||''):(t.scheduledStartTime||'');
   const dispEnd=isP?(t.endTime||''):(t.scheduledEndTime||'');
   document.getElementById('rf-proj-id').value=projId;
   document.getElementById('rf-task-id').value=taskId;
-  document.getElementById('rf-info').innerHTML=`
-    <div class="card">
-      <div style="font-size:13px;font-weight:500">${t.name}</div>
-      ${par?`<div style="font-size:11px;color:var(--t3)">親タスク: ${par.name}</div>`:''}
-      <div style="display:flex;gap:10px;font-size:11px;color:var(--t3);font-family:var(--mono);margin-top:3px">
-        <span>${dispDate} ${dispStart}${dispEnd?'〜'+dispEnd:''}</span>
-        <span>想定: ${t.estimatedMins||'?'}分</span>
-        ${t.achievementPct!=null?`<span style="color:var(--g)">前回: ${t.achievementPct}%</span>`:''}
-      </div>
-      ${t.lastNote?`<div style="margin-top:6px;padding:5px 8px;background:var(--s3);border-radius:5px;font-size:11px;color:var(--t2)">📝 前回メモ: ${t.lastNote}</div>`:''}
-      ${t.actualMinsLog?`<div style="font-size:11px;color:var(--t3);margin-top:3px">前回実働: ${t.actualMinsLog}分</div>`:''}
-    </div>`;
+  document.getElementById('rf-info').innerHTML=`<div class="card"><div style="font-size:13px;font-weight:500">${t.name}</div>${par?`<div style="font-size:11px;color:var(--t3)">親タスク: ${par.name}</div>`:''}<div style="display:flex;gap:10px;font-size:11px;color:var(--t3);font-family:var(--mono);margin-top:3px"><span>${dispDate} ${dispStart}${dispEnd?'〜'+dispEnd:''}</span><span>想定: ${t.estimatedMins||'?'}分</span>${t.achievementPct!=null?`<span style="color:var(--g)">前回: ${t.achievementPct}%</span>`:''}</div>${t.lastNote?`<div style="margin-top:6px;padding:5px 8px;background:var(--s3);border-radius:5px;font-size:11px;color:var(--t2)">📝 前回メモ: ${t.lastNote}</div>`:''} ${t.actualMinsLog?`<div style="font-size:11px;color:var(--t3);margin-top:3px">前回実働: ${t.actualMinsLog}分</div>`:''}</div>`;
   document.getElementById('rf-pct').value=t.achievementPct||'';
   document.getElementById('rf-actual').value=t.actualMinsLog||'';
   document.getElementById('rf-actual-start').value=t.actualStartTime||'';
@@ -655,33 +638,23 @@ function saveResult(){
   const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);
   if(!t){closeM('m-result');return;}
   const actualLog=parseInt(document.getElementById('rf-actual')?.value)||null;
-  // 実績を保存（個人タスク・プロジェクトタスク共通）
   t.achievementPct=isNaN(pct)?null:Math.max(0,pct);
   t.actualMins=isNaN(pct)?null:Math.round((t.estimatedMins||0)*pct/100);
   if(actualLog!==null)t.actualMinsLog=actualLog;
-  // 実績時刻を保存
   const actualStart=document.getElementById('rf-actual-start')?.value||null;
   const actualEnd=document.getElementById('rf-actual-end')?.value||null;
   if(actualStart)t.actualStartTime=actualStart;
   if(actualEnd)t.actualEndTime=actualEnd;
   t.status=status;
-  t.lastNote=note; // メモを必ず保存
+  t.lastNote=note;
   if(status==='done'){
     if(isNaN(pct)||pct<=0)t.achievementPct=100;
     t.actualMins=Math.round((t.estimatedMins||0)*(t.achievementPct||100)/100);
-    // プロジェクトタスクのみ親タスク更新
-    if(!isP&&t.parentId){
-      const sibs=(proj.tasks||[]).filter(x=>x.parentId===t.parentId);
-      const par=(proj.tasks||[]).find(x=>x.id===t.parentId);
-      if(par){par.actualMins=sibs.reduce((a,s)=>a+(s.actualMins||0),0);if(sibs.every(s=>s.status==='done'||s.id===t.id))par.status='done';}
-    }
+    if(!isP&&t.parentId){const sibs=(proj.tasks||[]).filter(x=>x.parentId===t.parentId);const par=(proj.tasks||[]).find(x=>x.id===t.parentId);if(par){par.actualMins=sibs.reduce((a,s)=>a+(s.actualMins||0),0);if(sibs.every(s=>s.status==='done'||s.id===t.id))par.status='done';}}
     if(!isP&&!t.parentId)(proj.tasks||[]).filter(x=>x.parentId===t.id).forEach(s=>{s.status='done';s.achievementPct=100;s.actualMins=s.estimatedMins;});
     save();closeM('m-result');renderCurrent();
-  } else {
-    if(!isP&&t.parentId){
-      const par=(proj.tasks||[]).find(x=>x.id===t.parentId);
-      if(par){const ds=(proj.tasks||[]).filter(x=>x.parentId===t.parentId&&x.status==='done'&&x.id!==t.id);par.actualMins=ds.reduce((a,s)=>a+(s.actualMins||s.estimatedMins||0),0)+(t.actualMins||0);}
-    }
+  }else{
+    if(!isP&&t.parentId){const par=(proj.tasks||[]).find(x=>x.id===t.parentId);if(par){const ds=(proj.tasks||[]).filter(x=>x.parentId===t.parentId&&x.status==='done'&&x.id!==t.id);par.actualMins=ds.reduce((a,s)=>a+(s.actualMins||s.estimatedMins||0),0)+(t.actualMins||0);}}
     if(!isP)buildSchedule(proj,td());
     const rem=Math.max(0,(t.estimatedMins||0)-(t.actualMins||0));
     document.getElementById('rf-preview').innerHTML=`<div style="margin-top:10px;padding:10px;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.2);border-radius:7px;font-size:12px;color:var(--a)">✓ 実績を保存しました${!isP?' (残り '+rem+'分で再スケジュール)':''}</div>`;
@@ -706,61 +679,29 @@ function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;
 function toggleTodayTask(id){const t=(D.todayTasks||[]).find(x=>x.id===id);if(!t)return;t.status=t.status==='done'?'todo':'done';save();renderToday();}
 function delTodayTask(id){const t=(D.todayTasks||[]).find(x=>x.id===id);if(!t)return;if(t.repeatGroupId){const choice=confirm('繰り返しタスクです。\nOK=この日以降を全て削除\nキャンセル=この1件だけ削除');D.todayTasks=choice?D.todayTasks.filter(x=>!(x.repeatGroupId===t.repeatGroupId&&x.date>=t.date)):D.todayTasks.filter(x=>x.id!==id);}else{if(!confirm('削除しますか？'))return;D.todayTasks=D.todayTasks.filter(x=>x.id!==id);}save();renderToday();if(curView==='calendar')renderCalendar();}
 
-// ══ ACTUAL RECORDS（予定外実績） ══
-function openActualAdd(ds){
-  document.getElementById('aa-date').value=ds;
-  document.getElementById('aa-name').value='';
-  document.getElementById('aa-start').value='';
-  document.getElementById('aa-end').value='';
-  document.getElementById('aa-note').value='';
-  window._editActualId=null;
-  openM('m-actual-add');
-}
-function openActualEdit(id, ds){
-  const r=(D.actualRecords||[]).find(x=>x.id===id);
-  if(!r) return;
-  document.getElementById('aa-date').value=r.date||ds;
-  document.getElementById('aa-name').value=r.name||'';
-  document.getElementById('aa-start').value=r.startTime||'';
-  document.getElementById('aa-end').value=r.endTime||'';
-  document.getElementById('aa-note').value=r.note||'';
-  window._editActualId=id;
-  openM('m-actual-add');
-}
+// ══ ACTUAL RECORDS ══
+function openActualAdd(ds){document.getElementById('aa-date').value=ds;document.getElementById('aa-name').value='';document.getElementById('aa-start').value='';document.getElementById('aa-end').value='';document.getElementById('aa-note').value='';window._editActualId=null;openM('m-actual-add');}
+function openActualEdit(id,ds){const r=(D.actualRecords||[]).find(x=>x.id===id);if(!r)return;document.getElementById('aa-date').value=r.date||ds;document.getElementById('aa-name').value=r.name||'';document.getElementById('aa-start').value=r.startTime||'';document.getElementById('aa-end').value=r.endTime||'';document.getElementById('aa-note').value=r.note||'';window._editActualId=id;openM('m-actual-add');}
 function saveActualAdd(){
   const name=document.getElementById('aa-name').value.trim();
   if(!name){alert('内容を入力してください');return;}
   const ds=document.getElementById('aa-date').value;
-  const rec={
-    id: window._editActualId||uid(),
-    date: ds,
-    name,
-    startTime: document.getElementById('aa-start').value||null,
-    endTime:   document.getElementById('aa-end').value||null,
-    note:      document.getElementById('aa-note').value,
-    type: 'actual'
-  };
-  if(!D.actualRecords) D.actualRecords=[];
-  if(window._editActualId){
-    const idx=D.actualRecords.findIndex(x=>x.id===window._editActualId);
-    if(idx>=0) D.actualRecords[idx]=rec;
-  } else {
-    D.actualRecords.push(rec);
-  }
+  const rec={id:window._editActualId||uid(),date:ds,name,startTime:document.getElementById('aa-start').value||null,endTime:document.getElementById('aa-end').value||null,note:document.getElementById('aa-note').value,type:'actual'};
+  if(!D.actualRecords)D.actualRecords=[];
+  if(window._editActualId){const idx=D.actualRecords.findIndex(x=>x.id===window._editActualId);if(idx>=0)D.actualRecords[idx]=rec;}
+  else D.actualRecords.push(rec);
   window._editActualId=null;
-  save(); closeM('m-actual-add');
-  // カレンダーのデイパネルを再描画
-  const calMap=buildCalMap();
-  renderDayPanel(ds, calMap[ds]);
+  save();closeM('m-actual-add');
+  const calMap=buildCalMap();renderDayPanel(ds,calMap[ds]);
 }
-function delActual(id, ds){
-  if(!confirm('削除しますか？'))return;
-  D.actualRecords=(D.actualRecords||[]).filter(x=>x.id!==id);
-  save();
-  const calMap=buildCalMap();
-  renderDayPanel(ds, calMap[ds]);
-}
+function delActual(id,ds){if(!confirm('削除しますか？'))return;D.actualRecords=(D.actualRecords||[]).filter(x=>x.id!==id);save();const calMap=buildCalMap();renderDayPanel(ds,calMap[ds]);}
+
+// ══ THEME ══
+function applyTheme(id){localStorage.setItem('tf_theme',id);document.documentElement.setAttribute('data-theme',id==='dark'?'':id);if(curView==='settings')renderSettings();}
+function initTheme(){const t=localStorage.getItem('tf_theme')||'dark';document.documentElement.setAttribute('data-theme',t==='dark'?'':t);}
+
 (async function(){
+  initTheme();
   const now=new Date();calY=now.getFullYear();calM=now.getMonth();
   renderSidebar();
   if(ghToken()){
