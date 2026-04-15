@@ -3214,8 +3214,13 @@
       "startTime": "17:00",
       "endTime": "18:00",
       "plan": "生体電流の説明",
-      "status": "todo",
-      "repeatGroupId": null
+      "status": "doing",
+      "repeatGroupId": null,
+      "achievementPct": 70,
+      "actualMins": 42,
+      "actualStartTime": "18:00",
+      "actualEndTime": "19:00",
+      "lastNote": ""
     }
   ],
   "settings": {
