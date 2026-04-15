@@ -3182,8 +3182,13 @@
       "startTime": "11:30",
       "endTime": "12:30",
       "plan": "",
-      "status": "todo",
-      "repeatGroupId": null
+      "status": "done",
+      "repeatGroupId": null,
+      "achievementPct": 100,
+      "actualMins": 60,
+      "actualStartTime": "11:30",
+      "actualEndTime": "12:50",
+      "lastNote": "カルマと質問を終えた。あとは最終確認だけ。"
     },
     {
       "id": "mnzglf72frhf",
