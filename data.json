@@ -3227,6 +3227,17 @@
       "actualStartTime": "18:00",
       "actualEndTime": "19:00",
       "lastNote": ""
+    },
+    {
+      "id": "mo0zfwhfb1dq",
+      "date": "2026-04-16",
+      "name": "スライド作り",
+      "estimatedMins": 60,
+      "startTime": "13:30",
+      "endTime": "14:30",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
