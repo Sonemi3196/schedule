@@ -3501,6 +3501,15 @@
       "endTime": "21:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo3fn5i19qjz",
+      "date": "2026-04-17",
+      "name": "明日用意",
+      "startTime": "21:00",
+      "endTime": "23:57",
+      "note": "色々",
+      "type": "actual"
     }
   ]
 }
