@@ -388,9 +388,15 @@
       "startTime": "10:00",
       "endTime": "11:00",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": "mngy8nqty4mr",
-      "repeat": "daily"
+      "repeat": "daily",
+      "achievementPct": 100,
+      "actualMins": 60,
+      "actualMinsLog": 60,
+      "actualStartTime": "05:30",
+      "actualEndTime": "06:30",
+      "lastNote": "朝の準備"
     },
     {
       "id": "mngy8nqt10lu",
