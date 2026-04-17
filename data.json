@@ -3447,6 +3447,15 @@
       "endTime": "14:30",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo2gobwqb0b8",
+      "date": "2026-04-17",
+      "name": "料理",
+      "startTime": "12:00",
+      "endTime": "14:00",
+      "note": "カレー",
+      "type": "actual"
     }
   ]
 }
