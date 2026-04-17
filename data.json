@@ -3483,6 +3483,15 @@
       "endTime": "17:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo3flxq1v268",
+      "date": "2026-04-17",
+      "name": "料理",
+      "startTime": "17:00",
+      "endTime": "20:00",
+      "note": "クラフトコーラ",
+      "type": "actual"
     }
   ]
 }
