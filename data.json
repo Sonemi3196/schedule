@@ -3474,6 +3474,15 @@
       "endTime": "16:00",
       "note": "羊羹",
       "type": "actual"
+    },
+    {
+      "id": "mo3fleex9bu3",
+      "date": "2026-04-17",
+      "name": "絵や卒業賞状貼り",
+      "startTime": "16:00",
+      "endTime": "17:00",
+      "note": "",
+      "type": "actual"
     }
   ]
 }
