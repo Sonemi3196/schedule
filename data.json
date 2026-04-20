@@ -3264,6 +3264,17 @@
       "plan": "",
       "status": "todo",
       "repeatGroupId": null
+    },
+    {
+      "id": "mo75gj7n82h6",
+      "date": "2026-04-20",
+      "name": "パソコン調べ物",
+      "estimatedMins": 60,
+      "startTime": "09:30",
+      "endTime": "10:30",
+      "plan": "けやきネット\nウォーターピック",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
