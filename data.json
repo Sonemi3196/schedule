@@ -3571,6 +3571,15 @@
       "endTime": "17:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo6kln5sddqz",
+      "date": "2026-04-19",
+      "name": "洗濯",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "note": "",
+      "type": "actual"
     }
   ]
 }
