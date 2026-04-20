@@ -3280,6 +3280,17 @@
       "plan": "けやきネット\nウォーターピック",
       "status": "todo",
       "repeatGroupId": null
+    },
+    {
+      "id": "mo7t243ajrxi",
+      "date": "2026-04-21",
+      "name": "トイレ掃除",
+      "estimatedMins": null,
+      "startTime": "08:00",
+      "endTime": "08:30",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null
     }
   ],
   "settings": {
