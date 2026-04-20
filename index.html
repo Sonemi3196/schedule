@@ -182,7 +182,7 @@ button{cursor:pointer;font-family:var(--jp)}input,select,textarea{font-family:va
 
 <div class="modal-ov hidden" id="m-time-edit"><div class="modal"><div class="mhead"><span class="mtitle">時刻を変更</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-time-edit')">✕</button></div><div class="mbody"><div id="te-info" style="margin-bottom:12px;font-size:13px;font-weight:500"></div><input type="hidden" id="te-proj-id"><input type="hidden" id="te-task-id"><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="te-date"></div><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="te-start" oninput="updateTeEndHint()" placeholder="--:--"></div></div><div class="frow"><div class="fg"><label class="fl">終了時刻（直接指定）</label><input class="fi" type="time" id="te-end" oninput="updateTeEndFromEnd()" placeholder="--:--"></div><div class="fg"><label class="fl">作業時間（分）で指定</label><input class="fi" type="text" inputmode="numeric" id="te-mins" placeholder="例: 60" oninput="updateTeEndHint()"></div></div><div class="fhint" id="te-end-hint" style="color:var(--a)"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-time-edit')">キャンセル</button><button class="btn btn-primary" onclick="saveTimeEdit()">変更</button></div></div></div>
 
-<div class="modal-ov hidden" id="m-today"><div class="modal"><div class="mhead"><span class="mtitle" id="m-today-title">個人タスク追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-today')">✕</button></div><div class="mbody"><div class="fg"><label class="fl">タスク名 *</label><input class="fi" id="ttf-name"></div><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="ttf-date"></div><div class="fg"><label class="fl">想定時間（分）</label><input class="fi" type="text" inputmode="numeric" id="ttf-est"></div></div><div class="frow"><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="ttf-start"></div><div class="fg"><label class="fl">終了時刻（空欄=自動）</label><input class="fi" type="time" id="ttf-end"></div></div><div class="fg"><label class="fl">関連プロジェクト</label><select class="fs" id="ttf-proj"></select></div><div class="fg"><label class="fl">繰り返し</label><select class="fs" id="ttf-repeat" onchange="onRepeatChange()"><option value="none">なし（1回のみ）</option><option value="daily">毎日</option><option value="weekdays">平日のみ（月〜金）</option><option value="weekly">毎週（曜日指定）</option><option value="monthly">毎月（日付指定）</option></select></div><div id="ttf-repeat-days" class="fg hidden"><label class="fl">繰り返す曜日</label><div style="display:flex;gap:8px;flex-wrap:wrap"><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="0" class="ttf-wd" style="accent-color:var(--a)">日</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="1" class="ttf-wd" style="accent-color:var(--a)" checked>月</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="2" class="ttf-wd" style="accent-color:var(--a)" checked>火</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="3" class="ttf-wd" style="accent-color:var(--a)" checked>水</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="4" class="ttf-wd" style="accent-color:var(--a)" checked>木</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="5" class="ttf-wd" style="accent-color:var(--a)" checked>金</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="6" class="ttf-wd" style="accent-color:var(--a)">土</label></div></div><div id="ttf-repeat-end" class="fg hidden"><label class="fl">繰り返し終了日</label><input class="fi" type="date" id="ttf-end-date"></div><div class="fg"><label class="fl">メモ</label><textarea class="ft" id="ttf-plan" style="min-height:46px"></textarea></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-today')">キャンセル</button><button class="btn btn-primary" id="ttf-save-btn" onclick="saveTodayTask()">追加</button></div></div></div>
+<div class="modal-ov hidden" id="m-today"><div class="modal"><div class="mhead"><span class="mtitle" id="m-today-title">個人タスク追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-today')">✕</button></div><div class="mbody"><div id="ttf-group-banner" style="display:none;margin-bottom:10px;padding:8px 10px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:7px"></div><div class="fg"><label class="fl">タスク名 *</label><input class="fi" id="ttf-name"></div><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="ttf-date"></div><div class="fg"><label class="fl">想定時間（分）</label><input class="fi" type="text" inputmode="numeric" id="ttf-est"></div></div><div class="frow"><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="ttf-start"></div><div class="fg"><label class="fl">終了時刻（空欄=自動）</label><input class="fi" type="time" id="ttf-end"></div></div><div class="fg"><label class="fl">関連プロジェクト</label><select class="fs" id="ttf-proj"></select></div><div class="fg"><label class="fl">繰り返し</label><select class="fs" id="ttf-repeat" onchange="onRepeatChange()"><option value="none">なし（1回のみ）</option><option value="daily">毎日</option><option value="weekdays">平日のみ（月〜金）</option><option value="weekly">毎週（曜日指定）</option><option value="monthly">毎月（日付指定）</option></select></div><div id="ttf-repeat-days" class="fg hidden"><label class="fl">繰り返す曜日</label><div style="display:flex;gap:8px;flex-wrap:wrap"><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="0" class="ttf-wd" style="accent-color:var(--a)">日</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="1" class="ttf-wd" style="accent-color:var(--a)" checked>月</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="2" class="ttf-wd" style="accent-color:var(--a)" checked>火</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="3" class="ttf-wd" style="accent-color:var(--a)" checked>水</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="4" class="ttf-wd" style="accent-color:var(--a)" checked>木</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="5" class="ttf-wd" style="accent-color:var(--a)" checked>金</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="6" class="ttf-wd" style="accent-color:var(--a)">土</label></div></div><div id="ttf-repeat-end" class="fg hidden"><label class="fl">繰り返し終了日</label><input class="fi" type="date" id="ttf-end-date"></div><div class="fg"><label class="fl">メモ</label><textarea class="ft" id="ttf-plan" style="min-height:46px"></textarea></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-today')">キャンセル</button><button class="btn btn-primary" id="ttf-save-btn" onclick="saveTodayTask()">追加</button></div></div></div>
 
 <div class="modal-ov hidden" id="m-resched"><div class="modal modal-lg"><div class="mhead"><span class="mtitle">⟳ リスケジュール確認</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-resched')">✕</button></div><div class="mbody"><div id="rs-info" style="font-size:12px;color:var(--t2);margin-bottom:8px"></div><div id="rs-warn" style="display:none;color:var(--o);font-size:12px;margin-bottom:8px;padding:8px 12px;background:rgba(251,146,60,.08);border-radius:7px;border:1px solid rgba(251,146,60,.2)"></div><div id="rs-preview" style="max-height:320px;overflow-y:auto"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-resched')">キャンセル</button><button class="btn btn-primary" onclick="applyResched()">適用する</button></div></div></div>
 
@@ -353,9 +353,57 @@ function renderSchedule(){
   (D.todayTasks||[]).forEach(t=>{if(!t.date)return;if(!byDate[t.date])byDate[t.date]=[];byDate[t.date].push({t:{...t,scheduledDate:t.date,scheduledStartTime:t.startTime,scheduledEndTime:t.endTime,parentId:null},proj:_sp});});
   const dates=Object.keys(byDate).sort();const today=td();
   const {ids:conIds,count:conCount,raw:conflicts}=getConflictIds();const conflictDates=new Set(conflicts.map(c=>c.date));
-  el.innerHTML=`<div class="ph"><div class="ph-title">スケジュール</div><div class="ph-actions">${conCount?`<button class="btn btn-warn btn-sm" onclick="showAllConflicts()">⚠ 競合 ${conCount}件</button>`:''}<button class="btn btn-ghost btn-sm" onclick="reschedAll()">⟳ 全体リスケジュール</button></div></div>
-    ${dates.length?`<div class="sched-grid">${dates.map(date=>{const items=byDate[date].sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));const tot=items.reduce((a,x)=>a+(x.t.estimatedMins||0),0);const isToday=date===today;const hasLate=items.some(x=>x.t.status!=='done'&&x.t.status!=='hold'&&date<today);const hasCon=conflictDates.has(date);return `<div class="sched-day ${isToday?'today-row':''} ${isToday?'open':''}" id="sd-${date}"><div class="sday-head" onclick="toggleSD('sd-${date}')"><span class="sday-date ${isToday?'today-label':''}">${fmtDL(date)}</span><div class="sday-bar"><div class="pbar"><div class="pbar-fill" style="width:${Math.min(100,Math.round(tot/(getDailyMax(null)||192)*100))}%;background:${hasLate?'var(--r)':hasCon?'var(--o)':'var(--a)'}"></div></div></div><span class="sday-info" style="${hasLate?'color:var(--r)':hasCon?'color:var(--o)':''}">${tot}分</span><span class="sday-toggle">▶</span></div><div class="sday-tasks">${items.map(({t,proj})=>staskHTML(t,proj,date,conIds)).join('')}</div></div>`;}).join('')}</div>`:'<div class="empty"><div class="empty-icon">📋</div><p>スケジュールされたタスクがありません</p></div>'}`;
+  const pastDates=dates.filter(d=>d<today);
+  const futureDates=dates.filter(d=>d>=today);
+  function dayHTML(date){
+    const items=byDate[date].sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));
+    const tot=items.reduce((a,x)=>a+(x.t.estimatedMins||0),0);
+    const isToday=date===today;
+    const allDone=items.every(x=>x.t.status==='done'||x.t.status==='hold');
+    const hasLate=items.some(x=>x.t.status!=='done'&&x.t.status!=='hold'&&date<today);
+    const hasCon=conflictDates.has(date);
+    const openClass=(isToday||(!allDone&&date>=today))?'open':'';
+    const barColor=allDone?'var(--g)':hasLate?'var(--r)':hasCon?'var(--o)':'var(--a)';
+    const infoColor=allDone?'color:var(--g)':hasLate?'color:var(--r)':hasCon?'color:var(--o)':'';
+    const infoText=allDone?'✓完了':tot+'分';
+    const dateStyle=allDone&&date<today?'opacity:0.5':'';
+    let h='';
+    h+='<div class="sched-day '+(isToday?'today-row ':'')+openClass+'" id="sd-'+date+'">';
+    h+='<div class="sday-head" onclick="toggleSD(\'sd-'+date+'\')">';
+    h+='<span class="sday-date '+(isToday?'today-label ':'')+'" style="'+dateStyle+'">'+fmtDL(date)+'</span>';
+    h+='<div class="sday-bar"><div class="pbar"><div class="pbar-fill" style="width:'+Math.min(100,Math.round(tot/(getDailyMax(null)||192)*100))+'%;background:'+barColor+'"></div></div></div>';
+    h+='<span class="sday-info" style="'+infoColor+'">'+infoText+'</span>';
+    h+='<span class="sday-toggle">▶</span></div>';
+    h+='<div class="sday-tasks">'+items.map(({t,proj})=>staskHTML(t,proj,date,conIds)).join('')+'</div>';
+    h+='</div>';
+    return h;
+  }
+  const pastCount=pastDates.length;
+  const pastDoneCount=pastDates.filter(d=>byDate[d].every(x=>x.t.status==='done'||x.t.status==='hold')).length;
+  let out='<div class="ph"><div class="ph-title">スケジュール</div><div class="ph-actions">';
+  out+=(conCount?'<button class="btn btn-warn btn-sm" onclick="showAllConflicts()">⚠ 競合 '+conCount+'件</button>':'');
+  out+='<button class="btn btn-ghost btn-sm" onclick="reschedAll()">⟳ 全体リスケジュール</button></div></div>';
+  if(!dates.length){
+    out+='<div class="empty"><div class="empty-icon">📋</div><p>スケジュールされたタスクがありません</p></div>';
+  } else {
+    if(pastCount){
+      out+='<div style="margin-bottom:6px">';
+      out+='<button onclick="const g=document.getElementById(\'past-sched-group\');g.classList.toggle(\'hidden\');this.querySelector(\'.ptoggle\').textContent=g.classList.contains(\'hidden\')?\'▶\':\'▼\'" ';
+      out+='style="background:var(--s3);border:1px solid var(--b1);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--t3);width:100%;text-align:left;display:flex;align-items:center;gap:6px">';
+      out+='<span class="ptoggle">▶</span> 過去のスケジュール（'+pastCount+'日）';
+      out+='<span style="margin-left:auto;font-size:11px;color:var(--g)">'+pastDoneCount+'/'+pastCount+'日完了</span></button>';
+      out+='<div id="past-sched-group" class="hidden" style="margin-top:4px"><div class="sched-grid">';
+      pastDates.forEach(d=>{out+=dayHTML(d);});
+      out+='</div></div></div>';
+    }
+    out+='<div class="sched-grid" id="future-sched">';
+    futureDates.forEach(d=>{out+=dayHTML(d);});
+    out+='</div>';
+  }
+  el.innerHTML=out;
+  setTimeout(()=>{const el2=document.getElementById('sd-'+today);if(el2)el2.scrollIntoView({behavior:'smooth',block:'start'});},80);
 }
+
 function staskHTML(t,proj,date,conIds){const today=td();const isSub=!!t.parentId;const isLate=t.status!=='done'&&t.status!=='hold'&&date<today;const isCon=conIds?conIds.has(t.id):false;return `<div class="stask ${t.status==='done'?'done-t':''} ${isLate?'late-t':''} ${isCon?'conflict-t':''}"><button class="stask-check ${t.status==='done'?'chk':''}" onclick="toggleDone('${proj.id}','${t.id}')">✓</button><span class="stask-time">${t.scheduledStartTime||''}${t.scheduledEndTime?'〜'+t.scheduledEndTime:''}</span><span class="stask-name">${isSub?'<span style="font-size:10px;color:var(--t3)">↳ </span>':''}${t.name}</span><span class="stask-mins">${t.estimatedMins||'?'}分</span><span style="font-size:10px;color:${proj.color||COLORS[0]};margin-left:4px">${proj.name}</span><div class="stask-acts">${t.status!=='done'?`<button class="btn btn-warn btn-xs" onclick="openResultModal('${proj.id}','${t.id}')">実績</button>`:''}<button class="btn btn-ghost btn-xs" onclick="openTimeEdit('${proj.id}','${t.id}')">✎</button></div></div>`;}
 function toggleSD(id){document.getElementById(id)?.classList.toggle('open');}
 
@@ -382,7 +430,27 @@ function renderDayPanel(ds,data){
     </div>`;
 }
 function renderTimeline(ds,items){
-  const SH=8,EH=22,PPM=1.6,H=(EH-SH)*60*PPM;
+  // 設定の作業時間 ± 1時間をタイムライン範囲にする（最低6:00〜23:00）
+  const wsSetting=D.settings.workStart||'06:00';
+  const weSetting=D.settings.workEnd||'22:00';
+  const wsH=parseInt(wsSetting.split(':')[0]);
+  const weH=parseInt(weSetting.split(':')[0]);
+  // 全アイテムの最早・最遅時刻も考慮
+  let minH=Math.max(0, Math.min(wsH-1, 6));
+  let maxH=Math.min(23, Math.max(weH+1, 22));
+  items.forEach(({t,proj,isPersonal})=>{
+    const isP=isPersonal||proj.id==='personal';
+    const s=t2m(isP?t.startTime:t.scheduledStartTime);
+    const e=t2m(isP?t.endTime:t.scheduledEndTime);
+    if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h-1);}
+    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(24,h+1);}
+  });
+  (D.actualRecords||[]).filter(r=>r.date===ds).forEach(r=>{
+    const s=t2m(r.startTime);const e=t2m(r.endTime);
+    if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h-1);}
+    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(24,h+1);}
+  });
+  const SH=minH, EH=maxH, PPM=1.6, H=(EH-SH)*60*PPM;
   let labels='';
   for(let h=SH;h<=EH;h++){
     const top=(h-SH)*60*PPM;
@@ -427,7 +495,8 @@ function renderTimeline(ds,items){
       const isCon=!isPlan&&conIds.has(b.t.id);
       const isDone=b.t.status==='done';
       if(isPlan){
-        return `<div class="tl-block tl-plan ${isCon?'conflict-b':''}" style="top:${top}px;height:${bh}px;left:${left}%;width:${w-0.5}%;background:${color}18;border:1px dashed ${color}55;border-left:3px solid ${color};opacity:${isDone?0.4:0.85}" onclick="openResultModal('${b.proj.id}','${b.t.id}')"><div class="tl-block-time" style="color:${color};font-size:9px">${m2t(b.s)}〜${m2t(b.e)}</div><div class="tl-block-name" style="color:var(--t2)">${b.t.name}</div></div>`;
+        // 予定ブロック: クリックでアクションメニュー（実績 / 時刻変更）
+        return `<div class="tl-block tl-plan ${isCon?'conflict-b':''}" style="top:${top}px;height:${bh}px;left:${left}%;width:${w-0.5}%;background:${color}18;border:1px dashed ${color}55;border-left:3px solid ${color};opacity:${isDone?0.4:0.85}" onclick="openTlMenu('${b.proj.id}','${b.t.id}',event)"><div class="tl-block-time" style="color:${color};font-size:9px">${m2t(b.s)}〜${m2t(b.e)}</div><div class="tl-block-name" style="color:var(--t2)">${b.t.name}</div><div style="font-size:9px;color:${color};margin-top:2px">⋯ タップで操作</div></div>`;
       }else{
         const bg=b.isExtra?'rgba(251,146,60,0.25)':`${color}35`;
         const borderColor=b.isExtra?'#fb923c':color;
@@ -700,6 +769,38 @@ function openTodayModal(editId){
   const t=editId?(D.todayTasks||[]).find(x=>x.id===editId):null;
   document.getElementById('m-today-title').textContent=t?'個人タスク編集':'個人タスク追加';
   document.getElementById('ttf-save-btn').textContent=t?'保存':'追加';
+  window._editGroupMode='single';
+  // 繰り返しグループの場合、編集範囲を選べるバナーを表示
+  const groupBanner=document.getElementById('ttf-group-banner');
+  if(t&&t.repeatGroupId){
+    const grpCount=(D.todayTasks||[]).filter(x=>x.repeatGroupId===t.repeatGroupId).length;
+    const futureCount=(D.todayTasks||[]).filter(x=>x.repeatGroupId===t.repeatGroupId&&x.date>=t.date).length;
+    groupBanner.style.display='block';
+    groupBanner.innerHTML='';
+    const hdr=document.createElement('div');
+    hdr.style.cssText='font-size:11px;color:var(--y);margin-bottom:6px';
+    hdr.textContent='\uD83D\uDD01 繰り返しタスクです（グループ '+grpCount+' 件）';
+    groupBanner.appendChild(hdr);
+    const btnRow=document.createElement('div');
+    btnRow.style.cssText='display:flex;gap:6px;flex-wrap:wrap';
+    [['この1件のみ','single'],['今日以降('+futureCount+'件)','future'],['全件('+grpCount+'件)','all']].forEach(([label,mode],idx)=>{
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.textContent=label;
+      btn.style.cssText='padding:3px 8px;border-radius:5px;border:1px solid var(--b2);font-size:11px;cursor:pointer;transition:all .15s';
+      if(idx===0){btn.style.background='var(--a)';btn.style.color='#0a0c10';}
+      btn.addEventListener('click',function(){
+        window._editGroupMode=mode;
+        btnRow.querySelectorAll('button').forEach(b=>{b.style.background='';b.style.color='';});
+        this.style.background='var(--a)';this.style.color='#0a0c10';
+      });
+      btnRow.appendChild(btn);
+    });
+    groupBanner.appendChild(btnRow);
+  } else {
+    groupBanner.style.display='none';
+    groupBanner.innerHTML='';
+  }
   document.getElementById('ttf-name').value=t?t.name:'';
   document.getElementById('ttf-date').value=t?t.date:(calSelDate||td());
   document.getElementById('ttf-start').value=t?(t.startTime||''):'';
@@ -720,7 +821,16 @@ function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;
       const idx=(D.todayTasks||[]).findIndex(x=>x.id===window._editTodayId);
       if(idx>=0){
         const orig=D.todayTasks[idx];
-        D.todayTasks[idx]={...orig,name,date:ttDate,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan};
+        const updated={...orig,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan};
+        if(window._editGroupMode==='all'&&orig.repeatGroupId){
+          // グループ全体を更新（時刻・メモのみ、日付は各自維持）
+          D.todayTasks=D.todayTasks.map(x=>x.repeatGroupId===orig.repeatGroupId?{...x,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan}:x);
+        } else if(window._editGroupMode==='future'&&orig.repeatGroupId){
+          // 今日以降を更新
+          D.todayTasks=D.todayTasks.map(x=>(x.repeatGroupId===orig.repeatGroupId&&x.date>=orig.date)?{...x,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan}:x);
+        } else {
+          D.todayTasks[idx]={...updated,date:ttDate};
+        }
       }
     } else {
       D.todayTasks.push({id:uid(),date:ttDate,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan,status:'todo',repeatGroupId:null});
@@ -746,6 +856,42 @@ function saveActualAdd(){
   window._editActualId=null;
   save();closeM('m-actual-add');
   const calMap=buildCalMap();renderDayPanel(ds,calMap[ds]);
+}
+// タイムラインの予定ブロックメニュー
+function openTlMenu(projId,taskId,ev){
+  ev.stopPropagation();
+  // 既存のメニューを消す
+  const old=document.getElementById('tl-menu');if(old)old.remove();
+  const isP=projId==='personal';
+  const proj=isP?null:getProj(projId);
+  const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);
+  if(!t)return;
+  const menu=document.createElement('div');
+  menu.id='tl-menu';
+  menu.style.cssText='position:fixed;z-index:600;background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:6px;box-shadow:0 4px 20px rgba(0,0,0,.4);min-width:160px';
+  menu.style.left=Math.min(ev.clientX,window.innerWidth-180)+'px';
+  menu.style.top=Math.min(ev.clientY,window.innerHeight-120)+'px';
+  // タイトル
+  const mTitle=document.createElement('div');
+  mTitle.style.cssText='font-size:11px;color:var(--t3);padding:4px 8px;margin-bottom:4px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px';
+  mTitle.textContent=t.name;
+  menu.appendChild(mTitle);
+  // ボタン生成ヘルパー
+  function mkBtn(label,fn){
+    const b=document.createElement('button');
+    b.textContent=label;
+    b.style.cssText='display:block;width:100%;text-align:left;padding:7px 10px;border:none;background:none;color:var(--text);font-size:13px;border-radius:6px;cursor:pointer';
+    b.addEventListener('mouseenter',()=>b.style.background='var(--s3)');
+    b.addEventListener('mouseleave',()=>b.style.background='');
+    b.addEventListener('click',()=>{menu.remove();fn();});
+    menu.appendChild(b);
+  }
+  mkBtn('📝 実績を記録',()=>openResultModal(projId,taskId));
+  mkBtn('⏱ 時刻を変更',()=>openTimeEdit(projId,taskId));
+  if(isP) mkBtn('✎ タスクを編集',()=>openTodayModal(taskId));
+  document.body.appendChild(menu);
+  // 外クリックで閉じる
+  setTimeout(()=>document.addEventListener('click',function h(){document.getElementById('tl-menu')?.remove();document.removeEventListener('click',h);},{once:true}),10);
 }
 function delActual(id,ds){if(!confirm('削除しますか？'))return;D.actualRecords=(D.actualRecords||[]).filter(x=>x.id!==id);save();const calMap=buildCalMap();renderDayPanel(ds,calMap[ds]);}
 
