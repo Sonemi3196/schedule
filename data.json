@@ -3632,6 +3632,15 @@
       "endTime": "19:30",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo7shzg76b8j",
+      "date": "2026-04-20",
+      "name": "JIMT面談",
+      "startTime": "16:30",
+      "endTime": "17:30",
+      "note": "6時起きとなることになった",
+      "type": "actual"
     }
   ]
 }
