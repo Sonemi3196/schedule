@@ -3270,8 +3270,8 @@
       "date": "2026-04-21",
       "name": "パソコン調べ物",
       "estimatedMins": 60,
-      "startTime": "09:30",
-      "endTime": "10:30",
+      "startTime": "06:00",
+      "endTime": "07:00",
       "plan": "けやきネット\nウォーターピック",
       "status": "todo",
       "repeatGroupId": null
