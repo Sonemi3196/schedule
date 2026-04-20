@@ -3562,6 +3562,15 @@
       "endTime": "19:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo6kl9n7fqgd",
+      "date": "2026-04-19",
+      "name": "お茶",
+      "startTime": "16:00",
+      "endTime": "17:00",
+      "note": "",
+      "type": "actual"
     }
   ]
 }
