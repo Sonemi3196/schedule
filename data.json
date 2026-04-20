@@ -1177,7 +1177,7 @@
       "startTime": "10:00",
       "endTime": "11:00",
       "plan": "",
-      "status": "done",
+      "status": "todo",
       "repeatGroupId": "mngy8nqty4mr",
       "repeat": "daily"
     },
