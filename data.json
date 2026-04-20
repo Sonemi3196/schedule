@@ -3646,6 +3646,15 @@
       "endTime": "17:30",
       "note": "6時起きとなることになった",
       "type": "actual"
+    },
+    {
+      "id": "mo7t1meqnkfx",
+      "date": "2026-04-21",
+      "name": "SNSチェック",
+      "startTime": "07:00",
+      "endTime": "08:00",
+      "note": "",
+      "type": "actual"
     }
   ]
 }
