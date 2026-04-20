@@ -3544,6 +3544,15 @@
       "endTime": "13:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo6kk06g3nx8",
+      "date": "2026-04-19",
+      "name": "酵素ジュース作り",
+      "startTime": "13:00",
+      "endTime": "16:00",
+      "note": "",
+      "type": "actual"
     }
   ]
 }
