@@ -3598,6 +3598,15 @@
       "endTime": "22:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo6kmw8es20y",
+      "date": "2026-04-19",
+      "name": "テレビ",
+      "startTime": "22:00",
+      "endTime": "23:58",
+      "note": "",
+      "type": "actual"
     }
   ]
 }
