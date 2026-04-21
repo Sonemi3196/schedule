@@ -187,6 +187,18 @@
       "description": "午前中の空いた時間で対応",
       "color": "#38bdf8",
       "status": "active"
+    },
+    {
+      "id": "mo87djouzavv",
+      "tasks": [],
+      "name": "調律130人",
+      "startDate": "2026-04-22",
+      "deadline": "",
+      "dailyMins": "300",
+      "includeWeekends": false,
+      "description": "遠征して調律",
+      "color": "#38bdf8",
+      "status": "active"
     }
   ],
   "todayTasks": [
