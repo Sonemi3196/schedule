@@ -4225,19 +4225,6 @@
       "personId": null
     },
     {
-      "id": "mo86b9kos6to",
-      "date": "2026-05-27",
-      "name": "夕食",
-      "estimatedMins": 60,
-      "startTime": "21:00",
-      "endTime": "22:00",
-      "plan": "",
-      "status": "todo",
-      "repeatGroupId": "mo86b9knszne",
-      "repeat": "daily",
-      "personId": null
-    },
-    {
       "id": "mo86b9koe000",
       "date": "2026-05-28",
       "name": "夕食",
