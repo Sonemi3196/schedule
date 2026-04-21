@@ -8451,6 +8451,18 @@
       "status": "todo",
       "repeatGroupId": null,
       "personId": null
+    },
+    {
+      "id": "mo86pnffl702",
+      "date": "2026-05-27",
+      "name": "美容院",
+      "estimatedMins": null,
+      "startTime": "16:00",
+      "endTime": "18:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
