@@ -7774,19 +7774,6 @@
       "personId": null
     },
     {
-      "id": "mo86nqe75qrl",
-      "date": "2026-05-04",
-      "name": "昼食",
-      "estimatedMins": null,
-      "startTime": "12:00",
-      "endTime": "13:00",
-      "plan": "",
-      "status": "todo",
-      "repeatGroupId": "mo86nqe7rxd0",
-      "repeat": "daily",
-      "personId": null
-    },
-    {
       "id": "mo86nqe7n1wr",
       "date": "2026-05-05",
       "name": "昼食",
