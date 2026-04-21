@@ -225,7 +225,7 @@
           "createdAt": "2026-04-21",
           "parentId": null,
           "name": "Bさん",
-          "status": "todo",
+          "status": "doing",
           "estimatedMins": 20,
           "taskStartDate": "2026-04-21",
           "prefTime": "08:30",
@@ -234,7 +234,12 @@
           "scheduledDate": "2026-04-21",
           "scheduledStartTime": "08:30",
           "scheduledEndTime": "08:50",
-          "actualMins": null
+          "actualMins": null,
+          "achievementPct": null,
+          "actualMinsLog": 30,
+          "actualStartTime": "11:00",
+          "actualEndTime": "11:30",
+          "lastNote": ""
         }
       ],
       "name": "ヴェーダ数秘試験",
