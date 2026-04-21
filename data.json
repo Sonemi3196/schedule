@@ -187,7 +187,7 @@
           "estimatedMins": 500,
           "taskStartDate": "2026-04-30",
           "prefTime": null,
-          "notes": "ラインから飛べる予約ページを作成する",
+          "notes": "ラインから飛べる予約ページを作成する\nリッチメニュー作成次第",
           "autoSchedule": false,
           "scheduledDate": null,
           "scheduledStartTime": null,
