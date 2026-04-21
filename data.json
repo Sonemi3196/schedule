@@ -161,7 +161,24 @@
     },
     {
       "id": "mo875scuw9yx",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "mo877r8zwsho",
+          "createdAt": "2026-04-21",
+          "parentId": null,
+          "name": "ラインアットのリッチメニュー",
+          "status": "todo",
+          "estimatedMins": 600,
+          "taskStartDate": "2026-04-22",
+          "prefTime": "08:30",
+          "notes": "リッチメニューを作る",
+          "autoSchedule": false,
+          "scheduledDate": null,
+          "scheduledStartTime": null,
+          "scheduledEndTime": null,
+          "actualMins": null
+        }
+      ],
       "name": "くりすたるはあとサロン予定",
       "startDate": "2026-04-21",
       "deadline": "2026-06-30",
