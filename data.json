@@ -4570,6 +4570,18 @@
       "repeatGroupId": "mo86b9knszne",
       "repeat": "daily",
       "personId": null
+    },
+    {
+      "id": "mo86c0kbut2b",
+      "date": "2026-04-21",
+      "name": "料理",
+      "estimatedMins": null,
+      "startTime": "17:00",
+      "endTime": null,
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
