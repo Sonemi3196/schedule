@@ -177,6 +177,22 @@
           "scheduledStartTime": null,
           "scheduledEndTime": null,
           "actualMins": null
+        },
+        {
+          "id": "mo87lzsqt8se",
+          "createdAt": "2026-04-21",
+          "parentId": null,
+          "name": "予約ページの作成",
+          "status": "todo",
+          "estimatedMins": 500,
+          "taskStartDate": "2026-04-30",
+          "prefTime": null,
+          "notes": "ラインから飛べる予約ページを作成する",
+          "autoSchedule": false,
+          "scheduledDate": null,
+          "scheduledStartTime": null,
+          "scheduledEndTime": null,
+          "actualMins": null
         }
       ],
       "name": "くりすたるはあとサロン予定",
