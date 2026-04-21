@@ -8439,6 +8439,18 @@
       "repeatGroupId": "mo86nqe7rxd0",
       "repeat": "daily",
       "personId": null
+    },
+    {
+      "id": "mo86oig3wc3k",
+      "date": "2026-04-23",
+      "name": "パソコン",
+      "estimatedMins": null,
+      "startTime": "08:30",
+      "endTime": "12:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
