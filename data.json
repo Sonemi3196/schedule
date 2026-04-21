@@ -9780,6 +9780,19 @@
       "repeatGroupId": "mo880pb5jegb",
       "repeat": "monthly",
       "personId": null
+    },
+    {
+      "id": "mo881ni1y2o3",
+      "date": "2026-06-15",
+      "name": "榊",
+      "estimatedMins": null,
+      "startTime": "07:00",
+      "endTime": "08:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": "mo881ni1m50k",
+      "repeat": "monthly",
+      "personId": null
     }
   ],
   "settings": {
