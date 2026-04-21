@@ -10789,6 +10789,15 @@
       "endTime": "12:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo8cf5u3a084",
+      "date": "2026-04-21",
+      "name": "予定(修正)",
+      "startTime": "16:00",
+      "endTime": "17:00",
+      "note": "・お出掛けの前日の料理\n・10日と15日の榊のチェック\n・洗濯機の予定(仮)",
+      "type": "actual"
     }
   ],
   "people": [
