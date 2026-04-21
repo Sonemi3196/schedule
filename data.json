@@ -9730,19 +9730,6 @@
       "personId": null
     },
     {
-      "id": "mo880pb5vnzt",
-      "date": "2026-06-01",
-      "name": "月一掃除",
-      "estimatedMins": null,
-      "startTime": "07:00",
-      "endTime": "08:00",
-      "plan": "換気扇とか",
-      "status": "todo",
-      "repeatGroupId": "mo880pb5jegb",
-      "repeat": "monthly",
-      "personId": null
-    },
-    {
       "id": "mo881ni1y2o3",
       "date": "2026-06-15",
       "name": "榊",
