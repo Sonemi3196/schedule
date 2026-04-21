@@ -10282,6 +10282,13 @@
       "relation": "妻",
       "memo": "",
       "color": "#e879f9"
+    },
+    {
+      "id": "mo8c3hceuh8z",
+      "name": "洗濯機",
+      "relation": "道具",
+      "memo": "洗濯機さんの稼働",
+      "color": "#34d399"
     }
   ]
 }
