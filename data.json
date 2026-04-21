@@ -10338,6 +10338,18 @@
       "repeatGroupId": "mo8c6t3kwlj2",
       "repeat": "weekly",
       "personId": "mo8c3hceuh8z"
+    },
+    {
+      "id": "mo8cc56pmcsj",
+      "date": "2026-05-27",
+      "name": "夕食",
+      "estimatedMins": null,
+      "startTime": "20:00",
+      "endTime": "21:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
