@@ -182,7 +182,11 @@ button{cursor:pointer;font-family:var(--jp)}input,select,textarea{font-family:va
 
 <div class="modal-ov hidden" id="m-time-edit"><div class="modal"><div class="mhead"><span class="mtitle">時刻を変更</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-time-edit')">✕</button></div><div class="mbody"><div id="te-info" style="margin-bottom:12px;font-size:13px;font-weight:500"></div><input type="hidden" id="te-proj-id"><input type="hidden" id="te-task-id"><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="te-date"></div><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="te-start" oninput="updateTeEndHint()" placeholder="--:--"></div></div><div class="frow"><div class="fg"><label class="fl">終了時刻（直接指定）</label><input class="fi" type="time" id="te-end" oninput="updateTeEndFromEnd()" placeholder="--:--"></div><div class="fg"><label class="fl">作業時間（分）で指定</label><input class="fi" type="text" inputmode="numeric" id="te-mins" placeholder="例: 60" oninput="updateTeEndHint()"></div></div><div class="fhint" id="te-end-hint" style="color:var(--a)"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-time-edit')">キャンセル</button><button class="btn btn-primary" onclick="saveTimeEdit()">変更</button></div></div></div>
 
-<div class="modal-ov hidden" id="m-today"><div class="modal"><div class="mhead"><span class="mtitle" id="m-today-title">個人タスク追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-today')">✕</button></div><div class="mbody"><div id="ttf-group-banner" style="display:none;margin-bottom:10px;padding:8px 10px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:7px"></div><div class="fg"><label class="fl">タスク名 *</label><input class="fi" id="ttf-name"></div><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="ttf-date"></div><div class="fg"><label class="fl">想定時間（分）</label><input class="fi" type="text" inputmode="numeric" id="ttf-est"></div></div><div class="frow"><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="ttf-start"></div><div class="fg"><label class="fl">終了時刻（空欄=自動）</label><input class="fi" type="time" id="ttf-end"></div></div><div class="fg"><label class="fl">関連プロジェクト</label><select class="fs" id="ttf-proj"></select></div><div class="fg"><label class="fl">繰り返し</label><select class="fs" id="ttf-repeat" onchange="onRepeatChange()"><option value="none">なし（1回のみ）</option><option value="daily">毎日</option><option value="weekdays">平日のみ（月〜金）</option><option value="weekly">毎週（曜日指定）</option><option value="monthly">毎月（日付指定）</option></select></div><div id="ttf-repeat-days" class="fg hidden"><label class="fl">繰り返す曜日</label><div style="display:flex;gap:8px;flex-wrap:wrap"><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="0" class="ttf-wd" style="accent-color:var(--a)">日</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="1" class="ttf-wd" style="accent-color:var(--a)" checked>月</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="2" class="ttf-wd" style="accent-color:var(--a)" checked>火</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="3" class="ttf-wd" style="accent-color:var(--a)" checked>水</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="4" class="ttf-wd" style="accent-color:var(--a)" checked>木</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="5" class="ttf-wd" style="accent-color:var(--a)" checked>金</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="6" class="ttf-wd" style="accent-color:var(--a)">土</label></div></div><div id="ttf-repeat-end" class="fg hidden"><label class="fl">繰り返し終了日</label><input class="fi" type="date" id="ttf-end-date"></div><div class="fg"><label class="fl">メモ</label><textarea class="ft" id="ttf-plan" style="min-height:46px"></textarea></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-today')">キャンセル</button><button class="btn btn-primary" id="ttf-save-btn" onclick="saveTodayTask()">追加</button></div></div></div>
+<div class="modal-ov hidden" id="m-today"><div class="modal"><div class="mhead"><span class="mtitle" id="m-today-title">個人タスク追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-today')">✕</button></div><div class="mbody"><div id="ttf-group-banner" style="display:none;margin-bottom:10px;padding:8px 10px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:7px"></div><div class="fg"><label class="fl">タスク名 *</label><input class="fi" id="ttf-name"></div><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="ttf-date"></div><div class="fg"><label class="fl">想定時間（分）</label><input class="fi" type="text" inputmode="numeric" id="ttf-est"></div></div><div class="frow"><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="ttf-start"></div><div class="fg"><label class="fl">終了時刻（空欄=自動）</label><input class="fi" type="time" id="ttf-end"></div></div><div class="fg"><label class="fl">誰の予定</label><select class="fs" id="ttf-person"><option value="">自分（デフォルト）</option></select></div>
+<div class="fg"><label class="fl">関連プロジェクト</label><select class="fs" id="ttf-proj"></select></div><div class="fg"><label class="fl">繰り返し</label><select class="fs" id="ttf-repeat" onchange="onRepeatChange()"><option value="none">なし（1回のみ）</option><option value="daily">毎日</option><option value="weekdays">平日のみ（月〜金）</option><option value="weekly">毎週（曜日指定）</option><option value="biweekly">隔週（2週間ごと）</option><option value="nweeks">N週間ごと</option><option value="monthly">毎月（同じ日付）</option><option value="monthly_dow">毎月（第N曜日）</option><option value="ndays">N日ごと</option></select></div><div id="ttf-repeat-days" class="fg hidden"><label class="fl">繰り返す曜日</label><div style="display:flex;gap:8px;flex-wrap:wrap"><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="0" class="ttf-wd" style="accent-color:var(--a)">日</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="1" class="ttf-wd" style="accent-color:var(--a)" checked>月</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="2" class="ttf-wd" style="accent-color:var(--a)" checked>火</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="3" class="ttf-wd" style="accent-color:var(--a)" checked>水</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="4" class="ttf-wd" style="accent-color:var(--a)" checked>木</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="5" class="ttf-wd" style="accent-color:var(--a)" checked>金</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="6" class="ttf-wd" style="accent-color:var(--a)">土</label></div></div><div id="ttf-repeat-nweeks" class="fg hidden"><label class="fl">何週間ごと（例: 3）</label><input class="fi" type="text" inputmode="numeric" id="ttf-nweeks" placeholder="3"></div>
+<div id="ttf-repeat-ndays" class="fg hidden"><label class="fl">何日ごと（例: 10）</label><input class="fi" type="text" inputmode="numeric" id="ttf-ndays" placeholder="10"></div>
+<div id="ttf-repeat-dow-info" class="fg hidden" style="padding:6px 8px;background:var(--s3);border-radius:6px;font-size:11px;color:var(--t2)"></div>
+<div id="ttf-repeat-end" class="fg hidden"><label class="fl">繰り返し終了日</label><input class="fi" type="date" id="ttf-end-date"></div><div class="fg"><label class="fl">メモ</label><textarea class="ft" id="ttf-plan" style="min-height:46px"></textarea></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-today')">キャンセル</button><button class="btn btn-primary" id="ttf-save-btn" onclick="saveTodayTask()">追加</button></div></div></div>
 
 <div class="modal-ov hidden" id="m-resched"><div class="modal modal-lg"><div class="mhead"><span class="mtitle">⟳ リスケジュール確認</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-resched')">✕</button></div><div class="mbody"><div id="rs-info" style="font-size:12px;color:var(--t2);margin-bottom:8px"></div><div id="rs-warn" style="display:none;color:var(--o);font-size:12px;margin-bottom:8px;padding:8px 12px;background:rgba(251,146,60,.08);border-radius:7px;border:1px solid rgba(251,146,60,.2)"></div><div id="rs-preview" style="max-height:320px;overflow-y:auto"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-resched')">キャンセル</button><button class="btn btn-primary" onclick="applyResched()">適用する</button></div></div></div>
 
@@ -210,7 +214,7 @@ button{cursor:pointer;font-family:var(--jp)}input,select,textarea{font-family:va
 const COLORS=['#38bdf8','#4ade80','#fb923c','#f87171','#a78bfa','#fbbf24','#34d399','#e879f9'];
 const SL={todo:'未着手',doing:'進行中',review:'確認待ち',done:'完了',hold:'保留'};
 const JP=['日','月','火','水','木','金','土'];
-let D={projects:[],todayTasks:[],actualRecords:[],settings:{maxMins:240,buffer:20,workStart:'09:00',workEnd:'18:00',workdays:[1,2,3,4,5]}};
+let D={projects:[],todayTasks:[],actualRecords:[],people:[],settings:{maxMins:240,buffer:20,workStart:'09:00',workEnd:'18:00',workdays:[1,2,3,4,5]}};
 let curView='dash',curProj=null,curPTab='tasks';
 let calY,calM,calSelDate=null,pendingRS=null,pendingConflict=null,resultCtx=null,pickedColor=COLORS[0];
 
@@ -415,7 +419,12 @@ function calSelect(ds){calSelDate=ds;renderCalendar();renderDayPanel(ds,buildCal
 function calMov(n){calM+=n;if(calM<0){calM=11;calY--;}if(calM>11){calM=0;calY++;}renderCalendar();}
 function calNow(){const n=new Date();calY=n.getFullYear();calM=n.getMonth();renderCalendar();}
 function renderDayPanel(ds,data){
-  const items=(data?.items||[]).sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));
+  // 通常タスク + 関係者タスク
+  const otherItems=(D.todayTasks||[]).filter(r=>r.date===ds&&r.personId).map(t=>{
+    const person=(D.people||[]).find(p=>p.id===t.personId);
+    return {t:{...t,scheduledDate:ds,scheduledStartTime:t.startTime,scheduledEndTime:t.endTime,parentId:null},proj:{id:'person_'+t.personId,name:person?person.name:'関係者',color:person?.color||'#a78bfa'},isPersonal:true,isPerson:true};
+  });
+  const items=[...(data?.items||[]),...otherItems].sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));
   document.getElementById('day-panel').innerHTML=`
     <div class="day-panel">
       <div class="dp-title">
@@ -517,42 +526,88 @@ function renderTimeline(ds,items){
 
 // ══ TODAY ══
 function renderToday(){
-  const today=td();const projItems=[];
+  const today=td();
+  const projItems=[];
   D.projects.forEach(proj=>(proj.tasks||[]).forEach(t=>{if(t.scheduledDate===today)projItems.push({t,proj});}));
   projItems.sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));
-  const personal=(D.todayTasks||[]).filter(t=>t.date===today);
-  document.getElementById('v-today').innerHTML=`
-    <div class="ph"><div class="ph-title">今日</div>
-      <div class="ph-actions"><button class="btn btn-primary btn-sm" onclick="openTodayModal()">＋ 追加</button></div>
-    </div>
-    ${projItems.length?`<div style="font-size:12px;font-family:var(--mono);color:var(--t3);margin-bottom:7px">プロジェクトタスク</div>
-    <div class="sched-grid" style="margin-bottom:14px">${projItems.map(({t,proj})=>staskHTML(t,proj,today,getConflictIds().ids)).join('')}</div>`:''}
-    ${personal.length?`<div style="font-size:12px;font-family:var(--mono);color:var(--t3);margin-bottom:7px">個人タスク</div>
-    <div style="font-size:11px;color:var(--t3);margin-bottom:6px;padding:6px 8px;background:var(--s3);border-radius:6px">
-      ✓ チェック = 完了/未完了の切り替え　　📝 実績 = 達成率・メモを記録（後から確認できます）
-    </div>
-    <div class="tlist">${personal.map(t=>`
-      <div class="titem ${t.status==='done'?'done-item':''}">
-        <button class="tcheck ${t.status==='done'?'chk':''}" onclick="toggleTodayTask('${t.id}')" title="完了/未完了を切り替え">✓</button>
-        <div class="tbody">
-          <div class="tname">${t.name}</div>
-          <div class="tmeta">
-            ${t.startTime?`<span class="tmeta-i">🕐 ${t.startTime}${t.endTime?'〜'+t.endTime:''}</span>`:''}
-            ${t.estimatedMins?`<span class="tmeta-i">⏱ ${t.estimatedMins}分</span>`:''}
-            ${t.achievementPct!=null?`<span class="tmeta-i" style="color:var(--g)">達成 ${t.achievementPct}%</span>`:''}
-            ${t.actualMinsLog?`<span class="tmeta-i" style="color:var(--g)">実働 ${t.actualMinsLog}分</span>`:''}
-          </div>
-          ${t.plan?`<div style="font-size:11px;color:var(--t3);margin-top:3px;padding:3px 6px;background:var(--s3);border-radius:4px">📋 ${t.plan}</div>`:''}
-          ${t.lastNote?`<div style="font-size:11px;color:var(--t2);margin-top:2px;padding:3px 6px;background:var(--s3);border-radius:4px;border-left:2px solid var(--g)">📝 ${t.lastNote}</div>`:''}
-        </div>
-        <div class="tactions">
-          <button class="btn btn-ghost btn-xs btn-icon" onclick="openTodayModal('${t.id}')" title="タスクを編集">✎</button>
-          <button class="btn btn-warn btn-xs" onclick="openResultModal('personal','${t.id}')" title="達成率・メモを記録">実績</button>
-          <button class="btn btn-ghost btn-xs btn-icon" onclick="openTimeEdit('personal','${t.id}')" title="時刻を変更">⏱</button>
-          <button class="btn btn-danger btn-xs btn-icon" onclick="delTodayTask('${t.id}')">🗑</button>
-        </div>
-      </div>`).join('')}</div>`:''}
-    ${!projItems.length&&!personal.length?'<div class="empty"><div class="empty-icon">☀</div><p>今日の予定はありません</p></div>':''}`;
+  const personal=(D.todayTasks||[]).filter(t=>t.date===today&&!t.personId);
+  const othersToday=(D.todayTasks||[]).filter(t=>t.date===today&&t.personId);
+
+  let out='';
+  out+='<div class="ph"><div class="ph-title">今日</div>';
+  out+='<div class="ph-actions"><button class="btn btn-primary btn-sm" onclick="openTodayModal()">＋ 追加</button></div></div>';
+
+  // プロジェクトタスク
+  if(projItems.length){
+    out+='<div style="font-size:12px;font-family:var(--mono);color:var(--t3);margin-bottom:7px">プロジェクトタスク</div>';
+    out+='<div class="sched-grid" style="margin-bottom:14px">';
+    projItems.forEach(({t,proj})=>{out+=staskHTML(t,proj,today,getConflictIds().ids);});
+    out+='</div>';
+  }
+
+  // 個人タスク（自分）
+  if(personal.length){
+    out+='<div style="font-size:12px;font-family:var(--mono);color:var(--t3);margin-bottom:7px">個人タスク</div>';
+    out+='<div style="font-size:11px;color:var(--t3);margin-bottom:6px;padding:6px 8px;background:var(--s3);border-radius:6px">✓ チェック = 完了/未完了の切り替え　　📝 実績 = 達成率・メモを記録</div>';
+    out+='<div class="tlist" style="margin-bottom:12px">';
+    personal.forEach(t=>{
+      const doneClass=t.status==='done'?'done-item':'';
+      const chkClass=t.status==='done'?'chk':'';
+      out+='<div class="titem '+doneClass+'">';
+      out+='<button class="tcheck '+chkClass+'" onclick="toggleTodayTask(\''+t.id+'\')" title="完了/未完了を切り替え">✓</button>';
+      out+='<div class="tbody">';
+      out+='<div class="tname">'+t.name+'</div>';
+      out+='<div class="tmeta">';
+      if(t.startTime) out+='<span class="tmeta-i">🕐 '+t.startTime+(t.endTime?'〜'+t.endTime:'')+'</span>';
+      if(t.estimatedMins) out+='<span class="tmeta-i">⏱ '+t.estimatedMins+'分</span>';
+      if(t.achievementPct!=null) out+='<span class="tmeta-i" style="color:var(--g)">達成 '+t.achievementPct+'%</span>';
+      if(t.actualMinsLog) out+='<span class="tmeta-i" style="color:var(--g)">実働 '+t.actualMinsLog+'分</span>';
+      out+='</div>';
+      if(t.plan) out+='<div style="font-size:11px;color:var(--t3);margin-top:3px;padding:3px 6px;background:var(--s3);border-radius:4px">📋 '+t.plan+'</div>';
+      if(t.lastNote) out+='<div style="font-size:11px;color:var(--t2);margin-top:2px;padding:3px 6px;background:var(--s3);border-radius:4px;border-left:2px solid var(--g)">📝 '+t.lastNote+'</div>';
+      out+='</div>';
+      out+='<div class="tactions">';
+      out+='<button class="btn btn-ghost btn-xs btn-icon" onclick="openTodayModal(\''+t.id+'\')" title="タスクを編集">✎</button>';
+      out+='<button class="btn btn-warn btn-xs" onclick="openResultModal(\'personal\',\''+t.id+'\')" title="達成率・メモを記録">実績</button>';
+      out+='<button class="btn btn-ghost btn-xs btn-icon" onclick="openTimeEdit(\'personal\',\''+t.id+'\')" title="時刻を変更">⏱</button>';
+      out+='<button class="btn btn-danger btn-xs btn-icon" onclick="delTodayTask(\''+t.id+'\')">🗑</button>';
+      out+='</div></div>';
+    });
+    out+='</div>';
+  }
+
+  // 関係者の予定
+  if(othersToday.length){
+    out+='<div style="font-size:12px;font-family:var(--mono);color:var(--t3);margin-bottom:7px;margin-top:4px">👥 関係者の予定</div>';
+    out+='<div class="tlist">';
+    othersToday.forEach(t=>{
+      const person=(D.people||[]).find(p=>p.id===t.personId);
+      const pColor=person?.color||'var(--p)';
+      out+='<div class="titem" style="border-left:3px solid '+pColor+'">';
+      out+='<div class="tbody">';
+      out+='<div class="tname" style="display:flex;align-items:center;gap:6px">';
+      out+='<span style="font-size:10px;padding:1px 5px;border-radius:4px;background:'+pColor+'22;color:'+pColor+'">'+(person?person.name:'?')+'</span>';
+      out+=t.name;
+      out+='</div>';
+      out+='<div class="tmeta">';
+      if(t.startTime) out+='<span class="tmeta-i">🕐 '+t.startTime+(t.endTime?'〜'+t.endTime:'')+'</span>';
+      if(t.estimatedMins) out+='<span class="tmeta-i">⏱ '+t.estimatedMins+'分</span>';
+      out+='</div>';
+      if(t.plan) out+='<div style="font-size:11px;color:var(--t3);margin-top:2px;padding:2px 5px;background:var(--s3);border-radius:3px">📋 '+t.plan+'</div>';
+      out+='</div>';
+      out+='<div class="tactions">';
+      out+='<button class="btn btn-ghost btn-xs btn-icon" onclick="openTodayModal(\''+t.id+'\')" title="編集">✎</button>';
+      out+='<button class="btn btn-danger btn-xs btn-icon" onclick="delTodayTask(\''+t.id+'\')">🗑</button>';
+      out+='</div></div>';
+    });
+    out+='</div>';
+  }
+
+  if(!projItems.length&&!personal.length&&!othersToday.length){
+    out+='<div class="empty"><div class="empty-icon">☀</div><p>今日の予定はありません</p></div>';
+  }
+
+  document.getElementById('v-today').innerHTML=out;
 }
 
 // ══ PROJECT DETAIL ══
@@ -590,11 +645,63 @@ function renderSettings(){
     <div class="fg"><label class="fl">作業曜日</label><div style="display:flex;gap:10px;flex-wrap:wrap">${JP.map((d,i)=>`<label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer"><input type="checkbox" value="${i}" ${(s.workdays||[1,2,3,4,5]).includes(i)?'checked':''} style="accent-color:var(--a)">${d}</label>`).join('')}</div></div>
     <button class="btn btn-primary btn-sm" onclick="saveSettings()" style="margin-top:4px">保存</button>
   </div>
+  <div class="settings-block">
+    <div class="settings-block-title">👥 関係者管理</div>
+    <div id="people-list" style="margin-bottom:10px"></div>
+    <button class="btn btn-primary btn-sm" onclick="openPersonModal()">＋ 関係者を追加</button>
+    <div id="people-list-render" style="margin-top:8px"></div>
+  </div>
   <div class="settings-block"><div class="settings-block-title">データ管理</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-warn btn-sm" onclick="forceReschedAll()">⟳ 全プロジェクト強制リスケジュール</button><button class="btn btn-sec btn-sm" onclick="exportData()">⬇ JSONバックアップ</button><button class="btn btn-sec btn-sm" onclick="importData()">⬆ JSONインポート</button><button class="btn btn-danger btn-sm" onclick="resetAll()">⚠ 全リセット</button></div>
   </div>`;
+  setTimeout(renderPeopleList,50);
 }
-
+function renderPeopleList(){
+  const el=document.getElementById('people-list-render');
+  if(!el)return;
+  const people=D.people||[];
+  if(!people.length){el.innerHTML='<div style="font-size:12px;color:var(--t3);padding:4px 0">まだ登録されていません</div>';return;}
+  el.innerHTML='<div class="tlist">'+people.map(p=>`
+    <div class="titem" style="border-left:3px solid ${p.color||'var(--p)'}">
+      <div class="tbody">
+        <div class="tname" style="display:flex;align-items:center;gap:6px">
+          <span style="width:10px;height:10px;border-radius:50%;background:${p.color||'var(--p)'};display:inline-block"></span>
+          ${p.name}
+          <span style="font-size:10px;color:var(--t3);font-family:var(--mono)">${p.relation||''}</span>
+        </div>
+        ${p.memo?`<div style="font-size:11px;color:var(--t3)">${p.memo}</div>`:''}
+      </div>
+      <div class="tactions" style="opacity:1">
+        <button class="btn btn-ghost btn-xs btn-icon" onclick="openPersonModal('${p.id}')">✎</button>
+        <button class="btn btn-danger btn-xs btn-icon" onclick="delPerson('${p.id}')">🗑</button>
+      </div>
+    </div>`).join('')+'</div>';
+}
+function openPersonModal(editId){
+  const p=editId?(D.people||[]).find(x=>x.id===editId):null;
+  document.getElementById('pm-id').value=p?.id||'';
+  document.getElementById('pm-name').value=p?.name||'';
+  document.getElementById('pm-relation').value=p?.relation||'';
+  document.getElementById('pm-memo').value=p?.memo||'';
+  initCP('pm-colors',p?.color);
+  openM('m-person');
+}
+function savePerson(){
+  const name=document.getElementById('pm-name').value.trim();
+  if(!name){alert('名前を入力してください');return;}
+  if(!D.people)D.people=[];
+  const editId=document.getElementById('pm-id').value;
+  const data={name,relation:document.getElementById('pm-relation').value,memo:document.getElementById('pm-memo').value,color:pickedColor};
+  if(editId){const p=D.people.find(x=>x.id===editId);if(p)Object.assign(p,data);}
+  else D.people.push({id:uid(),...data});
+  save();closeM('m-person');renderSettings();setTimeout(renderPeopleList,50);
+}
+function delPerson(id){
+  if(!confirm('削除しますか？この人の予定からは人物情報が外れます'))return;
+  D.people=(D.people||[]).filter(x=>x.id!==id);
+  D.todayTasks=(D.todayTasks||[]).map(t=>t.personId===id?{...t,personId:null}:t);
+  save();renderSettings();setTimeout(renderPeopleList,50);
+}
 function saveGhToken(){const input=document.getElementById('cfg-token').value.trim();if(!input||input.startsWith('●'))return;ghSetToken(input);renderSettings();setSS('saving','読み込み中…');ghLoad().then(ok=>{if(ok){renderAll();gotoView('dash');}});}
 function clearGhToken(){if(!confirm('トークンを削除します。'))return;ghSetToken('');renderSettings();setSS('notoken','トークン未設定');}
 async function testGhConnection(){const token=ghToken();if(!token){document.getElementById('gh-test-result').textContent='⚠ トークン未設定';return;}document.getElementById('gh-test-result').textContent='接続中…';try{const res=await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}`,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});document.getElementById('gh-test-result').innerHTML=res.ok?'<span style="color:var(--g)">✓ 接続成功！</span>':`<span style="color:var(--r)">✕ HTTP ${res.status}</span>`;}catch(e){document.getElementById('gh-test-result').innerHTML=`<span style="color:var(--r)">✕ ${e.message}</span>`;}}
@@ -602,7 +709,7 @@ function saveSettings(){const checked=[...document.querySelectorAll('#v-settings
 function forceReschedAll(){D.projects.forEach(p=>buildSchedule(p,td()));save();renderAll();}
 function exportData(){const a=document.createElement('a');a.href='data:application/json,'+encodeURIComponent(JSON.stringify(D,null,2));a.download='taskflow_backup_'+td()+'.json';a.click();}
 function importData(){const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=e=>{const r=new FileReader();r.onload=ev=>{try{D=JSON.parse(ev.target.result);save();renderAll();}catch(e){alert('読み込みに失敗しました');}};r.readAsText(e.target.files[0]);};i.click();}
-function resetAll(){if(!confirm('全データを削除します。よろしいですか？'))return;D={projects:[],todayTasks:[],settings:{maxMins:240,buffer:20,workStart:'09:00',workEnd:'18:00',workdays:[1,2,3,4,5]}};save();renderAll();}
+function resetAll(){if(!confirm('全データを削除します。よろしいですか？'))return;D={projects:[],todayTasks:[],actualRecords:[],people:[],settings:{maxMins:240,buffer:20,workStart:'09:00',workEnd:'18:00',workdays:[1,2,3,4,5]}};save();renderAll();}
 
 // ══ COLOR PICKER ══
 function initCP(id,cur){pickedColor=cur||COLORS[0];document.getElementById(id).innerHTML=COLORS.map(c=>`<div class="cp-dot ${c===pickedColor?'selected':''}" style="background:${c}" onclick="pickC('${c}','${id}')"></div>`).join('');}
@@ -763,7 +870,28 @@ function reschedAll(){document.getElementById('rs-info').textContent='全プロ�
 function applyResched(){if(!pendingRS)return;if(pendingRS.mode==='all')D.projects.forEach(p=>buildSchedule(p,td()));else{const p=getProj(pendingRS.projId);if(p)buildSchedule(p,td());}pendingRS=null;save();closeM('m-resched');renderCurrent();}
 
 // ══ TODAY TASKS ══
-function onRepeatChange(){const v=document.getElementById('ttf-repeat').value;document.getElementById('ttf-repeat-days').classList.toggle('hidden',v!=='weekly');document.getElementById('ttf-repeat-end').classList.toggle('hidden',v==='none');}
+function onRepeatChange(){
+  const v=document.getElementById('ttf-repeat').value;
+  document.getElementById('ttf-repeat-days').classList.toggle('hidden',v!=='weekly'&&v!=='biweekly');
+  document.getElementById('ttf-repeat-nweeks').classList.toggle('hidden',v!=='nweeks');
+  document.getElementById('ttf-repeat-ndays').classList.toggle('hidden',v!=='ndays');
+  document.getElementById('ttf-repeat-end').classList.toggle('hidden',v==='none');
+  // 第N曜日の説明を表示
+  const dowInfo=document.getElementById('ttf-repeat-dow-info');
+  if(v==='monthly_dow'){
+    const dateVal=document.getElementById('ttf-date').value;
+    if(dateVal){
+      const d=new Date(dateVal+'T00:00:00');
+      const nth=Math.ceil(d.getDate()/7);
+      const nthStr=['','第1','第2','第3','第4','第5'][nth]||'第'+nth;
+      dowInfo.textContent='毎月 '+nthStr+JP[d.getDay()]+'曜日 に繰り返します';
+      dowInfo.style.display='block';
+    }
+    dowInfo.classList.remove('hidden');
+  } else {
+    dowInfo.classList.add('hidden');
+  }
+}
 function openTodayModal(editId){
   window._editTodayId=editId||null;
   const t=editId?(D.todayTasks||[]).find(x=>x.id===editId):null;
@@ -813,6 +941,9 @@ function openTodayModal(editId){
   document.querySelectorAll('.ttf-wd').forEach(cb=>{cb.checked=[1,2,3,4,5].includes(parseInt(cb.value));});
   onRepeatChange();
   document.getElementById('ttf-proj').innerHTML='<option value="">なし</option>'+D.projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+  const personSel=document.getElementById('ttf-person');
+  personSel.innerHTML='<option value="">自分</option>'+(D.people||[]).map(p=>`<option value="${p.id}" style="color:${p.color||'var(--text)'}">${p.name}（${p.relation||''}）</option>`).join('');
+  if(t&&t.personId) personSel.value=t.personId||'';
   openM('m-today');
 }
 function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;setTimeout(()=>{window._savingToday=false;},1000);const name=document.getElementById('ttf-name').value.trim();if(!name){window._savingToday=false;return;}if(!D.todayTasks)D.todayTasks=[];const ttDate=document.getElementById('ttf-date').value||td();const ttStart=document.getElementById('ttf-start').value||null;const ttEst=parseInt(document.getElementById('ttf-est').value)||null;const ttEnd=document.getElementById('ttf-end').value||(ttStart&&ttEst?addMinsT(ttStart,ttEst):null);const ttPlan=document.getElementById('ttf-plan').value;const ttRepeat=document.getElementById('ttf-repeat').value||'none';const ttRepeatEnd=document.getElementById('ttf-end-date').value||null;if(!ttRepeat||ttRepeat==='none'){
@@ -833,12 +964,85 @@ function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;
         }
       }
     } else {
-      D.todayTasks.push({id:uid(),date:ttDate,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan,status:'todo',repeatGroupId:null});
+      const ttPersonId=document.getElementById('ttf-person')?.value||'';
+      D.todayTasks.push({id:uid(),date:ttDate,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan,status:'todo',repeatGroupId:null,personId:ttPersonId||null});
     }
     save();closeM('m-today');renderToday();if(curView==='calendar')renderCalendar();return;
-  }const ttRepeatDays=ttRepeat==='weekly'?[...document.querySelectorAll('.ttf-wd:checked')].map(cb=>parseInt(cb.value)):null;
+  }
+  // 繰り返し生成
+  const ttRepeatDays=(ttRepeat==='weekly'||ttRepeat==='biweekly')?[...document.querySelectorAll('.ttf-wd:checked')].map(cb=>parseInt(cb.value)):null;
+  const ttNWeeks=parseInt(document.getElementById('ttf-nweeks')?.value)||2;
+  const ttNDays=parseInt(document.getElementById('ttf-ndays')?.value)||7;
   if(!ttRepeatEnd){alert('繰り返し終了日を入力してください');window._savingToday=false;return;}
-  const gid=uid();const endD=new Date(ttRepeatEnd+'T00:00:00');let cur=new Date(ttDate+'T00:00:00');while(cur<=endD){const ds=cur.getFullYear()+'-'+String(cur.getMonth()+1).padStart(2,'0')+'-'+String(cur.getDate()).padStart(2,'0');const day=cur.getDay();let include=false;if(ttRepeat==='daily')include=true;else if(ttRepeat==='weekdays')include=[1,2,3,4,5].includes(day);else if(ttRepeat==='weekly')include=ttRepeatDays&&ttRepeatDays.includes(day);else if(ttRepeat==='monthly')include=cur.getDate()===new Date(ttDate+'T00:00:00').getDate();if(include)D.todayTasks.push({id:uid(),date:ds,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan,status:'todo',repeatGroupId:gid,repeat:ttRepeat});cur.setDate(cur.getDate()+1);}save();closeM('m-today');renderToday();if(curView==='calendar')renderCalendar();}
+  const gid=uid();
+  const startD=new Date(ttDate+'T00:00:00');
+  const endD=new Date(ttRepeatEnd+'T00:00:00');
+  // 毎月第N曜日の計算用
+  const startNth=Math.ceil(startD.getDate()/7);
+  const startDow=startD.getDay();
+  function getNthDowOfMonth(year,month,nth,dow){
+    // 指定月のnth番目のdow曜日を返す
+    const first=new Date(year,month,1);
+    let count=0;
+    for(let d=1;d<=31;d++){
+      const date=new Date(year,month,d);
+      if(date.getMonth()!==month)break;
+      if(date.getDay()===dow){count++;if(count===nth)return date;}
+    }
+    return null;
+  }
+  const generatedDates=[];
+  if(ttRepeat==='monthly_dow'){
+    // 毎月第N曜日: 月ごとに計算
+    let y=startD.getFullYear(),m=startD.getMonth();
+    while(true){
+      const target=getNthDowOfMonth(y,m,startNth,startDow);
+      if(target&&target>=startD&&target<=endD){
+        generatedDates.push(target.getFullYear()+'-'+String(target.getMonth()+1).padStart(2,'0')+'-'+String(target.getDate()).padStart(2,'0'));
+      }
+      m++;if(m>11){m=0;y++;}
+      if(y>endD.getFullYear()||(y===endD.getFullYear()&&m>endD.getMonth()+1))break;
+    }
+  } else if(ttRepeat==='nweeks'){
+    // N週間ごと
+    let cur=new Date(startD);
+    while(cur<=endD){
+      generatedDates.push(cur.getFullYear()+'-'+String(cur.getMonth()+1).padStart(2,'0')+'-'+String(cur.getDate()).padStart(2,'0'));
+      cur.setDate(cur.getDate()+ttNWeeks*7);
+    }
+  } else if(ttRepeat==='ndays'){
+    // N日ごと
+    let cur=new Date(startD);
+    while(cur<=endD){
+      generatedDates.push(cur.getFullYear()+'-'+String(cur.getMonth()+1).padStart(2,'0')+'-'+String(cur.getDate()).padStart(2,'0'));
+      cur.setDate(cur.getDate()+ttNDays);
+    }
+  } else {
+    // 既存の繰り返し (daily/weekdays/weekly/biweekly/monthly)
+    let cur=new Date(startD);
+    while(cur<=endD){
+      const ds=cur.getFullYear()+'-'+String(cur.getMonth()+1).padStart(2,'0')+'-'+String(cur.getDate()).padStart(2,'0');
+      const day=cur.getDay();
+      let include=false;
+      if(ttRepeat==='daily')include=true;
+      else if(ttRepeat==='weekdays')include=[1,2,3,4,5].includes(day);
+      else if(ttRepeat==='weekly')include=ttRepeatDays&&ttRepeatDays.includes(day);
+      else if(ttRepeat==='biweekly'){
+        // 隔週: 開始日と同じ曜日、かつ2週間ごと
+        const diffDays=Math.round((cur-startD)/86400000);
+        include=ttRepeatDays&&ttRepeatDays.includes(day)&&diffDays%14===0;
+      }
+      else if(ttRepeat==='monthly')include=cur.getDate()===startD.getDate();
+      if(include)generatedDates.push(ds);
+      cur.setDate(cur.getDate()+1);
+    }
+  }
+  generatedDates.forEach(ds=>{
+    const ttPId=document.getElementById('ttf-person')?.value||null;
+    D.todayTasks.push({id:uid(),date:ds,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan,status:'todo',repeatGroupId:gid,repeat:ttRepeat,personId:ttPId||null});
+  });
+  save();closeM('m-today');renderToday();if(curView==='calendar')renderCalendar();
+}
 function toggleTodayTask(id){const t=(D.todayTasks||[]).find(x=>x.id===id);if(!t)return;t.status=t.status==='done'?'todo':'done';save();renderToday();}
 function delTodayTask(id){const t=(D.todayTasks||[]).find(x=>x.id===id);if(!t)return;if(t.repeatGroupId){const choice=confirm('繰り返しタスクです。\nOK=この日以降を全て削除\nキャンセル=この1件だけ削除');D.todayTasks=choice?D.todayTasks.filter(x=>!(x.repeatGroupId===t.repeatGroupId&&x.date>=t.date)):D.todayTasks.filter(x=>x.id!==id);}else{if(!confirm('削除しますか？'))return;D.todayTasks=D.todayTasks.filter(x=>x.id!==id);}save();renderToday();if(curView==='calendar')renderCalendar();}
 
@@ -912,5 +1116,22 @@ function initTheme(){const t=localStorage.getItem('tf_theme')||'dark';document.d
   }
 })();
 </script>
+<!-- 関係者追加/編集モーダル -->
+<div class="modal-ov hidden" id="m-person">
+  <div class="modal">
+    <div class="mhead"><span class="mtitle">👤 関係者</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-person')">✕</button></div>
+    <div class="mbody">
+      <input type="hidden" id="pm-id">
+      <div class="fg"><label class="fl">名前 *</label><input class="fi" id="pm-name" placeholder="例: 山田太郎"></div>
+      <div class="fg"><label class="fl">関係・役職</label><input class="fi" id="pm-relation" placeholder="例: 上司・妻・子供"></div>
+      <div class="fg"><label class="fl">メモ</label><textarea class="ft" id="pm-memo" style="min-height:40px" placeholder="連絡先や備考など"></textarea></div>
+      <div class="fg"><label class="fl">カラー</label><div class="cpicker" id="pm-colors"></div></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-sec" onclick="closeM('m-person')">キャンセル</button>
+      <button class="btn btn-primary" onclick="savePerson()">保存</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
