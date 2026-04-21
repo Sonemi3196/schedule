@@ -9755,6 +9755,18 @@
       "repeatGroupId": "mo87rktlybm5",
       "repeat": "daily",
       "personId": null
+    },
+    {
+      "id": "mo87smy5qfr8",
+      "date": "2026-04-27",
+      "name": "パソコン",
+      "estimatedMins": null,
+      "startTime": "08:30",
+      "endTime": "12:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
