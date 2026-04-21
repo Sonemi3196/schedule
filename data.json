@@ -4737,19 +4737,6 @@
       "personId": null
     },
     {
-      "id": "mo86ckrj6f53",
-      "date": "2026-04-25",
-      "name": "料理",
-      "estimatedMins": 60,
-      "startTime": "17:00",
-      "endTime": "18:00",
-      "plan": "",
-      "status": "todo",
-      "repeatGroupId": "mo86ckrjcp4f",
-      "repeat": "daily",
-      "personId": null
-    },
-    {
       "id": "mo86ckrj5601",
       "date": "2026-04-26",
       "name": "料理",
