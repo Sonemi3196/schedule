@@ -3480,19 +3480,6 @@
       "repeat": "monthly"
     },
     {
-      "id": "mo84s88tcvh3",
-      "date": "2026-04-21",
-      "name": "トイレ掃除",
-      "estimatedMins": null,
-      "startTime": "08:00",
-      "endTime": "08:30",
-      "plan": "",
-      "status": "todo",
-      "repeatGroupId": "mo84s88tb9hm",
-      "repeat": "nweeks",
-      "personId": null
-    },
-    {
       "id": "mo84s88tgrpc",
       "date": "2026-05-12",
       "name": "トイレ掃除",
