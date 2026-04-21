@@ -9831,6 +9831,32 @@
       "repeatGroupId": "mo8bii3wz1j1",
       "repeat": "monthly",
       "personId": null
+    },
+    {
+      "id": "mo8bpj11qx6q",
+      "date": "2026-05-01",
+      "name": "ついたち掃除",
+      "estimatedMins": null,
+      "startTime": "07:00",
+      "endTime": "08:00",
+      "plan": "換気扇・排水溝",
+      "status": "todo",
+      "repeatGroupId": "mo8bpj106lpl",
+      "repeat": "monthly",
+      "personId": null
+    },
+    {
+      "id": "mo8bpj11xxzd",
+      "date": "2026-06-01",
+      "name": "ついたち掃除",
+      "estimatedMins": null,
+      "startTime": "07:00",
+      "endTime": "08:00",
+      "plan": "換気扇・排水溝",
+      "status": "todo",
+      "repeatGroupId": "mo8bpj106lpl",
+      "repeat": "monthly",
+      "personId": null
     }
   ],
   "settings": {
