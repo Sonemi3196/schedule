@@ -219,7 +219,24 @@
     },
     {
       "id": "mo87fs5az7u9",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "mo87gi4yiq6k",
+          "createdAt": "2026-04-21",
+          "parentId": null,
+          "name": "Bさん",
+          "status": "todo",
+          "estimatedMins": 20,
+          "taskStartDate": "2026-04-21",
+          "prefTime": "08:30",
+          "notes": "",
+          "autoSchedule": true,
+          "scheduledDate": "2026-04-21",
+          "scheduledStartTime": "08:30",
+          "scheduledEndTime": "08:50",
+          "actualMins": null
+        }
+      ],
       "name": "ヴェーダ数秘試験",
       "startDate": "2026-04-21",
       "deadline": "",
