@@ -8836,9 +8836,14 @@
       "startTime": "15:00",
       "endTime": "16:00",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": null,
-      "personId": null
+      "personId": null,
+      "achievementPct": 100,
+      "actualMins": 0,
+      "actualStartTime": "15:00",
+      "actualEndTime": "16:00",
+      "lastNote": ""
     },
     {
       "id": "mo87pd2d8kul",
