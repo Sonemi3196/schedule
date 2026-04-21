@@ -158,6 +158,18 @@
       "includeWeekends": true,
       "description": "",
       "color": "#38bdf8"
+    },
+    {
+      "id": "mo875scuw9yx",
+      "tasks": [],
+      "name": "くりすたるはあとサロン予定",
+      "startDate": "2026-04-21",
+      "deadline": "2026-06-30",
+      "dailyMins": "120",
+      "includeWeekends": false,
+      "description": "午前中の空いた時間で対応",
+      "color": "#38bdf8",
+      "status": "active"
     }
   ],
   "todayTasks": [
