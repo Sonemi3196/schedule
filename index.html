@@ -408,11 +408,26 @@ function renderSchedule(){
   setTimeout(()=>{const el2=document.getElementById('sd-'+today);if(el2)el2.scrollIntoView({behavior:'smooth',block:'start'});},80);
 }
 
-function staskHTML(t,proj,date,conIds){const today=td();const isSub=!!t.parentId;const isLate=t.status!=='done'&&t.status!=='hold'&&date<today;const isCon=conIds?conIds.has(t.id):false;return `<div class="stask ${t.status==='done'?'done-t':''} ${isLate?'late-t':''} ${isCon?'conflict-t':''}"><button class="stask-check ${t.status==='done'?'chk':''}" onclick="toggleDone('${proj.id}','${t.id}')">✓</button><span class="stask-time">${t.scheduledStartTime||''}${t.scheduledEndTime?'〜'+t.scheduledEndTime:''}</span><span class="stask-name">${isSub?'<span style="font-size:10px;color:var(--t3)">↳ </span>':''}${t.name}</span><span class="stask-mins">${t.estimatedMins||'?'}分</span><span style="font-size:10px;color:${proj.color||COLORS[0]};margin-left:4px">${proj.name}</span><div class="stask-acts">${t.status!=='done'?`<button class="btn btn-warn btn-xs" onclick="openResultModal('${proj.id}','${t.id}')">実績</button>`:''}<button class="btn btn-ghost btn-xs" onclick="openTimeEdit('${proj.id}','${t.id}')">✎</button></div></div>`;}
+function staskHTML(t,proj,date,conIds){
+  const today=td();
+  const isSub=!!t.parentId;
+  const isLate=t.status!=='done'&&t.status!=='hold'&&date<today;
+  const isCon=conIds?conIds.has(t.id):false;
+  const isPersonal=proj.id==='personal';
+  let acts='';
+  if(t.status!=='done') acts+=`<button class="btn btn-warn btn-xs" onclick="openResultModal('${proj.id}','${t.id}')">実績</button>`;
+  acts+=`<button class="btn btn-ghost btn-xs" onclick="openTimeEdit('${proj.id}','${t.id}')">✎</button>`;
+  if(isPersonal){
+    acts+=`<button class="btn btn-ghost btn-xs" onclick="openTodayModal('${t.id}')">編集</button>`;
+    acts+=`<button class="btn btn-danger btn-xs btn-icon" onclick="delTodayTask('${t.id}')">🗑</button>`;
+  }
+  return `<div class="stask ${t.status==='done'?'done-t':''} ${isLate?'late-t':''} ${isCon?'conflict-t':''}"><button class="stask-check ${t.status==='done'?'chk':''}" onclick="toggleDone('${proj.id}','${t.id}')">✓</button><span class="stask-time">${t.scheduledStartTime||''}${t.scheduledEndTime?'〜'+t.scheduledEndTime:''}</span><span class="stask-name">${isSub?'<span style="font-size:10px;color:var(--t3)">↳ </span>':''}${t.name}</span><span class="stask-mins">${t.estimatedMins||'?'}分</span><span style="font-size:10px;color:${proj.color||COLORS[0]};margin-left:4px">${proj.name}</span><div class="stask-acts">${acts}</div></div>`;
+}
 function toggleSD(id){document.getElementById(id)?.classList.toggle('open');}
 
 // ══ CALENDAR ══
-function buildCalMap(){const m={};D.projects.forEach(proj=>(proj.tasks||[]).forEach(t=>{if(!t.scheduledDate)return;if(!m[t.scheduledDate])m[t.scheduledDate]={items:[],late:false,conflict:false};m[t.scheduledDate].items.push({t,proj});if(t.scheduledDate<td()&&t.status!=='done'&&t.status!=='hold')m[t.scheduledDate].late=true;}));const _p={id:'personal',name:'個人',color:'#a78bfa',tasks:[]};(D.todayTasks||[]).forEach(t=>{if(!t.date)return;if(!m[t.date])m[t.date]={items:[],late:false,conflict:false};m[t.date].items.push({t:{...t,scheduledDate:t.date,scheduledStartTime:t.startTime,scheduledEndTime:t.endTime,parentId:null},proj:_p});});const {raw:conflicts}=getConflictIds();conflicts.forEach(c=>{if(m[c.date])m[c.date].conflict=true;});return m;}
+function buildCalMap(){const m={};D.projects.forEach(proj=>(proj.tasks||[]).forEach(t=>{if(!t.scheduledDate)return;if(!m[t.scheduledDate])m[t.scheduledDate]={items:[],late:false,conflict:false};m[t.scheduledDate].items.push({t,proj});if(t.scheduledDate<td()&&t.status!=='done'&&t.status!=='hold')m[t.scheduledDate].late=true;}));const _p={id:'personal',name:'個人',color:'#a78bfa',tasks:[]};// buildCalMap には自分（personIdなし）のタスクのみ追加。関係者タスクはrenderDayPanel側で追加
+(D.todayTasks||[]).filter(t=>!t.personId).forEach(t=>{if(!t.date)return;if(!m[t.date])m[t.date]={items:[],late:false,conflict:false};m[t.date].items.push({t:{...t,scheduledDate:t.date,scheduledStartTime:t.startTime,scheduledEndTime:t.endTime,parentId:null},proj:_p});});const {raw:conflicts}=getConflictIds();conflicts.forEach(c=>{if(m[c.date])m[c.date].conflict=true;});return m;}
 function renderCalendar(){const calMap=buildCalMap();const first=new Date(calY,calM,1);const last=new Date(calY,calM+1,0);const today=td();document.getElementById('v-calendar').innerHTML=`<div class="ph"><div class="ph-title">カレンダー</div><div class="ph-actions"><button class="btn btn-ghost btn-sm" onclick="calMov(-1)">‹ 前月</button><button class="btn btn-ghost btn-sm" onclick="calNow()">今日</button><button class="btn btn-ghost btn-sm" onclick="calMov(1)">次月 ›</button></div></div><div style="font-size:15px;font-weight:600;margin-bottom:12px">${calY}年 ${calM+1}月</div><div class="cal-wrap"><div class="cal-grid">${JP.map(d=>`<div class="cal-dow">${d}</div>`).join('')}${buildCalCells(calMap,first,last,today)}</div></div><div id="day-panel"></div>`;if(calSelDate)renderDayPanel(calSelDate,calMap[calSelDate]);}
 function buildCalCells(calMap,first,last,today){let html='';let d=new Date(first);d.setDate(d.getDate()-d.getDay());while(d<=last||d.getDay()!==0){const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;const isOther=d.getMonth()!==calM;const isToday=ds===today;const isSel=ds===calSelDate;const data=calMap[ds];const items=data?.items||[];const pills=items.slice(0,3).map(({t,proj})=>`<div class="cal-pill" style="background:${proj.color||COLORS[0]}22;color:${proj.color||COLORS[0]}">${t.scheduledStartTime?t.scheduledStartTime+' ':''}${t.name}</div>`).join('');html+=`<div class="cal-cell ${isOther?'other-month':''} ${isToday?'today':''} ${isSel?'selected':''}" onclick="calSelect('${ds}')">${data?.conflict?'<div class="cal-conflict-badge"></div>':''}<div class="cal-date">${d.getDate()}${isToday?'<span class="cal-today-dot"></span>':''}</div>${pills}${items.length>3?`<div style="font-size:9px;color:var(--t3)">+${items.length-3}件</div>`:''}</div>`;d.setDate(d.getDate()+1);if(d>last&&d.getDay()===0)break;}return html;}
 function calSelect(ds){calSelDate=ds;renderCalendar();renderDayPanel(ds,buildCalMap()[ds]);}
@@ -422,7 +437,12 @@ function renderDayPanel(ds,data){
   // 通常タスク + 関係者タスク
   const otherItems=(D.todayTasks||[]).filter(r=>r.date===ds&&r.personId).map(t=>{
     const person=(D.people||[]).find(p=>p.id===t.personId);
-    return {t:{...t,scheduledDate:ds,scheduledStartTime:t.startTime,scheduledEndTime:t.endTime,parentId:null},proj:{id:'person_'+t.personId,name:person?person.name:'関係者',color:person?.color||'#a78bfa'},isPersonal:true,isPerson:true};
+    const pColor=person?.color||'#a78bfa';
+    // proj.id='personal' にして openTlMenu などが正しく動作するようにする
+    // name に人物名を含めて区別
+    return {t:{...t,scheduledDate:ds,scheduledStartTime:t.startTime,scheduledEndTime:t.endTime,parentId:null},
+            proj:{id:'personal',name:(person?person.name:'関係者'),color:pColor,tasks:[]},
+            isPersonal:true,isPerson:true};
   });
   const items=[...(data?.items||[]),...otherItems].sort((a,b)=>(t2m(a.t.scheduledStartTime)||0)-(t2m(b.t.scheduledStartTime)||0));
   document.getElementById('day-panel').innerHTML=`
@@ -448,7 +468,7 @@ function renderTimeline(ds,items){
   let minH=Math.max(0, Math.min(wsH-1, 6));
   let maxH=Math.min(23, Math.max(weH+1, 22));
   items.forEach(({t,proj,isPersonal})=>{
-    const isP=isPersonal||proj.id==='personal';
+    const isP=isPersonal||proj.id==='personal'||proj.id?.startsWith('person_');
     const s=t2m(isP?t.startTime:t.scheduledStartTime);
     const e=t2m(isP?t.endTime:t.scheduledEndTime);
     if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h-1);}
@@ -467,7 +487,7 @@ function renderTimeline(ds,items){
   }
   const planBlocks=[],actualBlocks=[];
   items.forEach(({t,proj,isPersonal})=>{
-    const isP=isPersonal||proj.id==='personal';
+    const isP=isPersonal||proj.id==='personal'||proj.id?.startsWith('person_');
     const ps=isP?t2m(t.startTime):t2m(t.scheduledStartTime);
     const pe=isP?t2m(t.endTime):t2m(t.scheduledEndTime);
     const pStart=ps||SH*60;
@@ -1044,7 +1064,7 @@ function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;
   save();closeM('m-today');renderToday();if(curView==='calendar')renderCalendar();
 }
 function toggleTodayTask(id){const t=(D.todayTasks||[]).find(x=>x.id===id);if(!t)return;t.status=t.status==='done'?'todo':'done';save();renderToday();}
-function delTodayTask(id){const t=(D.todayTasks||[]).find(x=>x.id===id);if(!t)return;if(t.repeatGroupId){const choice=confirm('繰り返しタスクです。\nOK=この日以降を全て削除\nキャンセル=この1件だけ削除');D.todayTasks=choice?D.todayTasks.filter(x=>!(x.repeatGroupId===t.repeatGroupId&&x.date>=t.date)):D.todayTasks.filter(x=>x.id!==id);}else{if(!confirm('削除しますか？'))return;D.todayTasks=D.todayTasks.filter(x=>x.id!==id);}save();renderToday();if(curView==='calendar')renderCalendar();}
+function delTodayTask(id){const t=(D.todayTasks||[]).find(x=>x.id===id);if(!t)return;if(t.repeatGroupId){const choice=confirm('繰り返しタスクです。\nOK=この日以降を全て削除\nキャンセル=この1件だけ削除');D.todayTasks=choice?D.todayTasks.filter(x=>!(x.repeatGroupId===t.repeatGroupId&&x.date>=t.date)):D.todayTasks.filter(x=>x.id!==id);}else{if(!confirm('削除しますか？'))return;D.todayTasks=D.todayTasks.filter(x=>x.id!==id);}save();renderCurrent();}
 
 // ══ ACTUAL RECORDS ══
 function openActualAdd(ds){document.getElementById('aa-date').value=ds;document.getElementById('aa-name').value='';document.getElementById('aa-start').value='';document.getElementById('aa-end').value='';document.getElementById('aa-note').value='';window._editActualId=null;openM('m-actual-add');}
