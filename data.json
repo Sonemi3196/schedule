@@ -190,7 +190,24 @@
     },
     {
       "id": "mo87djouzavv",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "mo87ehte31dl",
+          "createdAt": "2026-04-21",
+          "parentId": null,
+          "name": "代々木公園",
+          "status": "todo",
+          "estimatedMins": 1500,
+          "taskStartDate": "2026-04-22",
+          "prefTime": "10:00",
+          "notes": "",
+          "autoSchedule": false,
+          "scheduledDate": null,
+          "scheduledStartTime": null,
+          "scheduledEndTime": null,
+          "actualMins": null
+        }
+      ],
       "name": "調律130人",
       "startDate": "2026-04-22",
       "deadline": "",
