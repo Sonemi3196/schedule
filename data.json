@@ -4828,19 +4828,6 @@
       "personId": null
     },
     {
-      "id": "mo86ckrjyxy8",
-      "date": "2026-05-03",
-      "name": "料理",
-      "estimatedMins": 60,
-      "startTime": "19:00",
-      "endTime": "20:00",
-      "plan": "",
-      "status": "todo",
-      "repeatGroupId": "mo86ckrjcp4f",
-      "repeat": "daily",
-      "personId": null
-    },
-    {
       "id": "mo86ckrj8sp5",
       "date": "2026-05-04",
       "name": "料理",
