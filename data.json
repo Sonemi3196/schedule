@@ -3862,6 +3862,15 @@
       "endTime": "10:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mo80g3fejwbm",
+      "date": "2026-04-21",
+      "name": "団欒・瞑想",
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "note": "",
+      "type": "actual"
     }
   ]
 }
