@@ -9767,6 +9767,19 @@
       "status": "todo",
       "repeatGroupId": null,
       "personId": null
+    },
+    {
+      "id": "mo880pb5vnzt",
+      "date": "2026-06-01",
+      "name": "月一掃除",
+      "estimatedMins": null,
+      "startTime": "07:00",
+      "endTime": "08:00",
+      "plan": "換気扇とか",
+      "status": "todo",
+      "repeatGroupId": "mo880pb5jegb",
+      "repeat": "monthly",
+      "personId": null
     }
   ],
   "settings": {
