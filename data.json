@@ -7517,6 +7517,18 @@
       "status": "todo",
       "repeatGroupId": null,
       "personId": null
+    },
+    {
+      "id": "mo86n5qkxzor",
+      "date": "2026-04-22",
+      "name": "パソコン",
+      "estimatedMins": null,
+      "startTime": "10:00",
+      "endTime": "12:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
