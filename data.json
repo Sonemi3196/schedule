@@ -216,6 +216,18 @@
       "description": "遠征して調律",
       "color": "#38bdf8",
       "status": "active"
+    },
+    {
+      "id": "mo87fs5az7u9",
+      "tasks": [],
+      "name": "ヴェーダ数秘試験",
+      "startDate": "2026-04-21",
+      "deadline": "",
+      "dailyMins": "120",
+      "includeWeekends": false,
+      "description": "",
+      "color": "#38bdf8",
+      "status": "active"
     }
   ],
   "todayTasks": [
