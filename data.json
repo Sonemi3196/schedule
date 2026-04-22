@@ -7580,9 +7580,14 @@
       "startTime": "08:00",
       "endTime": "09:00",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": null,
-      "personId": null
+      "personId": null,
+      "achievementPct": 100,
+      "actualMins": 0,
+      "actualStartTime": "08:30",
+      "actualEndTime": "09:30",
+      "lastNote": ""
     },
     {
       "id": "mo86n5qkxzor",
