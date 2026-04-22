@@ -10375,6 +10375,18 @@
       "status": "todo",
       "repeatGroupId": null,
       "personId": null
+    },
+    {
+      "id": "mo9klwi8cbey",
+      "date": "2026-04-24",
+      "name": "お金確認・振込",
+      "estimatedMins": null,
+      "startTime": "07:00",
+      "endTime": "08:00",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
