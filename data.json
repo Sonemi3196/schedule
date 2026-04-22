@@ -9873,7 +9873,8 @@
       "actualMins": 0,
       "actualStartTime": "06:00",
       "actualEndTime": "07:00",
-      "lastNote": ""
+      "lastNote": "",
+      "actualMinsLog": 60
     },
     {
       "id": "mo8c5nswb7zr",
