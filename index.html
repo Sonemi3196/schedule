@@ -465,19 +465,19 @@ function renderTimeline(ds,items){
   const wsH=parseInt(wsSetting.split(':')[0]);
   const weH=parseInt(weSetting.split(':')[0]);
   // 全アイテムの最早・最遅時刻も考慮
-  let minH=Math.max(0, Math.min(wsH-1, 6));
-  let maxH=Math.min(23, Math.max(weH+1, 22));
+  let minH=Math.min(wsH>0?wsH-1:0, 6);  // 設定開始1時間前、最大でも6時まで
+  let maxH=Math.max(weH<23?weH+1:23, 22);  // 設定終了1時間後、最低でも22時まで
   items.forEach(({t,proj,isPersonal})=>{
     const isP=isPersonal||proj.id==='personal'||proj.id?.startsWith('person_');
     const s=t2m(isP?t.startTime:t.scheduledStartTime);
     const e=t2m(isP?t.endTime:t.scheduledEndTime);
-    if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h-1);}
-    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(24,h+1);}
+    if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h>0?h-1:0);}
+    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(24,h<24?h+1:24);}
   });
   (D.actualRecords||[]).filter(r=>r.date===ds).forEach(r=>{
     const s=t2m(r.startTime);const e=t2m(r.endTime);
-    if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h-1);}
-    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(24,h+1);}
+    if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h>0?h-1:0);}
+    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(24,h<24?h+1:24);}
   });
   const SH=minH, EH=maxH, PPM=1.6, H=(EH-SH)*60*PPM;
   let labels='';
@@ -1064,7 +1064,84 @@ function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;
   save();closeM('m-today');renderToday();if(curView==='calendar')renderCalendar();
 }
 function toggleTodayTask(id){const t=(D.todayTasks||[]).find(x=>x.id===id);if(!t)return;t.status=t.status==='done'?'todo':'done';save();renderToday();}
-function delTodayTask(id){const t=(D.todayTasks||[]).find(x=>x.id===id);if(!t)return;if(t.repeatGroupId){const choice=confirm('繰り返しタスクです。\nOK=この日以降を全て削除\nキャンセル=この1件だけ削除');D.todayTasks=choice?D.todayTasks.filter(x=>!(x.repeatGroupId===t.repeatGroupId&&x.date>=t.date)):D.todayTasks.filter(x=>x.id!==id);}else{if(!confirm('削除しますか？'))return;D.todayTasks=D.todayTasks.filter(x=>x.id!==id);}save();renderCurrent();}
+function delTodayTask(id){
+  const t=(D.todayTasks||[]).find(x=>x.id===id);
+  if(!t)return;
+  if(t.repeatGroupId){
+    // 繰り返しタスク: モーダルで選択
+    openDelRepeatModal(id);
+  } else {
+    // 単発タスク: 確認ダイアログ
+    if(!confirm('「'+t.name+'」を削除しますか？'))return;
+    D.todayTasks=D.todayTasks.filter(x=>x.id!==id);
+    save();renderCurrent();
+  }
+}
+function openDelRepeatModal(id){
+  const t=(D.todayTasks||[]).find(x=>x.id===id);
+  if(!t)return;
+  const grpCount=(D.todayTasks||[]).filter(x=>x.repeatGroupId===t.repeatGroupId).length;
+  const futureCount=(D.todayTasks||[]).filter(x=>x.repeatGroupId===t.repeatGroupId&&x.date>=t.date).length;
+  // 既存モーダルを再利用せず動的に作成
+  const ov=document.createElement('div');
+  ov.className='modal-ov';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:600;display:flex;align-items:center;justify-content:center;padding:16px';
+  ov.innerHTML='';
+  const modal=document.createElement('div');
+  modal.className='modal';
+  modal.style.cssText='max-width:400px';
+  // ヘッダー
+  const head=document.createElement('div');
+  head.className='mhead';
+  head.innerHTML='<span class="mtitle">🗑 繰り返しタスクの削除</span>';
+  const closeBtn=document.createElement('button');
+  closeBtn.className='btn btn-ghost btn-xs btn-icon';
+  closeBtn.textContent='✕';
+  closeBtn.onclick=()=>document.body.removeChild(ov);
+  head.appendChild(closeBtn);
+  modal.appendChild(head);
+  // ボディ
+  const body=document.createElement('div');
+  body.className='mbody';
+  const info=document.createElement('div');
+  info.style.cssText='font-size:12px;color:var(--t2);margin-bottom:12px;padding:8px 10px;background:var(--s3);border-radius:6px';
+  info.textContent='「'+t.name+'」は繰り返しタスクです。どの範囲を削除しますか？';
+  body.appendChild(info);
+  // ボタン3つ
+  function mkDelBtn(label,desc,fn){
+    const wrap=document.createElement('div');
+    wrap.style.cssText='margin-bottom:8px';
+    const btn=document.createElement('button');
+    btn.style.cssText='display:block;width:100%;text-align:left;padding:10px 12px;border:1px solid var(--b1);border-radius:8px;background:var(--s2);cursor:pointer;transition:background .15s';
+    btn.onmouseenter=()=>btn.style.background='var(--s3)';
+    btn.onmouseleave=()=>btn.style.background='var(--s2)';
+    btn.innerHTML='<div style="font-size:13px;font-weight:500;color:var(--text)">'+label+'</div><div style="font-size:11px;color:var(--t3);margin-top:2px">'+desc+'</div>';
+    btn.onclick=()=>{fn();document.body.removeChild(ov);};
+    wrap.appendChild(btn);
+    body.appendChild(wrap);
+  }
+  mkDelBtn('この1件のみ削除','この日付のタスクだけを削除します',()=>{
+    D.todayTasks=D.todayTasks.filter(x=>x.id!==id);save();renderCurrent();
+  });
+  mkDelBtn('今日以降を削除 ('+futureCount+'件)','この日付以降の繰り返しタスクを全て削除します',()=>{
+    D.todayTasks=D.todayTasks.filter(x=>!(x.repeatGroupId===t.repeatGroupId&&x.date>=t.date));save();renderCurrent();
+  });
+  mkDelBtn('全件削除 ('+grpCount+'件)','この繰り返しグループを全て削除します',()=>{
+    D.todayTasks=D.todayTasks.filter(x=>x.repeatGroupId!==t.repeatGroupId);save();renderCurrent();
+  });
+  modal.appendChild(body);
+  // フッター（キャンセルのみ）
+  const foot=document.createElement('div');
+  foot.className='mfoot';
+  const cancelBtn=document.createElement('button');
+  cancelBtn.className='btn btn-sec';
+  cancelBtn.textContent='キャンセル（削除しない）';
+  cancelBtn.onclick=()=>document.body.removeChild(ov);
+  foot.appendChild(cancelBtn);
+  modal.appendChild(foot);
+  ov.appendChild(modal);
+  document.body.appendChild(ov);
+}
 
 // ══ ACTUAL RECORDS ══
 function openActualAdd(ds){document.getElementById('aa-date').value=ds;document.getElementById('aa-name').value='';document.getElementById('aa-start').value='';document.getElementById('aa-end').value='';document.getElementById('aa-note').value='';window._editActualId=null;openM('m-actual-add');}
@@ -1113,6 +1190,7 @@ function openTlMenu(projId,taskId,ev){
   mkBtn('📝 実績を記録',()=>openResultModal(projId,taskId));
   mkBtn('⏱ 時刻を変更',()=>openTimeEdit(projId,taskId));
   if(isP) mkBtn('✎ タスクを編集',()=>openTodayModal(taskId));
+  if(isP) mkBtn('🗑 削除',()=>delTodayTask(taskId));
   document.body.appendChild(menu);
   // 外クリックで閉じる
   setTimeout(()=>document.addEventListener('click',function h(){document.getElementById('tl-menu')?.remove();document.removeEventListener('click',h);},{once:true}),10);
