@@ -9865,10 +9865,15 @@
       "startTime": "06:00",
       "endTime": "07:00",
       "plan": "",
-      "status": "todo",
+      "status": "doing",
       "repeatGroupId": "mo8c5nswquv3",
       "repeat": "weekly",
-      "personId": "mo8c3hceuh8z"
+      "personId": "mo8c3hceuh8z",
+      "achievementPct": 100,
+      "actualMins": 0,
+      "actualStartTime": "06:00",
+      "actualEndTime": "07:00",
+      "lastNote": ""
     },
     {
       "id": "mo8c5nswb7zr",
