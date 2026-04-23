@@ -10831,6 +10831,15 @@
       "endTime": "17:00",
       "note": "・お出掛けの前日の料理\n・10日と15日の榊のチェック\n・洗濯機の予定(仮)",
       "type": "actual"
+    },
+    {
+      "id": "mob4hqxqdmrh",
+      "date": "2026-04-23",
+      "name": "瞑想",
+      "startTime": "15:00",
+      "endTime": "15:30",
+      "note": "",
+      "type": "actual"
     }
   ],
   "people": [
