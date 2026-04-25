@@ -7422,7 +7422,12 @@
       "status": "done",
       "repeatGroupId": "mo86inyjs0u4",
       "repeat": "weekly",
-      "personId": null
+      "personId": null,
+      "achievementPct": 100,
+      "actualMins": 0,
+      "actualStartTime": "08:00",
+      "actualEndTime": "09:30",
+      "lastNote": ""
     },
     {
       "id": "mo86inyjf6xd",
