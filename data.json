@@ -8885,7 +8885,7 @@
       "startTime": "07:00",
       "endTime": "07:10",
       "plan": "",
-      "status": "",
+      "status": "done",
       "repeatGroupId": "mo8bgmc7hls1",
       "repeat": "monthly",
       "personId": null,
