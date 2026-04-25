@@ -8885,10 +8885,15 @@
       "startTime": "07:00",
       "endTime": "07:10",
       "plan": "",
-      "status": "todo",
+      "status": "",
       "repeatGroupId": "mo8bgmc7hls1",
       "repeat": "monthly",
-      "personId": null
+      "personId": null,
+      "achievementPct": null,
+      "actualMins": null,
+      "actualStartTime": "10:00",
+      "actualEndTime": "10:30",
+      "lastNote": ""
     },
     {
       "id": "mo8bgmc78i3a",
