@@ -3421,17 +3421,6 @@
       "lastNote": ""
     },
     {
-      "id": "mo7t3swivm4u",
-      "date": "2026-05-12",
-      "name": "トイレ掃除",
-      "estimatedMins": 30,
-      "startTime": "08:00",
-      "endTime": "08:30",
-      "plan": "",
-      "status": "todo",
-      "repeatGroupId": null
-    },
-    {
       "id": "mo7t4cf6s398",
       "date": "2026-06-02",
       "name": "トイレ掃除",
