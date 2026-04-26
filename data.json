@@ -7837,10 +7837,15 @@
       "startTime": "10:00",
       "endTime": "12:00",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": "mo8712ye63oq",
       "repeat": "weekly",
-      "personId": null
+      "personId": null,
+      "achievementPct": 100,
+      "actualMins": 0,
+      "actualStartTime": "10:30",
+      "actualEndTime": "12:00",
+      "lastNote": ""
     },
     {
       "id": "mo8712ye0hm9",
