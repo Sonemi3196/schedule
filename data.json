@@ -9603,19 +9603,6 @@
       "personId": null
     },
     {
-      "id": "mofo1ym7547p",
-      "date": "2026-05-01",
-      "name": "散歩",
-      "estimatedMins": 60,
-      "startTime": "07:00",
-      "endTime": "08:00",
-      "plan": "",
-      "status": "todo",
-      "repeatGroupId": "mofo1ym7qz9k",
-      "repeat": "daily",
-      "personId": null
-    },
-    {
       "id": "mofo1ym7atlp",
       "date": "2026-05-02",
       "name": "散歩",
