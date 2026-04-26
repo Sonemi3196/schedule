@@ -3439,8 +3439,13 @@
       "startTime": "15:00",
       "endTime": "16:00",
       "plan": "",
-      "status": "todo",
-      "repeatGroupId": null
+      "status": "",
+      "repeatGroupId": null,
+      "achievementPct": null,
+      "actualMins": null,
+      "actualStartTime": "15:00",
+      "actualEndTime": "16:00",
+      "lastNote": ""
     },
     {
       "id": "mo7t95nqdqj2",
