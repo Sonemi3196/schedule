@@ -3439,10 +3439,10 @@
       "startTime": "15:00",
       "endTime": "16:00",
       "plan": "",
-      "status": "",
+      "status": "done",
       "repeatGroupId": null,
-      "achievementPct": null,
-      "actualMins": null,
+      "achievementPct": 100,
+      "actualMins": 60,
       "actualStartTime": "15:00",
       "actualEndTime": "16:00",
       "lastNote": ""
