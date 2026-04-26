@@ -10844,6 +10844,15 @@
       "endTime": "15:30",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mofpnlm1a2rh",
+      "date": "2026-04-25",
+      "name": "話し合い",
+      "startTime": "12:00",
+      "endTime": "14:00",
+      "note": "",
+      "type": "actual"
     }
   ],
   "people": [
