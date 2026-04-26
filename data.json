@@ -10381,6 +10381,18 @@
       "repeatGroupId": "mofo1ym7qz9k",
       "repeat": "daily",
       "personId": null
+    },
+    {
+      "id": "mofo8mma1tp3",
+      "date": "2026-05-01",
+      "name": "散歩",
+      "estimatedMins": null,
+      "startTime": "08:00",
+      "endTime": "08:30",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
