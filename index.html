@@ -212,9 +212,9 @@ button{cursor:pointer;font-family:var(--jp)}input,select,textarea{font-family:va
 
 <div class="modal-ov hidden" id="m-conflict"><div class="modal modal-lg"><div class="mhead"><span class="mtitle">⚠ 時刻の競合</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-conflict')">✕</button></div><div class="mbody"><div style="font-size:12.5px;color:var(--t2);margin-bottom:12px">時間帯が重複しています。開始時刻を変更するか「このまま保存」を選択してください。</div><div id="conflict-body"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="saveWithConflicts()">このまま保存</button><button class="btn btn-primary" onclick="applyConflictFix()">時刻を変更して保存</button></div></div></div>
 
-<div class="modal-ov hidden" id="m-time-edit"><div class="modal"><div class="mhead"><span class="mtitle">時刻を変更</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-time-edit')">✕</button></div><div class="mbody"><div id="te-info" style="margin-bottom:12px;font-size:13px;font-weight:500"></div><input type="hidden" id="te-proj-id"><input type="hidden" id="te-task-id"><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="te-date"></div><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="te-start" oninput="updateTeEndHint()" placeholder="--:--"></div></div><div class="frow"><div class="fg"><label class="fl">終了時刻（直接指定）</label><input class="fi" type="time" id="te-end" oninput="updateTeEndFromEnd()" placeholder="--:--"></div><div class="fg"><label class="fl">作業時間（分）で指定</label><input class="fi" type="text" inputmode="numeric" id="te-mins" placeholder="例: 60" oninput="updateTeEndHint()"></div></div><div class="fhint" id="te-end-hint" style="color:var(--a)"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-time-edit')">キャンセル</button><button class="btn btn-primary" onclick="saveTimeEdit()">変更</button></div></div></div>
+<div class="modal-ov hidden" id="m-time-edit"><div class="modal"><div class="mhead"><span class="mtitle">時刻を変更</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-time-edit')">✕</button></div><div class="mbody"><div id="te-info" style="margin-bottom:12px;font-size:13px;font-weight:500"></div><input type="hidden" id="te-proj-id"><input type="hidden" id="te-task-id"><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="te-date"></div><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="text" id="te-start" oninput="updateTeEndHint()" placeholder="例: 09:00 / 深夜跨ぎ: 25:30" inputmode="numeric"></div></div><div class="frow"><div class="fg"><label class="fl">終了時刻（直接指定）</label><input class="fi" type="text" id="te-end" oninput="updateTeEndFromEnd()" placeholder="例: 22:00 / 深夜跨ぎ: 25:30" inputmode="numeric"></div><div class="fg"><label class="fl">作業時間（分）で指定</label><input class="fi" type="text" inputmode="numeric" id="te-mins" placeholder="例: 60" oninput="updateTeEndHint()"></div></div><div class="fhint" id="te-end-hint" style="color:var(--a)"></div></div><div class="mfoot"><button class="btn btn-sec" onclick="closeM('m-time-edit')">キャンセル</button><button class="btn btn-primary" onclick="saveTimeEdit()">変更</button></div></div></div>
 
-<div class="modal-ov hidden" id="m-today"><div class="modal"><div class="mhead"><span class="mtitle" id="m-today-title">個人タスク追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-today')">✕</button></div><div class="mbody"><div id="ttf-group-banner" style="display:none;margin-bottom:10px;padding:8px 10px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:7px"></div><div class="fg"><label class="fl">タスク名 *</label><input class="fi" id="ttf-name"></div><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="ttf-date"></div><div class="fg"><label class="fl">想定時間（分）</label><input class="fi" type="text" inputmode="numeric" id="ttf-est"></div></div><div class="frow"><div class="fg"><label class="fl">開始時刻</label><input class="fi" type="time" id="ttf-start"></div><div class="fg"><label class="fl">終了時刻（空欄=自動）</label><input class="fi" type="time" id="ttf-end"></div></div><div class="fg"><label class="fl">誰の予定</label><select class="fs" id="ttf-person"><option value="">自分（デフォルト）</option></select></div>
+<div class="modal-ov hidden" id="m-today"><div class="modal"><div class="mhead"><span class="mtitle" id="m-today-title">個人タスク追加</span><button class="btn btn-ghost btn-xs btn-icon" onclick="closeM('m-today')">✕</button></div><div class="mbody"><div id="ttf-group-banner" style="display:none;margin-bottom:10px;padding:8px 10px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:7px"></div><div class="fg"><label class="fl">タスク名 *</label><input class="fi" id="ttf-name"></div><div class="frow"><div class="fg"><label class="fl">日付</label><input class="fi" type="date" id="ttf-date"></div><div class="fg"><label class="fl">想定時間（分）</label><input class="fi" type="text" inputmode="numeric" id="ttf-est"></div></div><div class="frow"><div class="fg"><label class="fl">開始時刻（深夜跨ぎ: 25:30 など）</label><input class="fi" type="text" id="ttf-start" placeholder="例: 21:00 / 深夜跨ぎ: 25:30" inputmode="numeric"></div><div class="fg"><label class="fl">終了時刻（空欄=自動、深夜跨ぎは 25:30 など）</label><input class="fi" type="text" id="ttf-end" placeholder="例: 22:00 / 深夜跨ぎ: 25:30" inputmode="numeric"></div></div><div class="fg"><label class="fl">誰の予定</label><select class="fs" id="ttf-person"><option value="">自分（デフォルト）</option></select></div>
 <div class="fg"><label class="fl">関連プロジェクト</label><select class="fs" id="ttf-proj"></select></div><div class="fg"><label class="fl">繰り返し</label><select class="fs" id="ttf-repeat" onchange="onRepeatChange()"><option value="none">なし（1回のみ）</option><option value="daily">毎日</option><option value="weekdays">平日のみ（月〜金）</option><option value="weekly">毎週（曜日指定）</option><option value="biweekly">隔週（2週間ごと）</option><option value="nweeks">N週間ごと</option><option value="monthly">毎月（同じ日付）</option><option value="monthly_dow">毎月（第N曜日）</option><option value="ndays">N日ごと</option></select></div><div id="ttf-repeat-days" class="fg hidden"><label class="fl">繰り返す曜日</label><div style="display:flex;gap:8px;flex-wrap:wrap"><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="0" class="ttf-wd" style="accent-color:var(--a)">日</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="1" class="ttf-wd" style="accent-color:var(--a)" checked>月</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="2" class="ttf-wd" style="accent-color:var(--a)" checked>火</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="3" class="ttf-wd" style="accent-color:var(--a)" checked>水</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="4" class="ttf-wd" style="accent-color:var(--a)" checked>木</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="5" class="ttf-wd" style="accent-color:var(--a)" checked>金</label><label style="display:flex;align-items:center;gap:3px;font-size:13px;cursor:pointer"><input type="checkbox" value="6" class="ttf-wd" style="accent-color:var(--a)">土</label></div></div><div id="ttf-repeat-nweeks" class="fg hidden"><label class="fl">何週間ごと（例: 3）</label><input class="fi" type="text" inputmode="numeric" id="ttf-nweeks" placeholder="3"></div>
 <div id="ttf-repeat-ndays" class="fg hidden"><label class="fl">何日ごと（例: 10）</label><input class="fi" type="text" inputmode="numeric" id="ttf-ndays" placeholder="10"></div>
 <div id="ttf-repeat-dow-info" class="fg hidden" style="padding:6px 8px;background:var(--s3);border-radius:6px;font-size:11px;color:var(--t2)"></div>
@@ -306,7 +306,28 @@ function dLeft(s){if(!s)return null;const d=new Date(s+'T00:00:00');const t=new 
 function getProj(id){return D.projects.find(p=>p.id===id);}
 function pcColor(p){return p<30?'var(--r)':p<60?'var(--y)':'var(--g)';}
 function chip(s){const m={todo:'chip-todo',doing:'chip-doing',review:'chip-review',done:'chip-done',hold:'chip-hold'};return `<span class="chip ${m[s]||'chip-todo'}">${SL[s]||s}</span>`;}
-function t2m(t){if(!t)return null;const[h,m]=t.split(':').map(Number);return h*60+m;}
+function t2m(t){if(!t)return null;const parts=t.trim().split(':');if(parts.length<2)return null;const h=parseInt(parts[0])||0,m=parseInt(parts[1])||0;return h*60+m;}
+// 深夜跨ぎ対応: 終了時刻が開始より小さければ +24h
+function t2mEnd(endT,startT){
+  const e=t2m(endT),s=t2m(startT);
+  if(e===null)return null;
+  if(s!==null&&e<s)return e+1440; // 翌日扱い
+  return e;
+}
+// 時刻文字列を正規化: "900" → "09:00", "2130" → "21:30", "25:30" → そのまま
+function normalizeTime(t){
+  if(!t)return t;
+  t=t.trim().replace(/[^0-9:]/g,'');
+  if(!t)return '';
+  if(t.includes(':')){
+    const[h,m]=t.split(':');
+    return String(parseInt(h)||0).padStart(2,'0')+':'+String(parseInt(m)||0).padStart(2,'0');
+  }
+  if(t.length<=2)return t.padStart(2,'0')+':00';
+  if(t.length===3)return '0'+t[0]+':'+t.slice(1);
+  if(t.length===4)return t.slice(0,2)+':'+t.slice(2);
+  return t;
+}
 function m2t(m){const h=Math.floor(m/60),mm=m%60;return `${String(h).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;}
 function addMinsT(t,mins){return m2t(t2m(t)+mins);}
 
@@ -505,18 +526,19 @@ function renderTimeline(ds,items){
     const s=t2m(isP?t.startTime:t.scheduledStartTime);
     const e=t2m(isP?t.endTime:t.scheduledEndTime);
     if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h>0?h-1:0);}
-    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(24,h<24?h+1:24);}
+    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(30,h+1);}  // 深夜跨ぎ最大30h
   });
   (D.actualRecords||[]).filter(r=>r.date===ds).forEach(r=>{
     const s=t2m(r.startTime);const e=t2m(r.endTime);
     if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h>0?h-1:0);}
-    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(24,h<24?h+1:24);}
+    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(30,h+1);}
   });
   const SH=minH, EH=maxH, PPM=1.6, H=(EH-SH)*60*PPM;
   let labels='';
   for(let h=SH;h<=EH;h++){
     const top=(h-SH)*60*PPM;
-    labels+=`<div class="tl-hour-line" style="top:${top}px"><span class="tl-hour-label">${h}:00</span></div>`;
+    const hLabel=h<24?h+'':('翌'+(h-24));
+    labels+=`<div class="tl-hour-line" style="top:${top}px"><span class="tl-hour-label">${hLabel}:00</span></div>`;
   }
   const planBlocks=[],actualBlocks=[];
   items.forEach(({t,proj,isPersonal})=>{
@@ -524,7 +546,8 @@ function renderTimeline(ds,items){
     const ps=isP?t2m(t.startTime):t2m(t.scheduledStartTime);
     const pe=isP?t2m(t.endTime):t2m(t.scheduledEndTime);
     const pStart=ps||SH*60;
-    const pEnd=pe||(pStart+(t.estimatedMins||30));
+    // 終了が開始より小さければ翌日扱い（深夜跨ぎ）
+    const pEnd=(pe!==null&&pe<pStart)?pe+1440:(pe||(pStart+(t.estimatedMins||30)));
     planBlocks.push({t,proj,s:pStart,e:pEnd,isP,col:'plan'});
     if(t.actualStartTime){
       const as=t2m(t.actualStartTime);
@@ -837,8 +860,8 @@ function saveTimeEdit(){
   const t=isP?(D.todayTasks||[]).find(x=>x.id===taskId):(proj?.tasks||[]).find(x=>x.id===taskId);
   if(!t)return;
   const newDate=document.getElementById('te-date').value;
-  const newStart=document.getElementById('te-start').value;
-  const newEndDirect=document.getElementById('te-end')?.value||'';
+  const newStart=normalizeTime(document.getElementById('te-start').value||'');
+  const newEndDirect=normalizeTime(document.getElementById('te-end')?.value||'');
   const nm=parseInt(document.getElementById('te-mins')?.value)||0;
   let newEnd='';
   if(newEndDirect)newEnd=newEndDirect;
@@ -999,7 +1022,13 @@ function openTodayModal(editId){
   if(t&&t.personId) personSel.value=t.personId||'';
   openM('m-today');
 }
-function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;setTimeout(()=>{window._savingToday=false;},1000);const name=document.getElementById('ttf-name').value.trim();if(!name){window._savingToday=false;return;}if(!D.todayTasks)D.todayTasks=[];const ttDate=document.getElementById('ttf-date').value||td();const ttStart=document.getElementById('ttf-start').value||null;const ttEst=parseInt(document.getElementById('ttf-est').value)||null;const ttEnd=document.getElementById('ttf-end').value||(ttStart&&ttEst?addMinsT(ttStart,ttEst):null);const ttPlan=document.getElementById('ttf-plan').value;const ttRepeat=document.getElementById('ttf-repeat').value||'none';const ttRepeatEnd=document.getElementById('ttf-end-date').value||null;if(!ttRepeat||ttRepeat==='none'){
+function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;setTimeout(()=>{window._savingToday=false;},1000);const name=document.getElementById('ttf-name').value.trim();if(!name){window._savingToday=false;return;}if(!D.todayTasks)D.todayTasks=[];const ttDate=document.getElementById('ttf-date').value||td();const ttStartRaw=normalizeTime(document.getElementById('ttf-start').value||'');
+  const ttStart=ttStartRaw||null;
+  const ttEst=parseInt(document.getElementById('ttf-est').value)||null;
+  const ttEndRaw=normalizeTime(document.getElementById('ttf-end').value||'');
+  // 終了時刻が開始より小さければ翌日扱い（25:xx 表記）
+  let ttEnd=ttEndRaw||(ttStart&&ttEst?addMinsT(ttStart,ttEst):null);
+  if(ttEnd&&ttStart){const es=t2m(ttEnd),ss=t2m(ttStart);if(es!==null&&ss!==null&&es<ss){const p=ttEnd.split(':');ttEnd=String(parseInt(p[0])+24).padStart(2,'0')+':'+p[1];}}const ttPlan=document.getElementById('ttf-plan').value;const ttRepeat=document.getElementById('ttf-repeat').value||'none';const ttRepeatEnd=document.getElementById('ttf-end-date').value||null;if(!ttRepeat||ttRepeat==='none'){
     if(window._editTodayId){
       // 編集: 既存タスクを上書き
       const idx=(D.todayTasks||[]).findIndex(x=>x.id===window._editTodayId);
