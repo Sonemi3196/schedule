@@ -513,32 +513,12 @@ function renderDayPanel(ds,data){
     </div>`;
 }
 function renderTimeline(ds,items){
-  // 設定の作業時間 ± 1時間をタイムライン範囲にする（最低6:00〜23:00）
-  const wsSetting=D.settings.workStart||'06:00';
-  const weSetting=D.settings.workEnd||'22:00';
-  const wsH=parseInt(wsSetting.split(':')[0]);
-  const weH=parseInt(weSetting.split(':')[0]);
-  // 全アイテムの最早・最遅時刻も考慮
-  let minH=Math.min(wsH>0?wsH-1:0, 6);  // 設定開始1時間前、最大でも6時まで
-  let maxH=Math.max(weH<23?weH+1:23, 22);  // 設定終了1時間後、最低でも22時まで
-  items.forEach(({t,proj,isPersonal})=>{
-    const isP=isPersonal||proj.id==='personal'||proj.id?.startsWith('person_');
-    const s=t2m(isP?t.startTime:t.scheduledStartTime);
-    const e=t2m(isP?t.endTime:t.scheduledEndTime);
-    if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h>0?h-1:0);}
-    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(30,h+1);}  // 深夜跨ぎ最大30h
-  });
-  (D.actualRecords||[]).filter(r=>r.date===ds).forEach(r=>{
-    const s=t2m(r.startTime);const e=t2m(r.endTime);
-    if(s!=null){const h=Math.floor(s/60);if(h<minH)minH=Math.max(0,h>0?h-1:0);}
-    if(e!=null){const h=Math.ceil(e/60);if(h>maxH)maxH=Math.min(30,h+1);}
-  });
-  const SH=minH, EH=maxH, PPM=1.6, H=(EH-SH)*60*PPM;
+  // タイムライン: 常に 0:00〜24:00 固定表示
+  const SH=0, EH=24, PPM=1.4, H=(EH-SH)*60*PPM;
   let labels='';
   for(let h=SH;h<=EH;h++){
     const top=(h-SH)*60*PPM;
-    const hLabel=h<24?h+'':('翌'+(h-24));
-    labels+=`<div class="tl-hour-line" style="top:${top}px"><span class="tl-hour-label">${hLabel}:00</span></div>`;
+    labels+=`<div class="tl-hour-line" style="top:${top}px"><span class="tl-hour-label">${h}:00</span></div>`;
   }
   const planBlocks=[],actualBlocks=[];
   items.forEach(({t,proj,isPersonal})=>{
@@ -546,18 +526,20 @@ function renderTimeline(ds,items){
     const ps=isP?t2m(t.startTime):t2m(t.scheduledStartTime);
     const pe=isP?t2m(t.endTime):t2m(t.scheduledEndTime);
     const pStart=ps||SH*60;
-    // 終了が開始より小さければ翌日扱い（深夜跨ぎ）
-    const pEnd=(pe!==null&&pe<pStart)?pe+1440:(pe||(pStart+(t.estimatedMins||30)));
+    // 終了が開始より小さければ24:00にクリップ（翌日分は翌日のタイムラインへ）
+    const pEndRaw=pe||(pStart+(t.estimatedMins||30));
+    const pEnd=Math.min(pEndRaw, EH*60-1);  // 24:00以上は23:59までクリップ
     planBlocks.push({t,proj,s:pStart,e:pEnd,isP,col:'plan'});
     if(t.actualStartTime){
       const as=t2m(t.actualStartTime);
-      const ae=t.actualEndTime?t2m(t.actualEndTime):(as+(t.actualMinsLog||t.estimatedMins||30));
+      const aeRaw=t.actualEndTime?t2m(t.actualEndTime):(as+(t.actualMinsLog||t.estimatedMins||30));
+      const ae=Math.min(aeRaw,EH*60-1);
       actualBlocks.push({t,proj,s:as,e:ae,isP,col:'actual'});
     }
   });
   const extraActuals=(D.actualRecords||[]).filter(r=>r.date===ds);
   extraActuals.forEach(r=>{
-    const as=t2m(r.startTime),ae=t2m(r.endTime)||(as+30);
+    const as=t2m(r.startTime),aeR=t2m(r.endTime)||(as+30),ae=Math.min(aeR,EH*60-1);
     actualBlocks.push({t:{id:r.id,name:r.name,lastNote:r.note,status:'done'},proj:{id:'extra',name:'実績',color:'#fb923c'},s:as,e:ae,isP:true,col:'actual',isExtra:true});
   });
   const {ids:conIds}=getConflictIds();
@@ -1026,9 +1008,17 @@ function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;
   const ttStart=ttStartRaw||null;
   const ttEst=parseInt(document.getElementById('ttf-est').value)||null;
   const ttEndRaw=normalizeTime(document.getElementById('ttf-end').value||'');
-  // 終了時刻が開始より小さければ翌日扱い（25:xx 表記）
   let ttEnd=ttEndRaw||(ttStart&&ttEst?addMinsT(ttStart,ttEst):null);
-  if(ttEnd&&ttStart){const es=t2m(ttEnd),ss=t2m(ttStart);if(es!==null&&ss!==null&&es<ss){const p=ttEnd.split(':');ttEnd=String(parseInt(p[0])+24).padStart(2,'0')+':'+p[1];}}const ttPlan=document.getElementById('ttf-plan').value;const ttRepeat=document.getElementById('ttf-repeat').value||'none';const ttRepeatEnd=document.getElementById('ttf-end-date').value||null;if(!ttRepeat||ttRepeat==='none'){
+  // 深夜跨ぎ判定: 終了 < 開始 → 翌日分割フラグ
+  let ttCrossDay=false, ttNextDayEnd=null;
+  if(ttEnd&&ttStart){
+    const es=t2m(ttEnd),ss=t2m(ttStart);
+    if(es!==null&&ss!==null&&es<ss){
+      ttCrossDay=true;
+      ttNextDayEnd=ttEnd;  // 翌日の終了時刻 (例: 01:30)
+      ttEnd='24:00';       // 当日は24:00まで
+    }
+  }const ttPlan=document.getElementById('ttf-plan').value;const ttRepeat=document.getElementById('ttf-repeat').value||'none';const ttRepeatEnd=document.getElementById('ttf-end-date').value||null;if(!ttRepeat||ttRepeat==='none'){
     if(window._editTodayId){
       // 編集: 既存タスクを上書き
       const idx=(D.todayTasks||[]).findIndex(x=>x.id===window._editTodayId);
@@ -1048,6 +1038,12 @@ function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;
     } else {
       const ttPersonId=document.getElementById('ttf-person')?.value||'';
       D.todayTasks.push({id:uid(),date:ttDate,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan,status:'todo',repeatGroupId:null,personId:ttPersonId||null});
+      // 深夜跨ぎ: 翌日の 00:00〜終了時刻 でも追加
+      if(ttCrossDay&&ttNextDayEnd){
+        const nextDate=addDays(ttDate,1);
+        D.todayTasks.push({id:uid(),date:nextDate,name:name+'（深夜続き）',estimatedMins:ttEst,startTime:'00:00',endTime:ttNextDayEnd,plan:ttPlan,status:'todo',repeatGroupId:null,personId:ttPersonId||null});
+        alert('深夜をまたぐため、翌日('+nextDate+') 0:00〜'+ttNextDayEnd+' にも予定を追加しました。');
+      }
     }
     save();closeM('m-today');renderToday();if(curView==='calendar')renderCalendar();return;
   }
@@ -1122,6 +1118,11 @@ function saveTodayTask(){if(window._savingToday)return;window._savingToday=true;
   generatedDates.forEach(ds=>{
     const ttPId=document.getElementById('ttf-person')?.value||null;
     D.todayTasks.push({id:uid(),date:ds,name,estimatedMins:ttEst,startTime:ttStart,endTime:ttEnd,plan:ttPlan,status:'todo',repeatGroupId:gid,repeat:ttRepeat,personId:ttPId||null});
+    // 深夜跨ぎ: 翌日にも追加
+    if(ttCrossDay&&ttNextDayEnd){
+      const nextDs=addDays(ds,1);
+      D.todayTasks.push({id:uid(),date:nextDs,name:name+'（深夜続き）',estimatedMins:ttEst,startTime:'00:00',endTime:ttNextDayEnd,plan:ttPlan,status:'todo',repeatGroupId:gid,repeat:ttRepeat,personId:ttPId||null});
+    }
   });
   save();closeM('m-today');renderToday();if(curView==='calendar')renderCalendar();
 }
