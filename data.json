@@ -7590,18 +7590,6 @@
       "personId": null
     },
     {
-      "id": "mo86lvajlikh",
-      "date": "2026-05-04",
-      "name": "酵素ｼﾞｭｰｽ作り",
-      "estimatedMins": null,
-      "startTime": "13:00",
-      "endTime": "16:00",
-      "plan": "",
-      "status": "todo",
-      "repeatGroupId": null,
-      "personId": null
-    },
-    {
       "id": "mo86mk0b5ga8",
       "date": "2026-04-22",
       "name": "酵素ｼﾞｭｰｽ分け",
