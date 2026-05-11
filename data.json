@@ -3619,10 +3619,15 @@
       "startTime": "07:00",
       "endTime": "07:30",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": "mo84s88tb9hm",
       "repeat": "nweeks",
-      "personId": null
+      "personId": null,
+      "achievementPct": 100,
+      "actualMins": 0,
+      "actualStartTime": "06:30",
+      "actualEndTime": "06:40",
+      "lastNote": ""
     },
     {
       "id": "mo84s88tix1t",
