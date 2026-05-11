@@ -10429,9 +10429,14 @@
       "startTime": "06:00",
       "endTime": "06:10",
       "plan": "",
-      "status": "todo",
+      "status": "done",
       "repeatGroupId": null,
-      "personId": null
+      "personId": null,
+      "achievementPct": 100,
+      "actualMins": 10,
+      "actualStartTime": "06:00",
+      "actualEndTime": "06:10",
+      "lastNote": ""
     }
   ],
   "settings": {
