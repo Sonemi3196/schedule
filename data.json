@@ -10420,6 +10420,18 @@
       "status": "todo",
       "repeatGroupId": null,
       "personId": null
+    },
+    {
+      "id": "mp1qmkvf5zg5",
+      "date": "2026-05-12",
+      "name": "酵素ジュース混ぜ",
+      "estimatedMins": 10,
+      "startTime": "06:00",
+      "endTime": "06:10",
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
