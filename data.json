@@ -284,10 +284,10 @@
           "scheduledDate": null,
           "scheduledStartTime": null,
           "scheduledEndTime": null,
-          "actualMins": null
+          "actualMins": 0
         },
         {
-          "id": "mqokgqb0q7q1",
+          "id": "mqokwwjgjwc1",
           "parentId": "mqokgq9c5s3a",
           "name": "6月第3週 (1)",
           "estimatedMins": 40,
@@ -300,7 +300,7 @@
           "createdAt": "2026-06-22"
         },
         {
-          "id": "mqokgqb0evo4",
+          "id": "mqokwwjgz4q3",
           "parentId": "mqokgq9c5s3a",
           "name": "6月第3週 (2)",
           "estimatedMins": 40,
@@ -313,7 +313,7 @@
           "createdAt": "2026-06-22"
         },
         {
-          "id": "mqokgqb0peqh",
+          "id": "mqokwwjgubho",
           "parentId": "mqokgq9c5s3a",
           "name": "6月第3週 (3)",
           "estimatedMins": 40,
@@ -326,7 +326,7 @@
           "createdAt": "2026-06-22"
         },
         {
-          "id": "mqokgqb00tgf",
+          "id": "mqokwwjg7hbe",
           "parentId": "mqokgq9c5s3a",
           "name": "6月第3週 (4)",
           "estimatedMins": 40,
@@ -339,7 +339,7 @@
           "createdAt": "2026-06-22"
         },
         {
-          "id": "mqokgqb0vxh9",
+          "id": "mqokwwjg5r6v",
           "parentId": "mqokgq9c5s3a",
           "name": "6月第3週 (5)",
           "estimatedMins": 40,
