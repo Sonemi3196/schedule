@@ -266,6 +266,18 @@
       "description": "",
       "color": "#38bdf8",
       "status": "active"
+    },
+    {
+      "id": "mqokexx0dsda",
+      "tasks": [],
+      "name": "読書",
+      "startDate": "2026-06-22",
+      "deadline": "2026-08-31",
+      "dailyMins": "40",
+      "includeWeekends": false,
+      "description": "",
+      "color": "#38bdf8",
+      "status": "active"
     }
   ],
   "todayTasks": [
