@@ -11023,6 +11023,15 @@
       "endTime": "08:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mrjto6km5ic2",
+      "date": "2026-07-13",
+      "name": "カフェ",
+      "startTime": "08:00",
+      "endTime": "09:30",
+      "note": "",
+      "type": "actual"
     }
   ],
   "people": [
