@@ -11059,6 +11059,15 @@
       "endTime": "19:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mrjtq057c1um",
+      "date": "2026-07-13",
+      "name": "料理",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "note": "",
+      "type": "actual"
     }
   ],
   "people": [
