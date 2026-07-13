@@ -11014,6 +11014,15 @@
       "endTime": "16:00",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mrjtnombinp7",
+      "date": "2026-07-13",
+      "name": "川崎へ移動",
+      "startTime": "07:00",
+      "endTime": "08:00",
+      "note": "",
+      "type": "actual"
     }
   ],
   "people": [
