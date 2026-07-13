@@ -11041,6 +11041,15 @@
       "endTime": "11:10",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mrjtpbf2syvq",
+      "date": "2026-07-13",
+      "name": "外出",
+      "startTime": "07:00",
+      "endTime": "18:00",
+      "note": "",
+      "type": "actual"
     }
   ],
   "people": [
