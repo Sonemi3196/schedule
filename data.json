@@ -11032,6 +11032,15 @@
       "endTime": "09:30",
       "note": "",
       "type": "actual"
+    },
+    {
+      "id": "mrjtojr24nwa",
+      "date": "2026-07-13",
+      "name": "図書館",
+      "startTime": "09:30",
+      "endTime": "12:00",
+      "note": "",
+      "type": "actual"
     }
   ],
   "people": [
