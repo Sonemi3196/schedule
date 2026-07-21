@@ -10531,6 +10531,18 @@
       "actualStartTime": "06:00",
       "actualEndTime": "06:10",
       "lastNote": ""
+    },
+    {
+      "id": "mrue2twkor85",
+      "date": "2026-08-21",
+      "name": "pythonanywhere更新",
+      "estimatedMins": null,
+      "startTime": null,
+      "endTime": null,
+      "plan": "",
+      "status": "todo",
+      "repeatGroupId": null,
+      "personId": null
     }
   ],
   "settings": {
